@@ -15,7 +15,8 @@ Release:	10
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
-Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
+Source0:	ftp://ftp.cac.washington.edu/mail/old/%{name}-%{version}.tar.Z
+# Source0-md5:	42c5c8d049c209b15513a4f6ebba34d2
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
