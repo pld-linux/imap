@@ -13,7 +13,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2002b
+Version:	2002c1
 Release:	0.1
 Epoch:		1
 License:	BSD
@@ -34,8 +34,7 @@ Patch4:		%{name}-mailpath.patch
 Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
-Patch8:		%{name}-no_1777_warning.patch
-Patch9:		%{name}-non_root.patch
+Patch8:		%{name}-non_root.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.7
@@ -292,8 +291,7 @@ POP/IMAP.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
-%{?_with_non_root_auth:%patch9 -p1}
+%{?_with_non_root_auth:%patch8 -p1}
 
 %build
 # build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
