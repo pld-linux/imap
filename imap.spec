@@ -228,8 +228,8 @@ Statyczna biblioteka IMAP.
 Статична б╕бл╕отека, необх╕дна для розробки POP/IMAP-програм.
 
 %package common
-Summary:	Common files for WU imap and pop daemons.
-Summary(pl):	Pliki wspСlne dla serwerСw imap i pop.
+Summary:	Common files for WU imap and pop daemons
+Summary(pl):	Pliki wspСlne dla serwerСw imap i pop
 Group:		Networking/Daemons
 
 %description common
