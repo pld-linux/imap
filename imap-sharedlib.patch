@@ -1,5 +1,5 @@
---- imap-2001.BETA.SNAP-0107022325/src/imapd/Makefile.wiget	Thu Jun 28 19:23:36 2001
-+++ imap-2001.BETA.SNAP-0107022325/src/imapd/Makefile	Wed Jul 11 08:32:30 2001
+--- imap-2002b/src/imapd/Makefile.wiget	Thu Jun 28 19:23:36 2001
++++ imap-2002b/src/imapd/Makefile	Wed Jul 11 08:32:30 2001
 @@ -61,12 +61,12 @@
  # Get local definitions from c-client directory
  
@@ -7,7 +7,7 @@
 -CCLIENTLIB = $C/c-client.a
 +CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
  CC = `cat $C/CCTYPE`
- CFLAGS = -I$C `cat $C/CFLAGS` $(RFC1730) $(NSBD) $(MSBD) $(ENBD) \
+ CFLAGS = -I$C `cat $C/CFLAGS` $(NSBD) $(ENBD) \
  	-DANOFILE=\"$(ANO)\" -DALERTFILE=\"$(ALERT)\" \
  	-DUSERALERTFILE=\"$(USERALERT)\" -DSHUTDOWNFILE=\"$(SHUTDOWN)\"
 -LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
@@ -34,8 +34,8 @@
  
  ipopd: ipop2d ipop3d
  
---- imap-2001a/src/osdep/unix/Makefile.wiget	Wed Jul 11 08:32:30 2001
-+++ imap-2001a/src/osdep/unix/Makefile	Wed Jul 11 08:33:59 2001
+--- imap-2002b/src/osdep/unix/Makefile.wiget	Wed Jul 11 08:32:30 2001
++++ imap-2002b/src/osdep/unix/Makefile	Wed Jul 11 08:33:59 2001
 @@ -150,7 +150,7 @@
  	 SPOOLDIR=/var/spool \
  	 RSHPATH=/usr/bin/rsh \
@@ -634,9 +634,9 @@
  
  # Dependencies
 @@ -873,6 +913,7 @@
- 	 -DRSHPATH=\"$(RSHPATH)\" -DLOCKPGM=\"$(LOCKPGM)\" > OSCFLAGS
  	echo $(BASELDFLAGS) $(EXTRALDFLAGS) > LDFLAGS
  	echo "$(ARRC) $(ARCHIVE) $(BINARIES);$(RANLIB) $(ARCHIVE)" > ARCHIVE
+ 	echo $(OS) > OSTYPE
 +	echo $(ARCHIVE) >ARCHIVENAME
  	./drivers $(EXTRADRIVERS) $(DEFAULTDRIVERS) dummy
  	./mkauths $(EXTRAAUTHENTICATORS) $(DEFAULTAUTHENTICATORS)
@@ -660,8 +660,8 @@
  
  all:	mtest
  
---- imap-2001a/Makefile.wiget	Tue Jul  3 08:00:09 2001
-+++ imap-2001a/Makefile	Wed Jul 11 08:32:30 2001
+--- imap-2002b/Makefile.wiget	Tue Jul  3 08:00:09 2001
++++ imap-2002b/Makefile	Wed Jul 11 08:32:30 2001
 @@ -74,6 +74,7 @@
  # lnx	Linux with traditional passwords and crypt() in the C library
  #	 (see lnp, sl4, sl5, and slx)
@@ -674,8 +674,65 @@
  
  # Note on SCO you may have to set LN to "ln".
  
--a32 a41 aix bs3 bsf bsi bso cyg d-g d54 do4 drs epx gas gh9 ghp ghs go5 gsc gsg gso gsu gul hpp hpx lnp lyn mct mnt neb nec nto nxt nx3 osf os4 osx ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx sol sos uw2: an
-+a32 a41 aix bs3 bsf bsi bso cyg d-g d54 do4 drs epx gas gh9 ghp ghs go5 gsc gsg gso gsu gul hpp hpx lnp lnps lyn mct mnt neb nec nto nxt nx3 osf os4 osx ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx sol sos uw2: an
+-a32 a41 aix bs3 bsf bsi bso d-g d54 do4 drs epx gas gh9 ghp ghs go5 gsc gsg gso gsu gul hpp hpx lnp lyn mct mnt neb nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx sol sos uw2: an
++a32 a41 aix bs3 bsf bsi bso d-g d54 do4 drs epx gas gh9 ghp ghs go5 gsc gsg gso gsu gul hpp hpx lnp lnps lyn mct mnt neb nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx sol sos uw2: an
  	$(BUILD) BUILDTYPE=$@
  
  # If you use sv4, you may find that it works to move it to use the an process.
+--- imap-2002b/src/mailutil/Makefile.orig	Tue Nov 19 01:41:46 2002
++++ imap-2002b/src/mailutil/Makefile	Sat Jan 25 18:26:02 2003
+@@ -19,14 +19,14 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+ 
+ CC = `cat $C/CCTYPE`
+ CFLAGS = -I$C `cat $C/CFLAGS`
+-LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
++LDFLAGS = `cat $C/LDFLAGS`
+ 
+ mailutil: $(CCLIENTLIB) mailutil.o
+ 	$(CC) $(CFLAGS) -o mailutil mailutil.o $(LDFLAGS)
+--- imap-2002b/src/tmail/Makefile.orig	Tue Nov 19 01:45:14 2002
++++ imap-2002b/src/tmail/Makefile	Sat Jan 25 18:28:27 2003
+@@ -18,14 +18,14 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+ 
+ CC = `cat $C/CCTYPE`
+ CFLAGS = -I$C `cat $C/CFLAGS`
+-LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
++LDFLAGS = `cat $C/LDFLAGS`
+ 
+ tmail: $(CCLIENTLIB) tmail.o
+ 	$(CC) $(CFLAGS) -o tmail tmail.o $(LDFLAGS)
+--- imap-2002b/src/dmail/Makefile.orig	Tue Nov 19 01:43:31 2002
++++ imap-2002b/src/dmail/Makefile	Sat Jan 25 19:10:50 2003
+@@ -18,14 +18,14 @@
+ 
+ 
+ C = ../c-client
+-CCLIENTLIB = $C/c-client.a
++CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
+ SHELL = /bin/sh
+ 
+ # Get local definitions from c-client directory
+ 
+ CC = `cat $C/CCTYPE`
+ CFLAGS = -I$C `cat $C/CFLAGS`
+-LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
++LDFLAGS = `cat $C/LDFLAGS`
+ 
+ dmail: $(CCLIENTLIB) dmail.o
+ 	$(CC) $(CFLAGS) -o dmail dmail.o $(LDFLAGS)
