@@ -209,40 +209,22 @@ rm -rf docs/{rfc,BUILD}
 gzip -9nf README docs/*
 
 %post
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
-fi
+%rc_inetd_post
 
 %post pop2
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
-fi
+%rc_inetd_post
 
 %post pop3
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
-fi
+%rc_inetd_post
 
 %postun
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload
-fi
+%rc_inetd_postun
 
 %postun pop2
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload
-fi
+%rc_inetd_postun
 
 %postun pop3
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload
-fi
+%rc_inetd_postun
 
 %post   lib -p /sbin/ldconfig
 %postun lib -p /sbin/ldconfig
