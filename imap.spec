@@ -107,7 +107,7 @@ Pliki wspólne dla serwerów imap i pop.
 %patch -p1 
 
 %build
-make CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
+%{__make} CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
 
 %install
 rm -rf $RPM_BUILD_ROOT
