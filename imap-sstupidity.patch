@@ -1,0 +1,11 @@
+--- imap-2001.BETA.SNAP-0107022325/src/osdep/unix/env_unix.c~	Tue Jun 26 05:06:00 2001
++++ imap-2001.BETA.SNAP-0107022325/src/osdep/unix/env_unix.c	Fri Aug 17 15:20:13 2001
+@@ -384,7 +384,7 @@
+ 		  void *clkint,void *kodint,void *hupint,void *trmint)
+ {
+ 				/* only do this if for init call */
+-  if (server && service && sslservice && sasl) {
++  if (server && service && sasl) {
+     long port;
+     struct servent *sv;
+     struct sockaddr_in sin;
