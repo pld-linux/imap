@@ -1,14 +1,15 @@
 Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
-%define		snap	0106252013
-Version:	2001.BETA
-Release:	0.%{snap}
+%define		snap	0107022325
+Version:	2001
+Release:	0.BETA.%{snap}
+Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Group(de):	Netzwerkwesen/Server
-Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.SNAP-%{snap}.tar.Z
+Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.BETA.SNAP-%{snap}.tar.Z
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -143,7 +144,7 @@ Common files for WU imap and pop daemons.
 Pliki wspólne dla serwerów imap i pop.
 
 %prep
-%setup -q -n imap-%{version}.SNAP-%{snap}
+%setup -q -n imap-%{version}.BETA.SNAP-%{snap}
 %patch0 -p1 
 %patch1 -p1 
 
@@ -159,9 +160,7 @@ install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 
-install ./src/c-client/*.h $RPM_BUILD_ROOT%{_includedir}
-install ./src/osdep/tops-20/*.h $RPM_BUILD_ROOT%{_includedir}
-install ./src/osdep/unix/*.h $RPM_BUILD_ROOT%{_includedir}
+install ./c-client/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./c-client/c-client.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
 
 rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
