@@ -2,13 +2,14 @@ Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7c2
-Release:	5
+Release:	6
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
+Group(de):	Netzwerkwesen/Server
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
 Source1:	%{name}.pamd
-Source2:	%{name}-imapd.inetd
+Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
 Patch0:		%{name}.patch
@@ -44,6 +45,7 @@ Summary:	provides support for POP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego POP
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
+Group(de):	Netzwerkwesen/Server
 Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	%{name}-common
 Requires:	rc-inetd >= 0.8.1
@@ -70,6 +72,7 @@ Summary:	provides support for POP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego POP
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
+Group(de):	Netzwerkwesen/Server
 Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	%{name}-common
 Requires:	rc-inetd >= 0.8.1
@@ -97,8 +100,9 @@ zdalnej maszynie bez konieczno¶ci jej pobierania.
 Summary:	Development files for IMAP.
 Summary(pl):	Pliki nag³ówkowe IMAP.
 Group:		Development/Libraries
-Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 
 %description devel 
 Development files for IMAP.
@@ -106,23 +110,26 @@ Development files for IMAP.
 %description -l pl devel
 Pliki nag³ówkowe dla IMAP.
 
-#%package static
-#Summary:	IMAP static library
-#Summary(pl):	Statyczna biblioteka IMAP
-#Group:		Development/Libraries 
-#Group(pl):	Programowanie/Biblioteki
-#
-#%description static
-#IMAP static library.
-#
-#%description -l pl
-#Statyczna biblioteka IMAP.
+%package static
+Summary:	IMAP static library
+Summary(pl):	Statyczna biblioteka IMAP
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+
+%description static
+IMAP static library.
+
+%description -l pl
+Statyczna biblioteka IMAP.
 
 %package common
 Summary:	Common files for WU imap and pop daemons.
 Summary(pl):	Pliki wspólne dla serwerów imap i pop.
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
+Group(de):	Netzwerkwesen/Server
 
 %description common
 Common files for WU imap and pop daemons.
@@ -136,11 +143,11 @@ Pliki wspólne dla serwerów imap i pop.
 %patch1 -p1 
 
 %build
-%{__make} CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
+%{__make} CC="gcc" OPTIMIZE="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g} -pipe" slx
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{pam.d,sysconfig/rc-inetd} \
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{pam.d,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,%{_includedir},%{_libdir}}
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
@@ -155,8 +162,8 @@ install ./c-client/c-client.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
 rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
 	
-install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
-install -s ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
+install %{!?debug:-s} ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
+install %{!?debug:-s} ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imapd
