@@ -2,7 +2,7 @@ Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7c2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -46,9 +46,10 @@ Group(pl):	Sieciowe/Serwery
 Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	%{name}-common
 Requires:	rc-inetd >= 0.8.1
-Provides:	popdeamon
-Obsoletes:	popdeamon
+Provides:	pop3daemon
+Obsoletes:	pop3daemon
 Obsoletes:	qpopper
+Obsoletes:	solid-pop3d
 
 %description pop
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
