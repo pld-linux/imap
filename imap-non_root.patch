@@ -114,16 +114,16 @@ diff -urN imap-2001.BETA.SNAP-0107022325.orig/src/imapd/imapd.c imap-2001.BETA.S
  /* Main program */
  
  int main (int argc,char *argv[])
-@@ -240,6 +275,9 @@
+@@ -248,6 +283,9 @@
    char *s,*t,*u,*v,tmp[MAILTMPLEN];
    struct stat sbuf;
    time_t autologouttime = 0;
 +
 +  dogetopt(argc, argv);
 +  
- #include "linkage.c"
-   rfc822_date (tmp);		/* get date/time at startup */
- 				/* initialize server */
+   char *pgmname = (argc && argv[0]) ?
+     (((s = strrchr (argv[0],'/')) || (s = strrchr (argv[0],'\\'))) ?
+      s+1 : argv[0]) : "imapd";
 @@ -253,6 +291,14 @@
    mail_parameters (NIL,SET_IMAPREFERRAL,(void *) referral);
    if (stat (SHUTDOWNFILE,&sbuf)) {
@@ -161,7 +161,7 @@ diff -urN imap-2001.BETA.SNAP-0107022325.orig/src/osdep/unix/env_unix.c imap-200
  static char *sysInbox = NIL;	/* system inbox name */
  static char *newsActive = NIL;	/* news active file */
  static char *newsSpool = NIL;	/* news spool */
-@@ -601,11 +605,12 @@
+@@ -620,7 +624,7 @@
        else fatal ("Login failed after chroot");
      }
  				/* normal login */
@@ -170,11 +170,6 @@ diff -urN imap-2001.BETA.SNAP-0107022325.orig/src/osdep/unix/env_unix.c imap-200
  	     (ret = env_init (user,home))) chdir (myhomedir ());
      fs_give ((void **) &home);	/* clean up */
      if (user) fs_give ((void **) &user);
-   }
-+
-   return ret;			/* return status */
- }
- 
 @@ -712,7 +717,7 @@
  	   (pw->pw_uid == euid)) || (pw = getpwuid (euid))))
        fatal ("Unable to look up user name");
