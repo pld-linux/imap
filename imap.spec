@@ -4,6 +4,7 @@
 # _with_non_root_auth	- build with non_root patch (authentication without
 #			  root privilages and more configuration options).
 #			  Possibly not secure.
+#
 Summary:	Provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protokoЁu pocztowego IMAP
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
@@ -32,7 +33,7 @@ Patch6:		%{name}-man.patch
 Patch7:		%{name}-overflow.patch
 Patch8:		%{name}-version-pld.patch
 Patch9:		%{name}-no_1777_warning.patch
-%{?_with_non_root_auth:Patch10:	%{name}-non_root.patch}
+Patch10:	%{name}-non_root.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
