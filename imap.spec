@@ -12,7 +12,7 @@ Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
-Source5:	%{name}-imaps.inetd
+Source5:	%{name}-%{name}s.inetd
 Source6:	%{name}-pop3s.inetd
 Source7:	%{name}-pop.pamd
 Patch0:		%{name}.patch
@@ -106,10 +106,10 @@ Summary(pl):	Pliki nag³ówkowe IMAP.
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{version}
 
-%description devel 
+%description devel
 Development files for IMAP.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe dla IMAP.
 
 %package lib
@@ -120,7 +120,7 @@ Group:		Development/Libraries
 %description lib
 IMAP client library.
 
-%description -l pl lib
+%description lib -l pl
 Biblioteka IMAP.
 
 
@@ -133,7 +133,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 IMAP static library.
 
-%description -l pl static
+%description static -l pl
 Statyczna biblioteka IMAP.
 
 %package common
@@ -144,13 +144,13 @@ Group:		Networking/Daemons
 %description common
 Common files for WU imap and pop daemons.
 
-%description -l pl common
+%description common -l pl
 Pliki wspólne dla serwerów imap i pop.
 
 %prep
 %setup -q -n imap-%{version}.BETA.SNAP-%{snap}
-%patch0 -p1 
-%patch1 -p1 
+%patch0 -p1
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -179,7 +179,7 @@ ln -s libc-client.so.20%{snap}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
 rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
-	
+
 install ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
 install ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
 
