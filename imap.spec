@@ -1,7 +1,7 @@
 Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
-Version:	4.7b
+Version:	4.7c2
 Release:	1
 License:	BSD
 Group:		Networking/Daemons
@@ -15,10 +15,13 @@ Patch0:		%{name}.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 Requires:	pam >= 0.66
-Prereq:		/etc/rc.d/init.d/rc-inetd
+Requires:	%{name}-common
+PreReq:		/etc/rc.d/init.d/rc-inetd
 Requires:	rc-inetd >= 0.8.1
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
+
+%define		_includedir	%_prefix/include/imap
 
 %description
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
@@ -41,7 +44,11 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego POP
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Prereq:		/etc/rc.d/init.d/rc-inetd
+Requires:	%{name}-common
 Requires:	rc-inetd >= 0.8.1
+Provides:	popdeamon
+Obsoletes:	popdeamon
+Obsoletes:	qpopper
 
 %description pop
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
@@ -68,7 +75,7 @@ Group(pl):	Programowanie/Biblioteki
 %description devel 
 Development files for IMAP.
 
-%description -l pl
+%description -l pl devel
 Pliki nag³ówkowe dla IMAP.
 
 #%package static
@@ -83,8 +90,20 @@ Pliki nag³ówkowe dla IMAP.
 #%description -l pl
 #Statyczna biblioteka IMAP.
 
+%package common
+Summary:	Common files for WU imap and pop daemons.
+Summary(pl):	Pliki wspólne dla serwerów imap i pop.
+Group:		Networking/Daemons
+Group(pl):	Sieciowe/Serwery
+
+%description common
+Common files for WU imap and pop daemons.
+
+%description -l pl common
+Pliki wspólne dla serwerów imap i pop.
+
 %prep
-%setup -q 
+%setup -q -n imap-4.7c
 %patch -p1 
 
 %build
@@ -113,7 +132,9 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imapd
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop2d
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* README
+rm -rf docs/{rfc,BUILD}
+
+gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/* README docs/*
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -144,20 +165,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz
-%attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/imap
 %attr(640,root,root) /etc/sysconfig/rc-inetd/imapd
 %attr(755,root,root) %{_sbindir}/imapd
 %{_mandir}/man8/imapd.8.gz
 
 %files pop
 %defattr(644,root,root,755)
-%attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/imap
 %attr(640,root,root) /etc/sysconfig/rc-inetd/ipop2d
 %attr(640,root,root) /etc/sysconfig/rc-inetd/ipop3d
 %attr(755,root,root) %{_sbindir}/ipop2d
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipopd.8.gz
+
+%files common
+%doc README.gz docs/*
+%defattr(644,root,root,755)
+%attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/imap
 
 %files devel
 %defattr(644,root,root,755)
