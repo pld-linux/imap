@@ -1,10 +1,5 @@
 #
-# TODO: what is imap user in "%dir %attr(750,imap,mail) %{_var}/lib/imap"???
-#
 # Conditional build:
-%bcond_with	non_root_auth	- build with non_root patch (authentication
-#				  without root privileges and more configuration
-#				  options). Possibly not secure.
 #
 Summary:	Provides support for IMAP network mail protocol
 Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
@@ -14,13 +9,13 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2004b
-Release:	2.1
+Version:	2004c1
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
-# Source0-md5:	4dbd8d28ed9b2bda186a23277a95b486
+# Source0-md5:	f0a1a2abfa4b1ed8074ce023724416f3
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -37,12 +32,10 @@ Patch4:		%{name}-mailpath.patch
 Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
-Patch8:		%{name}-non_root.patch
-Patch9:		%{name}-headers_fix.patch
+Patch8:		%{name}-headers_fix.patch
 URL:		http://www.washington.edu/imap/
-BuildRequires:	WTF-is-imap-user
-BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
+BuildRequires:	openssl-devel >= 0.9.6m
 PreReq:		rc-inetd >= 0.8.1
 Requires:	pam >= 0.77.3
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -299,8 +292,7 @@ POP/IMAP.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%{?with_non_root_auth:%patch8 -p1}
-%patch9 -p1
+%patch8 -p1
 
 %build
 # build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
@@ -407,26 +399,25 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/imapd
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/imaps
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/imap
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.imap
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/imapd.pem
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imapd
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imaps
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/imap
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.imap
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) %{_var}/lib/openssl/certs/imapd.pem
 %attr(755,root,root) %{_sbindir}/imapd
-%dir %attr(750,imap,mail) %{_var}/lib/imap
 %{_mandir}/man8/imapd.8*
 
 %files pop2
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop2d
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop2d
 %attr(755,root,root) %{_sbindir}/ipop2d
 %{_mandir}/man8/ipop2d.8*
 
 %files pop3
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3d
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3s
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/ipop3d.pem
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3d
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3s
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) %{_var}/lib/openssl/certs/ipop3d.pem
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipop3d.8*
 
@@ -434,8 +425,8 @@ fi
 %defattr(644,root,root,755)
 %doc README docs/*
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/pop
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.pop
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/pop
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
 %dir %{_var}/lib/openssl/certs
 
 %files lib
