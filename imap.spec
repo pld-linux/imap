@@ -110,9 +110,13 @@ zdalnej maszynie bez konieczno╤ci jej pobierania.
 Summary:	Development files for IMAP.
 Summary(pl):	Pliki nagЁСwkowe IMAP.
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-lib = %{version}
 
 %description devel 
@@ -125,9 +129,13 @@ Pliki nagЁСwkowe dla IMAP.
 Summary:	IMAP client library
 Summary(pl):	Biblioteka IMAP
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 
 %description lib
 IMAP client library.
@@ -140,9 +148,13 @@ Biblioteka IMAP.
 Summary:	IMAP static library
 Summary(pl):	Statyczna biblioteka IMAP
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
