@@ -55,6 +55,24 @@ nastêpnie pobieranie ich przez maszyny klienckie w sieci. Protokó³ IMAP pozwala
 zdalnemu u¿ytkownikowi na czytanie poczty na zdalnej maszynie bez konieczno¶ci
 jej pobierania.
 
+%package devel
+Summary:        provides support for POP network mail protocol
+Summary(pl):    Wspomaganie dla protoko³u pocztowego POP
+Group:          Networking/Daemons
+Group(pl):      Sieciowe/Serwery
+
+%description devel 
+IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
+
+%package static
+Summary:        provides support for POP network mail protocol
+Summary(pl):    Wspomaganie dla protoko³u pocztowego POP
+Group:          Networking/Daemons
+Group(pl):      Sieciowe/Serwery
+
+%description static
+IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
+
 %prep
 %setup -q 
 %patch -p1 
@@ -65,10 +83,15 @@ make CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{etc/{pam.d,sysconfig/rc-inetd},usr/{sbin,share/man/man8}}
+install -d $RPM_BUILD_ROOT/{etc/{pam.d,sysconfig/rc-inetd},usr/{sbin,share/man/man8},%{_includedir},%{_libdir}}
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipopd.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
+
+install ./src/c-client/*.h $RPM_BUILD_ROOT%{_includedir}
+install ./src/osdep/tops-20/*.h $RPM_BUILD_ROOT%{_includedir}
+install ./src/osdep/unix/*.h $RPM_BUILD_ROOT%{_includedir}
+install ./c-client/*.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
 
 install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
 install -s ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
@@ -122,3 +145,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/ipop2d
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipopd.8.gz
+
+%files devel
+%{_includedir}/*
+
+%files static
+%{_libdir}/libimap.a
