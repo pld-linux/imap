@@ -3,13 +3,12 @@ Summary(pl):	Wspomaganie dla protokoЁu pocztowego IMAP
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Name:		imap
-%define		snap	0107022325
-Version:	2001
-Release:	0.BETA.20%{snap}.10
+Version:	2001a
+Release:	0.1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
-Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.BETA.SNAP-%{snap}.tar.Z
+Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -24,6 +23,8 @@ Patch3:		%{name}-sstupidity.patch
 Patch4:		%{name}-mailpath.patch
 Patch5:		%{name}-starttls.patch
 Patch6:		%{name}-man.patch
+Patch7:		%{name}-overflow.patch
+Patch8:		%{name}-version-pld.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
@@ -229,7 +230,7 @@ Common files for WU imap and pop daemons.
 Pliki wspСlne dla serwerСw imap i pop.
 
 %prep
-%setup -q -n imap-%{version}.BETA.SNAP-%{snap}
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -237,12 +238,14 @@ Pliki wspСlne dla serwerСw imap i pop.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
-%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="20%{snap}" lnp
-mv c-client/c-client.a libc-client.a
+%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="%{version}" lnp
+mv -f c-client/c-client.a libc-client.a
 %{__make} clean
-%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="20%{snap}" lnps
+%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="%{version}" lnps
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -256,8 +259,8 @@ install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 install ./c-client/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
 install libc-client.a $RPM_BUILD_ROOT%{_libdir}/libc-client.a
-install ./c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.20%{snap}.0
-ln -s libc-client.so.20%{snap}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
+install ./c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.%{version}.0
+ln -sf libc-client.so.%{version}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
 rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*

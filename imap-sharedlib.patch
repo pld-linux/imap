@@ -34,8 +34,8 @@
  
  ipopd: ipop2d ipop3d
  
---- imap-2001.BETA.SNAP-0107022325/src/osdep/unix/Makefile.wiget	Wed Jul 11 08:32:30 2001
-+++ imap-2001.BETA.SNAP-0107022325/src/osdep/unix/Makefile	Wed Jul 11 08:33:59 2001
+--- imap-2001a/src/osdep/unix/Makefile.wiget	Wed Jul 11 08:32:30 2001
++++ imap-2001a/src/osdep/unix/Makefile	Wed Jul 11 08:33:59 2001
 @@ -150,7 +150,7 @@
  	 SPOOLDIR=/var/spool \
  	 RSHPATH=/usr/bin/rsh \
@@ -398,7 +398,7 @@
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g -O -DNFSKLUDGE"
+ 	 BASECFLAGS="-g -O"
  
  nxt:	# NEXTSTEP
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
@@ -660,16 +660,16 @@
  
  all:	mtest
  
---- imap-2001.BETA.SNAP-0107022325/Makefile.wiget	Tue Jul  3 08:00:09 2001
-+++ imap-2001.BETA.SNAP-0107022325/Makefile	Wed Jul 11 08:32:30 2001
+--- imap-2001a/Makefile.wiget	Tue Jul  3 08:00:09 2001
++++ imap-2001a/Makefile	Wed Jul 11 08:32:30 2001
 @@ -74,6 +74,7 @@
  # lnx	Linux with traditional passwords and crypt() in the C library
  #	 (see lnp, sl4, sl5, and slx)
  # lnp	Linux with Pluggable Authentication Modules (PAM)
 +# lnps	Linux with Pluggable Authentication Modules (PAM) (with shared libc-client)
+ # lrh	RedHat Linux 7.2
  # lyn	LynxOS
  # mct	MachTen
- # mnt	Atari ST Mint (not MacMint)
 @@ -266,7 +267,7 @@
  
  # Note on SCO you may have to set LN to "ln".

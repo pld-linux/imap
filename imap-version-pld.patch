@@ -1,0 +1,33 @@
+--- imap-2001a/src/imapd/imapd.c.redhat-version	Wed Nov 14 18:26:07 2001
++++ imap-2001a/src/imapd/imapd.c	Tue Nov 20 06:00:05 2001
+@@ -173,7 +173,7 @@
+ 
+ /* Global storage */
+ 
+-char *version = "2001.315";	/* version number of this server */
++char *version = "2001.315PLD";	/* version number of this server */
+ time_t alerttime = 0;		/* time of last alert */
+ time_t sysalerttime = 0;	/* time of last system alert */
+ time_t useralerttime = 0;	/* time of last user alert */
+--- imap-2001a/src/ipopd/ipop2d.c.redhat-version	Thu Aug 16 21:36:11 2001
++++ imap-2001a/src/ipopd/ipop2d.c	Tue Nov 20 06:00:42 2001
+@@ -51,7 +51,7 @@
+ 
+ /* Global storage */
+ 
+-char *version = "2001.63";	/* server version */
++char *version = "2001.63PLD";	/* server version */
+ short state = LISN;		/* server state */
+ short critical = NIL;		/* non-zero if in critical code */
+ MAILSTREAM *stream = NIL;	/* mailbox stream */
+--- imap-2001a/src/ipopd/ipop3d.c.redhat-version	Mon Oct 22 11:52:49 2001
++++ imap-2001a/src/ipopd/ipop3d.c	Tue Nov 20 06:01:06 2001
+@@ -57,7 +57,7 @@
+ 
+ /* Global storage */
+ 
+-char *version = "2001.78";	/* server version */
++char *version = "2001.78PLD";	/* server version */
+ short state = AUTHORIZATION;	/* server state */
+ short critical = NIL;		/* non-zero if in critical code */
+ MAILSTREAM *stream = NIL;	/* mailbox stream */
