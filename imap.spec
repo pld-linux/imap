@@ -5,7 +5,7 @@ Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Name:		imap
 %define		snap	0107022325
 Version:	2001
-Release:	0.BETA.20%{snap}.8
+Release:	0.BETA.20%{snap}.9
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -273,6 +273,7 @@ install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop,imap}
 
+( cd docs/rfc; ls rfc* > ../INDEX.rfc )
 rm -rf docs/{rfc,BUILD}
 
 gzip -9nf README docs/*
