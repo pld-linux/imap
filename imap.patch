@@ -8,7 +8,7 @@ diff -Nur imap-4.6.BETA/src/osdep/unix/Makefile imap-4.6.BETA.pld/src/osdep/unix
 -ACTIVEFILE=/usr/lib/news/active
 -SPOOLDIR=/usr/spool
 -MAILSPOOL=$(SPOOLDIR)/mail
-+ACTIVEFILE=/var/state/news/active
++ACTIVEFILE=/var/lib/news/active
 +SPOOLDIR=/var/spool
 +MAILSPOOL=/var/mail
  NEWSSPOOL=$(SPOOLDIR)/news
@@ -32,7 +32,7 @@ diff -Nur imap-4.6.BETA/src/osdep/unix/Makefile imap-4.6.BETA.pld/src/osdep/unix
  	 SPOOLDIR=/var/spool \
 -	 ACTIVEFILE=/var/lib/news/active \
 +	 MAILSPOOL=/var/mail \
-+	 ACTIVEFILE=/var/state/news/active \
++	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
 -	 BASECFLAGS="-g -fno-omit-frame-pointer -O6 -DNFSKLUDGE" \
 -	 BASELDFLAGS="-lcrypt"
