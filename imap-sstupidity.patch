@@ -1,20 +1,20 @@
---- imap-2001a/src/osdep/unix/env_unix.c~	Tue Jun 26 05:06:00 2001
-+++ imap-2001a/src/osdep/unix/env_unix.c	Fri Aug 17 15:20:13 2001
+--- imap-2002b/src/osdep/unix/env_unix.c~	Tue Jun 26 05:06:00 2001
++++ imap-2002b/src/osdep/unix/env_unix.c	Fri Aug 17 15:20:13 2001
 @@ -384,7 +384,7 @@
  		  void *clkint,void *kodint,void *hupint,void *trmint)
  {
  				/* only do this if for init call */
--  if (server && service && sslservice && sasl) {
-+  if (server && service && sasl) {
+-  if (server && service && sslservice) {
++  if (server && service) {
+     int mask;
      long port;
      struct servent *sv;
-     struct sockaddr_in sin;
 @@ -412,7 +412,7 @@
      if (((port = tcp_serverport ()) >= 0)) {
        if ((sv = getservbyname (service,"tcp")) && (port == ntohs (sv->s_port)))
- 	syslog (LOG_DEBUG,"%s service init from %s",service,client);
+ 	syslog (LOG_DEBUG,"%s service init from %s",service,tcp_clientaddr ());
 -      else if ((sv = getservbyname (sslservice,"tcp")) &&
 +      else if (sslservice && (sv = getservbyname (sslservice,"tcp")) &&
  	       (port == ntohs (sv->s_port))) {
- 	syslog (LOG_DEBUG,"%s SSL service init from %s",sslservice,client);
- 	ssl_server_init (server);
+ 	syslog (LOG_DEBUG,"%s SSL service init from %s",sslservice,
+ 		tcp_clientaddr ());
