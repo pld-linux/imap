@@ -4,7 +4,7 @@ Name:		imap
 %define		snap	0107022325
 Version:	2001
 Release:	0.BETA.20%{snap}.3
-Epoch:		1
+Epoch:		2
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -20,6 +20,7 @@ Source7:	%{name}-pop.pamd
 Patch0:		%{name}.patch
 Patch1:		%{name}-pop2d-mbox-param.patch
 Patch2:		%{name}-sharedlib.patch
+Patch3:		%{name}-sstupidity.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
@@ -166,6 +167,7 @@ Pliki wspólne dla serwerów imap i pop.
 %patch0 -p1 
 %patch1 -p1 
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="20%{snap}" lnp
