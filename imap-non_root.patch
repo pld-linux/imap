@@ -40,7 +40,7 @@ diff -urN imap-2001.BETA.SNAP-0107022325.orig/src/imapd/imapd.8c imap-2001.BETA.
 +.SH "RUNNING NON-ROOT IMAPD"
 +If configured carefully, imapd will not require root privilages at all. Here are condition that must be meet:
 +
-+All mailboxes must be accessible for imapd, including WRITE access. This can be acomplished by running imapd with group mail and setting group of all mailboxes to mail. Note that members of this group will be allowed to read and WRITE all mailboxes on the system. Be carefull adding members to this group. It may be a good idea to \fIchmod g+s ~/Mail\fR directories. Also note that user, which imapd is running as, must be able to enter into user's home directory and then subdirectory in which mailboxes are stored. This usualy reqires \fIchmod a+x ~; chown mail ~/Mail; chmod g+rw ~/Mail\fR.
++All mailboxes must be accessible for imapd, including WRITE access. This can be acomplished by running imapd with group mail and setting group of all mailboxes to mail. Note that members of this group will be allowed to read and WRITE all mailboxes on the system. Be carefull adding members to this group. It may be a good idea to \fIchmod g+s ~/Mail\fR directories. Also note that user, which imapd is running as, must be able to enter into user's home directory and then subdirectory in which mailboxes are stored. This usualy reqires \fIchmod a+x ~; chgrp mail ~/Mail; chmod g+rw ~/Mail\fR.
 +
 +imapd must be able to authenticate users. On most systems this means read access for \fI/etc/shadow\fR or \fI/var/db/shadow.db\fR. One way is to \fIchgrp shadow /var/db/shadow/db\fR and add imap user to the shadow group.
 +
