@@ -1,6 +1,6 @@
-diff -urN imap-2004/src/c-client/env.h imap-patched/src/c-client/env.h
---- imap-2004/src/c-client/env.h	Tue Apr 27 19:51:17 2004
-+++ imap-patched/src/c-client/env.h	Sun May 30 07:22:54 2004
+diff -urN imap-2004b.orig/src/c-client/env.h imap-2004b/src/c-client/env.h
+--- imap-2004b.orig/src/c-client/env.h	2004-04-27 21:51:17.000000000 +0200
++++ imap-2004b/src/c-client/env.h	2005-01-11 00:32:32.000000000 +0100
 @@ -18,6 +18,16 @@
   * CPYRIGHT, included with this Distribution.
   */
@@ -18,16 +18,16 @@ diff -urN imap-2004/src/c-client/env.h imap-patched/src/c-client/env.h
  /* Function prototypes */
  
  long pmatch_full (unsigned char *s,unsigned char *pat,unsigned char delim);
-diff -urN imap-2004/src/imapd/imapd.8c imap-patched/src/imapd/imapd.8c
---- imap-2004/src/imapd/imapd.8c	Sun May 30 07:15:04 2004
-+++ imap-patched/src/imapd/imapd.8c	Sun May 30 07:22:54 2004
+diff -urN imap-2004b.orig/src/imapd/imapd.8 imap-2004b/src/imapd/imapd.8
+--- imap-2004b.orig/src/imapd/imapd.8	2005-01-11 00:24:00.000000000 +0100
++++ imap-2004b/src/imapd/imapd.8	2005-01-11 00:37:45.000000000 +0100
 @@ -31,5 +31,47 @@
  binary must have a link to
  .I /etc/rimapd
  since this is where this software expects it to be located.
 +.TP
 +\fB\-l\fR
-+perform login even if not running as root. With carefull configuration imapd can be run as (for example) \fIimap.mail\fR. Without this option imapd, when running not as root, considers that authentication has been done by external program and serves mail of user it is running as.
++perform login even if not running as root. With carefull configuration imapd can be run as (for example) \fIimap.mail\fR. Without this option imapd, whenrunning not as root, considers that authentication has been done by external program and serves mail of user it is running as.
 +.TP
 +\fB-m\fR \fIsubdir\fR
 +specifiy subdirectory of user's home directory which will be served by default. Giving this option prevents listing entire home directory in imap client.
@@ -42,7 +42,7 @@ diff -urN imap-2004/src/imapd/imapd.8c imap-patched/src/imapd/imapd.8c
 +
 +All mailboxes must be accessible for imapd, including WRITE access. This can be acomplished by running imapd with group mail and setting group of all mailboxes to mail. Note that members of this group will be allowed to read and WRITE all mailboxes on the system. Be carefull adding members to this group. It may be a good idea to \fIchmod g+s ~/Mail\fR directories. Also note that user, which imapd is running as, must be able to enter into user's home directory and then subdirectory in which mailboxes are stored. This usualy reqires \fIchmod a+x ~; chgrp mail ~/Mail; chmod g+rw ~/Mail\fR.
 +
-+imapd must be able to authenticate users. On most systems this means read access for \fI/etc/shadow\fR or \fI/var/db/shadow.db\fR. One way is to \fIchgrp shadow /var/db/shadow/db\fR and add imap user to the shadow group.
++imapd must be able to authenticate users. On most systems this means read access for \fI/etc/shadow\fR or \fI/var/db/shadow.db\fR. One way is to \fIchgrpshadow /var/db/shadow/db\fR and add imap user to the shadow group.
 +
 +BIG FAT WARNING: in the setup described above imapd will have read access for the shadow (either file or database) even after user authentication. In normal situation it starts as root, authorises the user and then performs
 +.BR setuid(2)
@@ -63,16 +63,17 @@ diff -urN imap-2004/src/imapd/imapd.8c imap-patched/src/imapd/imapd.8c
 +.EE
 +
  .SH "SEE ALSO"
- rsh(1C) ipopd(8C)
+ rsh(1) ipopd(8)
 +
 +.SH AUTHORS
 +imapd has been made on the University of Washington.
 +
 +Command line options, logic required by them and non-root mode support has been made by Michal Kochanowicz <michal@michal.waw.pl>
-diff -urN imap-2004/src/imapd/imapd.c imap-patched/src/imapd/imapd.c
---- imap-2004/src/imapd/imapd.c	Sun May 30 07:16:59 2004
-+++ imap-patched/src/imapd/imapd.c	Sun May 30 07:22:54 2004
-@@ -246,6 +246,41 @@
+\ No newline at end of file
+diff -urN imap-2004b.orig/src/imapd/imapd.c imap-2004b/src/imapd/imapd.c
+--- imap-2004b.orig/src/imapd/imapd.c	2005-01-11 00:27:09.000000000 +0100
++++ imap-2004b/src/imapd/imapd.c	2005-01-11 00:32:47.000000000 +0100
+@@ -247,6 +247,41 @@
    msg_string_setpos		/* set position in string structure */
  };
  
@@ -114,7 +115,7 @@ diff -urN imap-2004/src/imapd/imapd.c imap-patched/src/imapd/imapd.c
  /* Main program */
  
  int main (int argc,char *argv[])
-@@ -255,6 +290,9 @@
+@@ -256,6 +291,9 @@
    unsigned char *s,*t,*u,*v,tmp[MAILTMPLEN];
    struct stat sbuf;
    time_t autologouttime = 0;
@@ -124,9 +125,9 @@ diff -urN imap-2004/src/imapd/imapd.c imap-patched/src/imapd/imapd.c
    char *pgmname = (argc && argv[0]) ?
      (((s = strrchr (argv[0],'/')) || (s = strrchr (argv[0],'\\'))) ?
       (char *) s+1 : argv[0]) : "imapd";
-@@ -272,6 +310,14 @@
-   mail_parameters (NIL,SET_IMAPREFERRAL,(void *) referral);
-   if (stat (SHUTDOWNFILE,&sbuf)) {
+@@ -286,6 +324,14 @@
+       fclose (nntp);		/* done reading proxy name */
+     }
      s = myusername_full (&i);	/* get user name and flags */
 +    /* Enforce takeing user name form login even if we already have non-root
 +     * euid. This let us run root-free imap on properly configured system. */
@@ -139,9 +140,9 @@ diff -urN imap-2004/src/imapd/imapd.c imap-patched/src/imapd/imapd.c
      switch (i) {
      case MU_NOTLOGGEDIN:
        PSOUT ("* OK [");		/* not logged in, ordinary startup */
-diff -urN imap-2004/src/osdep/unix/env_unix.c imap-patched/src/osdep/unix/env_unix.c
---- imap-2004/src/osdep/unix/env_unix.c	Sun May 30 07:21:52 2004
-+++ imap-patched/src/osdep/unix/env_unix.c	Sun May 30 07:42:29 2004
+diff -urN imap-2004b.orig/src/osdep/unix/env_unix.c imap-2004b/src/osdep/unix/env_unix.c
+--- imap-2004b.orig/src/osdep/unix/env_unix.c	2005-01-11 00:23:25.000000000 +0100
++++ imap-2004b/src/osdep/unix/env_unix.c	2005-01-11 00:32:47.000000000 +0100
 @@ -24,12 +24,16 @@
  
  /* c-client environment parameters */
@@ -161,7 +162,7 @@ diff -urN imap-2004/src/osdep/unix/env_unix.c imap-patched/src/osdep/unix/env_un
  static char *sysInbox = NIL;	/* system inbox name */
  static char *newsActive = NIL;	/* news active file */
  static char *newsSpool = NIL;	/* news spool */
-@@ -628,7 +632,7 @@
+@@ -640,7 +644,7 @@
        else fatal ("Login failed after chroot");
      }
  				/* normal login */
@@ -170,7 +171,7 @@ diff -urN imap-2004/src/osdep/unix/env_unix.c imap-patched/src/osdep/unix/env_un
  	     (ret = env_init (user,home))) chdir (myhomedir ());
      fs_give ((void **) &home);	/* clean up */
      if (user) fs_give ((void **) &user);
-@@ -750,10 +754,12 @@
+@@ -762,10 +766,12 @@
      if (((s = (char *) getlogin ()) && *s && (strlen (s) < NETMAXUSER) &&
  	 (pw = getpwnam (s)) && (pw->pw_uid == euid)) ||
  	(pw = getpwuid (euid)))
@@ -184,7 +185,7 @@ diff -urN imap-2004/src/osdep/unix/env_unix.c imap-patched/src/osdep/unix/env_un
      else fatal ("Unable to look up user name");
    }
    if (myUserName) {		/* logged in? */
-@@ -818,7 +824,11 @@
+@@ -830,7 +836,11 @@
  {
    char tmp[MAILTMPLEN];
    if (!sysInbox) {		/* initialize if first time */
@@ -197,9 +198,9 @@ diff -urN imap-2004/src/osdep/unix/env_unix.c imap-patched/src/osdep/unix/env_un
      sysInbox = cpystr (tmp);	/* system inbox is from mail spool */
    }
    return sysInbox;
-diff -urN imap-2004/src/osdep/unix/env_unix.h imap-patched/src/osdep/unix/env_unix.h
---- imap-2004/src/osdep/unix/env_unix.h	Sat Feb 23 04:03:45 2002
-+++ imap-patched/src/osdep/unix/env_unix.h	Sun May 30 07:22:54 2004
+diff -urN imap-2004b.orig/src/osdep/unix/env_unix.h imap-2004b/src/osdep/unix/env_unix.h
+--- imap-2004b.orig/src/osdep/unix/env_unix.h	2002-02-23 05:03:45.000000000 +0100
++++ imap-2004b/src/osdep/unix/env_unix.h	2005-01-11 00:32:47.000000000 +0100
 @@ -33,9 +33,25 @@
  
  /* Subscription definitions for UNIX */

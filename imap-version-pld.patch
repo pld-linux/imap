@@ -5,8 +5,8 @@ diff -ur imap-2004a.orig/src/imapd/imapd.c imap-2004a/src/imapd/imapd.c
  
  /* Global storage */
  
--char *version = "2004.352";	/* version number of this server */
-+char *version = "2004.352PLD";	/* version number of this server */
+-char *version = "2004.355";	/* version number of this server */
++char *version = "2004.355PLD";	/* version number of this server */
  time_t alerttime = 0;		/* time of last alert */
  time_t sysalerttime = 0;	/* time of last system alert */
  time_t useralerttime = 0;	/* time of last user alert */
@@ -17,8 +17,8 @@ diff -ur imap-2004a.orig/src/ipopd/ipop2d.c imap-2004a/src/ipopd/ipop2d.c
  
  /* Global storage */
  
--char *version = "2004.68";	/* server version */
-+char *version = "2004.68PLD";	/* server version */
+-char *version = "2004.69";	/* server version */
++char *version = "2004.69PLD";	/* server version */
  short state = LISN;		/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */
@@ -29,8 +29,8 @@ diff -ur imap-2004a.orig/src/ipopd/ipop3d.c imap-2004a/src/ipopd/ipop3d.c
  
  /* Global storage */
  
--char *version = "2004.88";	/* server version */
-+char *version = "2004.88PLD";	/* server version */
+-char *version = "2004.89";	/* server version */
++char *version = "2004.89PLD";	/* server version */
  short state = AUTHORIZATION;	/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */

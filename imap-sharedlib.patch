@@ -1,26 +1,26 @@
-diff -ur imap-2004a.orig/Makefile imap-2004a/Makefile
---- imap-2004a.orig/Makefile	2004-04-27 21:56:49.000000000 +0200
-+++ imap-2004a/Makefile	2004-07-21 01:31:03.889862984 +0200
-@@ -76,6 +76,7 @@
+diff -ur imap-2004b.orig/Makefile imap-2004b/Makefile
+--- imap-2004b.orig/Makefile	2004-12-25 20:05:25.000000000 +0100
++++ imap-2004b/Makefile	2005-01-11 00:21:11.000000000 +0100
+@@ -77,6 +77,7 @@
  # lnx	Linux with traditional passwords and crypt() in the C library
  #	 (see lnp, sl4, sl5, and slx)
  # lnp	Linux with Pluggable Authentication Modules (PAM)
 +# lnps	Linux with Pluggable Authentication Modules (PAM) (with shared libc-client)
- # lrh	RedHat Linux 7.2
+ # lmd	Mankdrake Linux
+ # lrh	RedHat Linux 7.2 and later
  # lsu	SuSE Linux
- # lyn	LynxOS
-@@ -283,7 +284,7 @@
+@@ -285,7 +286,7 @@
  
  # Note on SCO you may have to set LN to "ln".
  
--a32 a41 aix bs3 bsf bsi bso d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul hpp hpx lnp lyn mct mnt neb nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
-+a32 a41 aix bs3 bsf bsi bso d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul hpp hpx lnp lnps lyn mct mnt neb nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
+-a32 a41 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul hpp hpx lnp lyn mct mnt neb nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
++a32 a41 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul hpp hpx lnp lnps lyn mct mnt neb nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
  	$(BUILD) BUILDTYPE=$@
  
  # If you use sv4, you may find that it works to move it to use the an process.
-diff -ur imap-2004a.orig/src/dmail/Makefile imap-2004a/src/dmail/Makefile
---- imap-2004a.orig/src/dmail/Makefile	2002-11-19 01:43:31.000000000 +0100
-+++ imap-2004a/src/dmail/Makefile	2004-07-21 01:31:03.890862832 +0200
+diff -ur imap-2004b.orig/src/dmail/Makefile imap-2004b/src/dmail/Makefile
+--- imap-2004b.orig/src/dmail/Makefile	2002-11-19 01:43:31.000000000 +0100
++++ imap-2004b/src/dmail/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -18,14 +18,14 @@
  
  
@@ -38,9 +38,9 @@ diff -ur imap-2004a.orig/src/dmail/Makefile imap-2004a/src/dmail/Makefile
  
  dmail: $(CCLIENTLIB) dmail.o
  	$(CC) $(CFLAGS) -o dmail dmail.o $(LDFLAGS)
-diff -ur imap-2004a.orig/src/imapd/Makefile imap-2004a/src/imapd/Makefile
---- imap-2004a.orig/src/imapd/Makefile	2004-06-29 23:26:28.000000000 +0200
-+++ imap-2004a/src/imapd/Makefile	2004-07-21 01:37:05.483892336 +0200
+diff -ur imap-2004b.orig/src/imapd/Makefile imap-2004b/src/imapd/Makefile
+--- imap-2004b.orig/src/imapd/Makefile	2004-06-29 23:26:28.000000000 +0200
++++ imap-2004b/src/imapd/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -45,12 +45,12 @@
  # Get local definitions from c-client directory
  
@@ -56,9 +56,9 @@ diff -ur imap-2004a.orig/src/imapd/Makefile imap-2004a/src/imapd/Makefile
  
  all:	imapd
  
-diff -ur imap-2004a.orig/src/ipopd/Makefile imap-2004a/src/ipopd/Makefile
---- imap-2004a.orig/src/ipopd/Makefile	2000-10-25 01:55:07.000000000 +0200
-+++ imap-2004a/src/ipopd/Makefile	2004-07-21 01:31:03.893862376 +0200
+diff -ur imap-2004b.orig/src/ipopd/Makefile imap-2004b/src/ipopd/Makefile
+--- imap-2004b.orig/src/ipopd/Makefile	2000-10-25 01:55:07.000000000 +0200
++++ imap-2004b/src/ipopd/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -19,14 +19,14 @@
  
  
@@ -76,9 +76,9 @@ diff -ur imap-2004a.orig/src/ipopd/Makefile imap-2004a/src/ipopd/Makefile
  
  ipopd: ipop2d ipop3d
  
-diff -ur imap-2004a.orig/src/mailutil/Makefile imap-2004a/src/mailutil/Makefile
---- imap-2004a.orig/src/mailutil/Makefile	2002-11-19 01:41:46.000000000 +0100
-+++ imap-2004a/src/mailutil/Makefile	2004-07-21 01:31:03.894862224 +0200
+diff -ur imap-2004b.orig/src/mailutil/Makefile imap-2004b/src/mailutil/Makefile
+--- imap-2004b.orig/src/mailutil/Makefile	2002-11-19 01:41:46.000000000 +0100
++++ imap-2004b/src/mailutil/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -19,14 +19,14 @@
  
  
@@ -96,9 +96,9 @@ diff -ur imap-2004a.orig/src/mailutil/Makefile imap-2004a/src/mailutil/Makefile
  
  mailutil: $(CCLIENTLIB) mailutil.o
  	$(CC) $(CFLAGS) -o mailutil mailutil.o $(LDFLAGS)
-diff -ur imap-2004a.orig/src/mtest/Makefile imap-2004a/src/mtest/Makefile
---- imap-2004a.orig/src/mtest/Makefile	2000-10-25 01:55:39.000000000 +0200
-+++ imap-2004a/src/mtest/Makefile	2004-07-21 01:31:03.895862072 +0200
+diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
+--- imap-2004b.orig/src/mtest/Makefile	2000-10-25 01:55:39.000000000 +0200
++++ imap-2004b/src/mtest/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -19,14 +19,14 @@
  
  
@@ -116,9 +116,9 @@ diff -ur imap-2004a.orig/src/mtest/Makefile imap-2004a/src/mtest/Makefile
  
  all:	mtest
  
-diff -ur imap-2004a.orig/src/osdep/unix/Makefile imap-2004a/src/osdep/unix/Makefile
---- imap-2004a.orig/src/osdep/unix/Makefile	2004-07-21 01:30:10.000000000 +0200
-+++ imap-2004a/src/osdep/unix/Makefile	2004-07-21 01:35:31.847127288 +0200
+diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makefile
+--- imap-2004b.orig/src/osdep/unix/Makefile	2005-01-11 00:16:37.000000000 +0100
++++ imap-2004b/src/osdep/unix/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -152,7 +152,7 @@
  	 SPOOLDIR=/var/spool \
  	 RSHPATH=/usr/bin/rsh \
@@ -684,9 +684,9 @@ diff -ur imap-2004a.orig/src/osdep/unix/Makefile imap-2004a/src/osdep/unix/Makef
  	./drivers $(EXTRADRIVERS) $(DEFAULTDRIVERS) dummy
  	./mkauths $(EXTRAAUTHENTICATORS) $(DEFAULTAUTHENTICATORS)
  	$(LN) os_$(OS).h osdep.h
-diff -ur imap-2004a.orig/src/tmail/Makefile imap-2004a/src/tmail/Makefile
---- imap-2004a.orig/src/tmail/Makefile	2002-11-19 01:45:14.000000000 +0100
-+++ imap-2004a/src/tmail/Makefile	2004-07-21 01:31:03.903860856 +0200
+diff -ur imap-2004b.orig/src/tmail/Makefile imap-2004b/src/tmail/Makefile
+--- imap-2004b.orig/src/tmail/Makefile	2002-11-19 01:45:14.000000000 +0100
++++ imap-2004b/src/tmail/Makefile	2005-01-11 00:18:13.000000000 +0100
 @@ -18,14 +18,14 @@
  
  
