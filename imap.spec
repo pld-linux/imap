@@ -15,7 +15,7 @@ Patch:		%{name}.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	pam >= 0.66
 Prereq:		/etc/rc.d/init.d/rc-inetd
-Requires:	rc-inetd
+Requires:	rc-inetd >= 0.8.1
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
 
@@ -39,7 +39,7 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego POP
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Prereq:		/etc/rc.d/init.d/rc-inetd
-Requires:	rc-inetd
+Requires:	rc-inetd >= 0.8.1
 
 %description pop
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
@@ -111,32 +111,33 @@ gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/* README
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart 1>&2
+	/etc/rc.d/init.d/rc-inetd reload 1>&2
 else
 	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
 fi
 
 %post pop
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart 1>&2
+	/etc/rc.d/init.d/rc-inetd reload 1>&2
 else
 	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
 fi
 
 %postun
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart
+	/etc/rc.d/init.d/rc-inetd reload
 fi
 
 %postun pop
 if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart
+	/etc/rc.d/init.d/rc-inetd reload
 fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(644,root,root,755)
 %doc README.gz
 %attr(640,root,root) %config /etc/pam.d/imap
 %attr(640,root,root) /etc/sysconfig/rc-inetd/imapd
@@ -153,7 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/ipopd.8.gz
 
 %files devel
+%defattr(644,root,root,755)
 %{_includedir}/*
 
 %files static
+%defattr(644,root,root,755)
 %{_libdir}/libimap.a
