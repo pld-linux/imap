@@ -3,8 +3,8 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 %define		snap	0107022325
 Version:	2001
-Release:	0.BETA.20%{snap}.3
-Epoch:		2
+Release:	0.BETA.20%{snap}.4
+Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
