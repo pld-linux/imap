@@ -1,7 +1,7 @@
 Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
-Version:	4.7
+Version:	4.7b
 Release:	1
 Copyright:	BSD
 Group:		Networking/Daemons
@@ -13,6 +13,7 @@ Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
 Patch:		%{name}.patch
 Buildroot:	/tmp/%{name}-%{version}-root
+BuildRequires:	pam-devel
 Requires:	pam >= 0.66
 Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	rc-inetd >= 0.8.1
@@ -67,17 +68,17 @@ Development files for IMAP.
 %description -l pl
 Pliki nag³ówkowe dla IMAP.
 
-%package static
-Summary:        IMAP static library.
-Summary(pl):    Statyczna biblioteka IMAP.
-Group:          Development/Libraries 
-Group(pl):      Programowanie/Biblioteki
-
-%description static
-IMAP static library.
-
-%description -l pl
-Statyczna biblioteka IMAP.
+#%package static
+#Summary:        IMAP static library.
+#Summary(pl):    Statyczna biblioteka IMAP.
+#Group:          Development/Libraries 
+#Group(pl):      Programowanie/Biblioteki
+#
+#%description static
+#IMAP static library.
+#
+#%description -l pl
+#Statyczna biblioteka IMAP.
 
 %prep
 %setup -q 
@@ -99,6 +100,9 @@ install ./src/osdep/tops-20/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./src/osdep/unix/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./c-client/c-client.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
 
+rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
+	$RPM_BUILD_ROOT%{_includedir}/os_*
+	
 install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
 install -s ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
 
@@ -157,6 +161,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/*
 
-%files static
-%defattr(644,root,root,755)
+#%files static
+#%defattr(644,root,root,755)
 %{_libdir}/libimap.a
