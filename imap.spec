@@ -3,7 +3,7 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 %define		snap	0107022325
 Version:	2001
-Release:	0.BETA.20%{snap}.2
+Release:	0.BETA.20%{snap}.3
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -285,7 +285,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/*
+%{_includedir}
 %{_libdir}/libc-client.so
 
 %files static
