@@ -41,7 +41,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.7
 PreReq:		rc-inetd >= 0.8.1
-Requires:	pam >= 0.66
+Requires:	pam >= 0.77.3
 Requires:	%{name}-common
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
@@ -183,6 +183,7 @@ IMAP. ðÒÏÔÏËÏÌ POP ÄÏÚ×ÏÌÑ¤ ÐÏÛÔÏ×¦Ê ÍÁÛÉÎ¦ (post office) ÐÒÉÊÍÁÔÉ
 Summary:	Common files for WU imap and pop daemons
 Summary(pl):	Pliki wspólne dla serwerów imap i pop
 Group:		Networking/Daemons
+Requires:	pam >= 0.77.3
 
 %description common
 Common files for WU imap and pop daemons.
