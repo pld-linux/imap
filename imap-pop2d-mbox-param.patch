@@ -6,7 +6,7 @@
  	      user,tcp_clienthost ());
 -      return c_fold ("INBOX");	/* local; select INBOX */
 +      if (argc > 1)
-+	return argv[1];
++	return c_fold argv[1];
 +      else
 +      	return c_fold ("INBOX");	/* local; select INBOX */
      }
