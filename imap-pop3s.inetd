@@ -2,6 +2,7 @@ SERVICE_NAME=pop3s
 SOCK_TYPE=stream
 PROTOCOL=tcp
 PORT=995
+FAMILY=ipv4
 FLAGS=nowait
 USER=root
 SERVER=/usr/sbin/ipop3d
