@@ -14,7 +14,7 @@ Summary(uk):	úÁÂÅÚÐÅÞÕ¤ Ð¦ÄÔÒÉÍËÕ ÍÅÒÅÖÅ×ÏÇÏ ÐÏÛÔÏ×ÏÇÏ ÐÒÏÔÏËÏÌÕ IMAP
 Summary(zh_CN):	IMAPºÍPOP·þÎñÆ÷
 Name:		imap
 Version:	2004
-Release:	1
+Release:	2
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -37,6 +37,7 @@ Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-non_root.patch
+Patch9:		%{name}-headers_fix.patch
 URL:		http://www.washington.edu/imap/
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -297,6 +298,7 @@ POP/IMAP.
 %patch6 -p1
 %patch7 -p1
 %{?with_non_root_auth:%patch8 -p1}
+%patch9 -p1
 
 %build
 # build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
