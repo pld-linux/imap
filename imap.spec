@@ -1,3 +1,9 @@
+#
+# Conditional build:
+#
+# _with_non_root_auth	- build with non_root patch (authentication without
+#			  root privilages and more configuration options).
+#			  Possibly not secure.
 Summary:	Provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protokoЁu pocztowego IMAP
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
@@ -26,6 +32,7 @@ Patch6:		%{name}-man.patch
 Patch7:		%{name}-overflow.patch
 Patch8:		%{name}-version-pld.patch
 Patch9:		%{name}-no_1777_warning.patch
+%{?_with_non_root_auth:Patch10:	%{name}-non_root.patch}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
@@ -242,6 +249,7 @@ Pliki wspСlne dla serwerСw imap i pop.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%{?_with_non_root_auth:%patch10 -p1}
 
 %build
 %{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="%{version}" lnp
@@ -252,7 +260,8 @@ mv -f c-client/c-client.a libc-client.a
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/{pam.d,security,sysconfig/rc-inetd} \
-	$RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,%{_includedir},%{_libdir}}
+	$RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,%{_includedir},%{_libdir}} \
+	$RPM_BUILD_ROOT%{_var}/lib/imap
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
@@ -334,6 +343,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.imap
 %attr(755,root,root) %{_sbindir}/imapd
+%dir %attr(750,imap,mail) %{_var}/lib/imap
 %{_mandir}/man8/imapd.8*
 
 %files pop2
