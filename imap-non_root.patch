@@ -27,7 +27,7 @@ diff -urN imap-2004b.orig/src/imapd/imapd.8 imap-2004b/src/imapd/imapd.8
  since this is where this software expects it to be located.
 +.TP
 +\fB\-l\fR
-+perform login even if not running as root. With carefull configuration imapd can be run as (for example) \fIimap.mail\fR. Without this option imapd, whenrunning not as root, considers that authentication has been done by external program and serves mail of user it is running as.
++perform login even if not running as root. With carefull configuration imapd can be run as (for example) \fIimap.mail\fR. Without this option imapd, when running not as root, considers that authentication has been done by external program and serves mail of user it is running as.
 +.TP
 +\fB-m\fR \fIsubdir\fR
 +specifiy subdirectory of user's home directory which will be served by default. Giving this option prevents listing entire home directory in imap client.
@@ -42,7 +42,7 @@ diff -urN imap-2004b.orig/src/imapd/imapd.8 imap-2004b/src/imapd/imapd.8
 +
 +All mailboxes must be accessible for imapd, including WRITE access. This can be acomplished by running imapd with group mail and setting group of all mailboxes to mail. Note that members of this group will be allowed to read and WRITE all mailboxes on the system. Be carefull adding members to this group. It may be a good idea to \fIchmod g+s ~/Mail\fR directories. Also note that user, which imapd is running as, must be able to enter into user's home directory and then subdirectory in which mailboxes are stored. This usualy reqires \fIchmod a+x ~; chgrp mail ~/Mail; chmod g+rw ~/Mail\fR.
 +
-+imapd must be able to authenticate users. On most systems this means read access for \fI/etc/shadow\fR or \fI/var/db/shadow.db\fR. One way is to \fIchgrpshadow /var/db/shadow/db\fR and add imap user to the shadow group.
++imapd must be able to authenticate users. On most systems this means read access for \fI/etc/shadow\fR or \fI/var/db/shadow.db\fR. One way is to \fIchgrp shadow /var/db/shadow/db\fR and add imap user to the shadow group.
 +
 +BIG FAT WARNING: in the setup described above imapd will have read access for the shadow (either file or database) even after user authentication. In normal situation it starts as root, authorises the user and then performs
 +.BR setuid(2)
