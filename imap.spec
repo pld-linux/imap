@@ -2,7 +2,7 @@ Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7c2
-Release:	4
+Release:	5
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -12,6 +12,7 @@ Source2:	%{name}-imapd.inetd
 Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
 Patch0:		%{name}.patch
+Patch1:		%{name}-pop2d-mbox-param.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 Requires:	pam >= 0.66
@@ -131,7 +132,8 @@ Pliki wspólne dla serwerów imap i pop.
 
 %prep
 %setup -q -n imap-4.7c
-%patch -p1 
+%patch0 -p1 
+%patch1 -p1 
 
 %build
 %{__make} CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
