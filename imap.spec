@@ -4,7 +4,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Name:		imap
 Version:	2001a
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
