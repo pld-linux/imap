@@ -3,7 +3,7 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 %define		snap	0107022325
 Version:	2001
-Release:	0.BETA.20%{snap}.5
+Release:	0.BETA.20%{snap}.6
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -258,7 +258,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imapd
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imaps
-%attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/imap
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.imap
 %attr(755,root,root) %{_sbindir}/imapd
 %{_mandir}/man8/imapd.8*
@@ -280,7 +280,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.gz docs/*
 %defattr(644,root,root,755)
-%attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/pop
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
 
 %files lib
