@@ -1,0 +1,4 @@
+#%PAM-1.0
+auth       required	/lib/security/pam_pwdb.so md5 shadow 
+auth       optional	/lib/security/pam_krb5.so 
+account    required	/lib/security/pam_pwdb.so
