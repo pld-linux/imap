@@ -13,13 +13,13 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2004
-Release:	2
+Version:	2004a
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
-# Source0-md5:	ec3dafeeae320457a1d098157e9bf969
+# Source0-md5:	34d2c66271302cd2f926094fb5e8705d
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -321,9 +321,9 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_var}/lib/imap} \
 	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
 
-install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
-install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
-install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
+install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
+install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
+install ./src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 install ./src/dmail/dmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install ./src/mailutil/mailutil.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install ./src/tmail/tmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
