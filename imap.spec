@@ -1,8 +1,6 @@
 #
-# TODO: what is imap user in "%dir %attr(750,imap,mail) %{_var}/lib/imap"???
-#
 # Conditional build:
-%bcond_with	non_root_auth	- build with non_root patch (authentication
+%bcond_without	non_root_auth	- build with non_root patch (authentication
 #				  without root privileges and more configuration
 #				  options). Possibly not secure.
 #
@@ -14,13 +12,13 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2004b
-Release:	2.1
+Version:	2004c1
+Release:	2
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
-# Source0-md5:	4dbd8d28ed9b2bda186a23277a95b486
+# Source0-md5:	f0a1a2abfa4b1ed8074ce023724416f3
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -40,7 +38,6 @@ Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-non_root.patch
 Patch9:		%{name}-headers_fix.patch
 URL:		http://www.washington.edu/imap/
-BuildRequires:	WTF-is-imap-user
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
 PreReq:		rc-inetd >= 0.8.1
@@ -413,7 +410,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/imapd.pem
 %attr(755,root,root) %{_sbindir}/imapd
-%dir %attr(750,imap,mail) %{_var}/lib/imap
+%{?with_non_root_auth:%dir %attr(750,imap,mail) %{_var}/lib/imap}
 %{_mandir}/man8/imapd.8*
 
 %files pop2
