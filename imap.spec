@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	non_root_auth	- build with non_root patch (authentication
+%bcond_with	non_root_auth	- build with non_root patch (authentication
 #				  without root privileges and more configuration
 #				  options). Possibly not secure.
 #
@@ -13,7 +13,7 @@ Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
 Version:	2004c1
-Release:	2
+Release:	1.9
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
