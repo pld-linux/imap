@@ -2,7 +2,7 @@ Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7c2
-Release:	6
+Release:	7
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
