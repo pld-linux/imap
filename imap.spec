@@ -36,6 +36,7 @@ Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-non_root.patch
+URL:		http://www.washington.edu/imap/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.7
