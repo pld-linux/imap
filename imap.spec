@@ -27,12 +27,12 @@ Patch6:		%{name}-man.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
+PreReq:		rc-inetd >= 0.8.1
 Requires:	pam >= 0.66
 Requires:	%{name}-common
-PreReq:		/etc/rc.d/init.d/rc-inetd
-Requires:	rc-inetd >= 0.8.1
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
+Conflicts:	courier-imap
 
 %define		_includedir	%{_prefix}/include/imap
 
@@ -123,6 +123,8 @@ Provides:	pop3daemon
 Obsoletes:	pop3daemon
 Obsoletes:	qpopper
 Obsoletes:	solid-pop3d
+Conflicts:	courier-imap-pop3
+Conflicts:	tpop3d
 
 %description pop3
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
