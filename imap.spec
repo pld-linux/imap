@@ -39,7 +39,7 @@ Patch8:		%{name}-non_root.patch
 URL:		http://www.washington.edu/imap/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
-BuildRequires:	openssl-devel >= 0.9.7c
+BuildRequires:	openssl-devel >= 0.9.7d
 PreReq:		rc-inetd >= 0.8.1
 Requires:	pam >= 0.77.3
 Requires:	%{name}-common
