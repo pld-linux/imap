@@ -4,17 +4,16 @@ Summary(fr):	Fournit un support pour les protocoles de mail IMAP et POP.
 Summary(pl):	Wspomaganie dla protoko³ów pocztowych IMAP i POP 
 Summary(tr):	IMAP ve POP posta indirme protokollarý için sunucu
 Name:		imap
-Version:	4.5
-Release:	3
+Version:	4.6.BETA
+Release:	2
 Copyright:	BSD
 Group:		Daemons
 Group(pl):	Serwery
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
 Source1:	%{name}.pamd
-Patch0:		%{name}-pld.patch
+Patch:		%{name}.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	pam >= 0.66
-Requires:	krb5-lib >= 1.0.5
 
 %description
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
@@ -40,7 +39,7 @@ make CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{etc/pam.d,usr/{sbin,man/man8}}
+install -d $RPM_BUILD_ROOT/{etc/pam.d,usr/{sbin,share/man/man8}}
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipopd.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
@@ -50,16 +49,14 @@ install -s ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 
-gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/*
-
-bzip2 -9 README
+gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/* README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.bz2
+%doc README.gz
 
 %attr(640,root,root) %config /etc/pam.d/imap
 %attr(755,root,root) %{_sbindir}/ipop2d
