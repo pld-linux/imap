@@ -140,7 +140,8 @@ Pliki wspólne dla serwerów imap i pop.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/{pam.d,sysconfig/rc-inetd},usr/{sbin,share/man/man8},%{_includedir},%{_libdir}}
+install -d $RPM_BUILD_ROOT/etc/{pam.d,sysconfig/rc-inetd} \
+	$RPM_BUILD_ROOT{%{sbindir},%{_mandir}/man8},%{_includedir},%{_libdir}}
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
