@@ -1,8 +1,8 @@
 Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
-Version:	4.6.BETA
-Release:	2
+Version:	4.7
+Release:	1
 Copyright:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
