@@ -5,13 +5,13 @@ Summary(pl):	Wspomaganie dla protoko³ów pocztowych IMAP i POP
 Summary(tr):	IMAP ve POP posta indirme protokollarý için sunucu
 Name:		imap
 Version:	4.5
-Release:	2d
+Release:	3
 Copyright:	BSD
 Group:		Daemons
 Group(pl):	Serwery
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
 Source1:	%{name}.pamd
-Patch:		%{name}-pld.patch
+Patch0:		%{name}-pld.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	pam >= 0.66
 Requires:	krb5-lib >= 1.0.5
@@ -41,16 +41,17 @@ make CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{etc/pam.d,usr/{sbin,man/man8}}
+
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT/usr/man/man8/ipopd.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT/usr/man/man8/imapd.8
 
-install -s ./ipopd/ipop2d $RPM_BUILD_ROOT/usr/sbin
-install -s ./ipopd/ipop3d $RPM_BUILD_ROOT/usr/sbin
+install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT/usr/sbin
 install -s ./imapd/imapd $RPM_BUILD_ROOT/usr/sbin
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 
 gzip -9fn $RPM_BUILD_ROOT/usr/man/man8/*
+
 bzip2 -9 README
 
 %clean
@@ -64,7 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/sbin/ipop2d
 %attr(755,root,root) /usr/sbin/ipop3d
 %attr(755,root,root) /usr/sbin/imapd
-%attr(644,root, man) /usr/man/man8/*
+
+/usr/man/man8/*
 
 %changelog
 * Wed Feb 10 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
@@ -77,37 +79,5 @@ rm -rf $RPM_BUILD_ROOT
   [4.5-1d]
 - build for Linux PLD,
 - major changes,
-
-* Fri Sep 11 1998 Jeff Johnson <jbj@redhat.com>
-- use only fcntl locking.
-
-* Thu Sep 10 1998 Jeff Johnson <jbj@redhat.com>
-- update to 4.4.
-- removed g+s bit to imapd.
-
-* Wed Jul 22 1998 Jeff Johnson <jbj@redhat.com>
-- updated to 4.2.
-- added g+s bit to imapd so that lock files can be created.
-
-* Thu May 07 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Wed Apr 08 1998 Cristian Gafton <gafton@redhat.com>
-- Updated to the latest imap as of today...
-
-* Wed Dec 10 1997 Cristian Gafton <gafton@redhat.com>
-- Updated to the latest imap as of today...
-- Updated the pam patch to reflect the new directory organization
-
-* Thu Oct 23 1997 Michael K. Johnson <johnsonm@redhat.com>
-- Fix patch for new PAM spec compliance.
-
-* Thu Oct 02 1997 Michael K. Johnson <johnsonm@redhat.com>
-- Comply with change in PAM spec.
-- Use a buildroot.
-
-* Mon Mar 03 1997 Michael K. Johnson <johnsonm@redhat.com>
-- Moved from pam.conf to pam.d
-
-* Mon Mar 03 1997 Erik Troan <ewt@redhat.com>
-- Fixed buffer overrun in server_login().
+- build against GNU libc-2.1,
+- start at RH spec file.
