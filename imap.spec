@@ -2,7 +2,7 @@ Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7c2
-Release:	3
+Release:	4
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -38,7 +38,33 @@ przesy³ek i nastêpnie pobieranie ich przez maszyny klienckie w sieci.
 Protokó³ IMAP pozwala zdalnemu u¿ytkownikowi na czytanie poczty na
 zdalnej maszynie bez konieczno¶ci jej pobierania.
 
-%package pop
+%package pop2
+Summary:	provides support for POP network mail protocol
+Summary(pl):	Wspomaganie dla protoko³u pocztowego POP
+Group:		Networking/Daemons
+Group(pl):	Sieciowe/Serwery
+Prereq:		/etc/rc.d/init.d/rc-inetd
+Requires:	%{name}-common
+Requires:	rc-inetd >= 0.8.1
+Provides:	pop2daemon
+Obsoletes:	pop2daemon
+
+%description pop2
+IMAP is a server for the POP (Post Office Protocol) and IMAP mail
+protocols. The POP protocol allows a "post office" machine to collect
+mail for users and have that mail downloaded to the user's local
+machine for reading. The IMAP protocol provides the functionality of
+POP, and allows a user to read mail on a remote machine without moving
+it to his local mailbox.
+
+%description pop2 -l pl
+Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP.
+Protokó³ POP pozwala serwerowi poczty elektronicznej na przechowywanie
+przesy³ek i nastêpnie pobieranie ich przez maszyny klienckie w sieci.
+Protokó³ IMAP pozwala zdalnemu u¿ytkownikowi na czytanie poczty na
+zdalnej maszynie bez konieczno¶ci jej pobierania.
+
+%package pop3
 Summary:	provides support for POP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego POP
 Group:		Networking/Daemons
@@ -51,7 +77,7 @@ Obsoletes:	pop3daemon
 Obsoletes:	qpopper
 Obsoletes:	solid-pop3d
 
-%description pop
+%description pop3
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
 protocols. The POP protocol allows a "post office" machine to collect
 mail for users and have that mail downloaded to the user's local
@@ -59,7 +85,7 @@ machine for reading. The IMAP protocol provides the functionality of
 POP, and allows a user to read mail on a remote machine without moving
 it to his local mailbox.
 
-%description pop -l pl
+%description pop3 -l pl
 Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP.
 Protokó³ POP pozwala serwerowi poczty elektronicznej na przechowywanie
 przesy³ek i nastêpnie pobieranie ich przez maszyny klienckie w sieci.
@@ -114,7 +140,8 @@ Pliki wspólne dla serwerów imap i pop.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/{pam.d,sysconfig/rc-inetd},usr/{sbin,share/man/man8},%{_includedir},%{_libdir}}
 
-install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipopd.8
+install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
+install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 
 install ./src/c-client/*.h $RPM_BUILD_ROOT%{_includedir}
@@ -144,7 +171,14 @@ else
 	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
 fi
 
-%post pop
+%post pop2
+if [ -f /var/lock/subsys/rc-inetd ]; then
+	/etc/rc.d/init.d/rc-inetd reload 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet sever" 1>&2
+fi
+
+%post pop3
 if [ -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload 1>&2
 else
@@ -156,7 +190,12 @@ if [ -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload
 fi
 
-%postun pop
+%postun pop2
+if [ -f /var/lock/subsys/rc-inetd ]; then
+	/etc/rc.d/init.d/rc-inetd reload
+fi
+
+%postun pop3
 if [ -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload
 fi
@@ -170,13 +209,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/imapd
 %{_mandir}/man8/imapd.8.gz
 
-%files pop
+%files pop2
 %defattr(644,root,root,755)
-%attr(640,root,root) /etc/sysconfig/rc-inetd/ipop2d
-%attr(640,root,root) /etc/sysconfig/rc-inetd/ipop3d
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop2d
 %attr(755,root,root) %{_sbindir}/ipop2d
+%{_mandir}/man8/ipop2d.8.gz
+
+%files pop3
+%defattr(644,root,root,755)
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3d
 %attr(755,root,root) %{_sbindir}/ipop3d
-%{_mandir}/man8/ipopd.8.gz
+%{_mandir}/man8/ipop3d.8.gz
 
 %files common
 %defattr(644,root,root,755)
