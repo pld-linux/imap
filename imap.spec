@@ -1,9 +1,9 @@
 #
 # Conditional build:
 #
-# _with_non_root_auth	- build with non_root patch (authentication without
-#			  root privileges and more configuration options).
-#			  Possibly not secure.
+%bcond_with	non_root_auth	- build with non_root patch (authentication
+#				  without root privileges and more configuration
+#				  options). Possibly not secure.
 #
 Summary:	Provides support for IMAP network mail protocol
 Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
@@ -38,15 +38,15 @@ Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-non_root.patch
 URL:		http://www.washington.edu/imap/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 PreReq:		rc-inetd >= 0.8.1
 Requires:	pam >= 0.77.3
-Requires:	%{name}-common
+Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
 Conflicts:	courier-imap
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/imap
 
@@ -111,7 +111,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP2
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP2
 Group:		Networking/Daemons
 Prereq:		/etc/rc.d/init.d/rc-inetd
-Requires:	%{name}-common
+Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
 Provides:	pop2daemon
 Obsoletes:	pop2daemon
@@ -147,7 +147,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP3
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP3
 Group:		Networking/Daemons
 Prereq:		/etc/rc.d/init.d/rc-inetd
-Requires:	%{name}-common
+Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
 Provides:	pop3daemon
 Obsoletes:	pop3daemon
@@ -184,6 +184,7 @@ IMAP. Протокол POP дозволя╓ поштов╕й машин╕ (post office) приймати
 Summary:	Common files for WU imap and pop daemons
 Summary(pl):	Pliki wspСlne dla serwerСw imap i pop
 Group:		Networking/Daemons
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.77.3
 
 %description common
@@ -200,7 +201,7 @@ Summary(ru):	Хедера для разработки программ с использованием библиотеки IMAP
 Summary(uk):	Хедери для розробки програм з використанням б╕бл╕отек╕ IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ©╙╥╒╧╓╬ъ╪╞
 Group:		Development/Libraries
-Requires:	%{name}-lib = %{epoch}:%{version}
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
 %description devel
 Development files for IMAP.
@@ -248,7 +249,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolver programas IMAP
 Summary(ru):	Статическая библиотека IMAP
 Summary(uk):	Статична б╕бл╕отека IMAP
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 IMAP static library.
@@ -270,7 +271,7 @@ Statyczna biblioteka IMAP.
 Summary:	IMAP tools: mailutil, dmail, tmail
 Summary(pl):	NarzЙdzia IMAP: mailutil, dmail, tmail
 Group:		Applications/Mail
-Requires:	%{name}-lib = %{epoch}:%{version}
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
 %description utils
 IMAP tools: mailutil (mail utility program), dmail (procmail mail
@@ -295,7 +296,7 @@ POP/IMAP.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%{?_with_non_root_auth:%patch8 -p1}
+%{?with_non_root_auth:%patch8 -p1}
 
 %build
 # build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
@@ -439,8 +440,8 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libc-client.so
 %{_includedir}
-%{_libdir}/libc-client.so
 
 %files static
 %defattr(644,root,root,755)
