@@ -1,9 +1,4 @@
 #
-# Conditional build:
-%bcond_with	non_root_auth	# build with non_root patch (authentication
-#				  without root privileges and more configuration
-#				  options). Possibly not secure.
-#
 Summary:	Provides support for IMAP network mail protocol
 Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
@@ -13,7 +8,7 @@ Summary(uk):	úÁÂÅÚÐÅÞÕ¤ Ð¦ÄÔÒÉÍËÕ ÍÅÒÅÖÅ×ÏÇÏ ÐÏÛÔÏ×ÏÇÏ ÐÒÏÔÏËÏÌÕ IMAP
 Summary(zh_CN):	IMAPºÍPOP·þÎñÆ÷
 Name:		imap
 Version:	2004c1
-Release:	1.9
+Release:	2
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -35,8 +30,7 @@ Patch4:		%{name}-mailpath.patch
 Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
-Patch8:		%{name}-non_root.patch
-Patch9:		%{name}-headers_fix.patch
+Patch8:		%{name}-headers_fix.patch
 URL:		http://www.washington.edu/imap/
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
@@ -296,8 +290,7 @@ POP/IMAP.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%{?with_non_root_auth:%patch8 -p1}
-%patch9 -p1
+%patch8 -p1
 
 %build
 # build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
@@ -410,7 +403,6 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/imapd.pem
 %attr(755,root,root) %{_sbindir}/imapd
-%{?with_non_root_auth:%dir %attr(750,imap,mail) %{_var}/lib/imap}
 %{_mandir}/man8/imapd.8*
 
 %files pop2
