@@ -5,8 +5,8 @@ diff -ur imap-2004a.orig/src/imapd/imapd.c imap-2004a/src/imapd/imapd.c
  
  /* Global storage */
  
--char *version = "2004.355";	/* version number of this server */
-+char *version = "2004.355PLD";	/* version number of this server */
+-char *version = "2004.357";	/* version number of this server */
++char *version = "2004.357PLD";	/* version number of this server */
  time_t alerttime = 0;		/* time of last alert */
  time_t sysalerttime = 0;	/* time of last system alert */
  time_t useralerttime = 0;	/* time of last user alert */
