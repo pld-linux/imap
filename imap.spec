@@ -13,13 +13,13 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2002c1
-Release:	1.1
+Version:	2004
+Release:	0.1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
-# Source0-md5:	90c255dcf3ee373e3fb174ea5d820f4d
+# Source0-md5:	ec3dafeeae320457a1d098157e9bf969
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -27,6 +27,7 @@ Source4:	%{name}-pop3d.inetd
 Source5:	%{name}-%{name}s.inetd
 Source6:	%{name}-pop3s.inetd
 Source7:	%{name}-pop.pamd
+Source8:	shared-ssl-key.pem
 Patch0:		%{name}.patch
 Patch1:		%{name}-pop2d-mbox-param.patch
 Patch2:		%{name}-sharedlib.patch
@@ -314,7 +315,8 @@ echo 'y' | %{__make} lnps \
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
-	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_var}/lib/imap}
+	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_var}/lib/imap} \
+	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
@@ -346,6 +348,8 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imaps
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3s
 install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
+install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/imapd.pem
+install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop,imap}
 
@@ -402,6 +406,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imaps
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.imap
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) %{_var}/lib/openssl/certs/imapd.pem
 %attr(755,root,root) %{_sbindir}/imapd
 %dir %attr(750,imap,mail) %{_var}/lib/imap
 %{_mandir}/man8/imapd.8*
@@ -416,6 +421,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3d
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3s
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) %{_var}/lib/openssl/certs/ipop3d.pem
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipop3d.8*
 
@@ -425,6 +431,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
+%dir %{_var}/lib/openssl/certs
 
 %files lib
 %defattr(644,root,root,755)
