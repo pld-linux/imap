@@ -198,7 +198,7 @@ Summary(ru):	Хедера для разработки программ с использованием библиотеки IMAP
 Summary(uk):	Хедери для розробки програм з використанням б╕бл╕отек╕ IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ©╙╥╒╧╓╬ъ╪╞
 Group:		Development/Libraries
-Requires:	%{name}-lib = %{version}
+Requires:	%{name}-lib = %{epoch}:%{version}
 
 %description devel
 Development files for IMAP.
@@ -246,7 +246,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolver programas IMAP
 Summary(ru):	Статическая библиотека IMAP
 Summary(uk):	Статична б╕бл╕отека IMAP
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 IMAP static library.
@@ -268,7 +268,7 @@ Statyczna biblioteka IMAP.
 Summary:	IMAP tools: mailutil, dmail, tmail
 Summary(pl):	NarzЙdzia IMAP: mailutil, dmail, tmail
 Group:		Applications/Mail
-Requires:	%{name}-lib = %{version}
+Requires:	%{name}-lib = %{epoch}:%{version}
 
 %description utils
 IMAP tools: mailutil (mail utility program), dmail (procmail mail
