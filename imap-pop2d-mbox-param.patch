@@ -1,14 +1,14 @@
---- imap-4.7c/src/ipopd/ipop2d.c~	Wed Nov 17 03:31:25 1999
-+++ imap-4.7c/src/ipopd/ipop2d.c	Thu Aug 31 18:58:57 2000
-@@ -302,7 +302,10 @@
- #endif
-   if (!s && server_login (user = cpystr (u),pass,argc,argv)) {
-     syslog (LOG_INFO,"Login user=%.80s host=%.80s",user,tcp_clienthost ());
--    strcpy (tmp,"INBOX");	/* local; attempt login, select INBOX */
-+    if (argc > 1)
-+	    strcpy(tmp,argv[1]);
-+    else
-+    	strcpy (tmp,"INBOX");	/* local; attempt login, select INBOX */
+--- imap-2001.BETA.SNAP-0106191041.orig/src/ipopd/ipop2d.c	Sat Apr 14 00:37:23 2001
++++ imap-2001.BETA.SNAP-0106191041/src/ipopd/ipop2d.c	Mon Jun 25 15:16:33 2001
+@@ -277,7 +277,10 @@
+     if (server_login (user = cpystr (u),pass,s,argc,argv)) {
+       syslog (LOG_INFO,"%sLogin user=%.80s host=%.80s",s ? "Admin " : "",
+ 	      user,tcp_clienthost ());
+-      return c_fold ("INBOX");	/* local; select INBOX */
++      if (argc > 1)
++	return argv[1];
++      else
++      	return c_fold ("INBOX");	/* local; select INBOX */
+     }
    }
-   else {
-     fputs ("- Bad login\015\012",stdout);
+ #ifndef DISABLE_POP_PROXY

@@ -1,8 +1,8 @@
-SERVICE_NAME=pop3
+SERVICE_NAME=pop3s
 SOCK_TYPE=stream
 PROTOCOL=tcp
-PORT=110
+PORT=995
 FLAGS=nowait
 USER=root
-SERVER=tcpd
+SERVER=/usr/sbin/ipop3d
 DAEMON=/usr/sbin/ipop3d

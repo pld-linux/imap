@@ -1,0 +1,8 @@
+SERVICE_NAME=imaps
+SOCK_TYPE=stream
+PROTOCOL=tcp
+PORT=993
+FLAGS=nowait
+USER=root
+SERVER=/usr/sbin/imapd
+DAEMON=/usr/sbin/imapd

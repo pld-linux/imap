@@ -1,63 +1,42 @@
-diff -ur imap-4.7c.orig/src/osdep/unix/Makefile imap-4.7c/src/osdep/unix/Makefile
---- imap-4.7c.orig/src/osdep/unix/Makefile	Wed Nov 17 03:05:48 1999
-+++ imap-4.7c/src/osdep/unix/Makefile	Thu Aug 31 16:40:43 2000
-@@ -58,11 +58,11 @@
- CHECKPW=std
- LOGINPW=std
- SIGTYPE=bsd
--ACTIVEFILE=/usr/lib/news/active
--SPOOLDIR=/usr/spool
--MAILSPOOL=$(SPOOLDIR)/mail
-+ACTIVEFILE=/var/lib/news/active
-+SPOOLDIR=/var/spool
-+MAILSPOOL=/var/mail
- NEWSSPOOL=$(SPOOLDIR)/news
--RSHPATH=/usr/ucb/rsh
-+RSHPATH=/usr/bin/rsh
- LOCKPGM=/etc/mlock
+diff -Nur imap-2001.BETA.SNAP-0106191041.orig/src/osdep/unix/Makefile imap-2001.BETA.SNAP-0106191041/src/osdep/unix/Makefile
+--- imap-2001.BETA.SNAP-0106191041.orig/src/osdep/unix/Makefile	Sat Jun 16 01:01:28 2001
++++ imap-2001.BETA.SNAP-0106191041/src/osdep/unix/Makefile	Mon Jun 25 15:10:38 2001
+@@ -28,10 +28,10 @@
  
+ # Extended flags needed for SSL.  You may need to modify.
  
-@@ -86,7 +86,7 @@
- # Commands possibly overriden by the individual port
+-SSLDIR=/usr/local/ssl
+-SSLCERTS=$(SSLDIR)/certs
+-SSLINCLUDE=$(SSLDIR)/include
+-SSLLIB=$(SSLDIR)/lib
++SSLDIR=/usr/lib/openssl
++SSLCERTS=/var/lib/openssl/certs
++SSLINCLUDE=/usr/include
++SSLLIB=/usr/lib
  
- ARRC=ar rc
--CC=cc
-+CC=gcc
- LN=ln -s
- RANLIB=ranlib
+ SSLCRYPTO=-lcrypto
  
-@@ -487,12 +487,14 @@
- 	@echo You are building for libc6/glibc versions of Secure Linux
+@@ -609,12 +609,13 @@
  	@echo If you want libc5 versions you must use sl5 instead!
  	@echo If you want libc4 versions you must use sl4 instead!
--	$(BUILD) `cat EXTRASPECIALS` OS=$@ SIGTYPE=psx CHECKPW=psx \
-+	$(BUILD) `cat EXTRASPECIALS` OS=$@ SIGTYPE=psx CHECKPW=pam LOGINPW=std \
+ 	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
+-	 SIGTYPE=psx CHECKPW=psx CRXTYPE=nfs \
++	 SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool \
 +	 MAILSPOOL=/var/mail \
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
--	 BASECFLAGS="-g -fno-omit-frame-pointer -O6 -DNFSKLUDGE" \
+-	 BASECFLAGS="-g -fno-omit-frame-pointer -O6" \
 -	 BASELDFLAGS="-lcrypt"
-+	 OPTIMIZE="-O2" \
-+	 BASECFLAGS="$(OPTIMIZE) -DNFSKLUDGE" \
-+	 BASELDFLAGS="$(BASELDFLAGS) -lpam -ldl -lcrypt"
++	 BASECFLAGS="$(OPT)" \
++	 BASELDFLAGS="$(LDOPT) -lpam -ldl -lcrypt"
  
  sl4:	# Secure Linux using libc4
  	@echo You are building for libc4 versions of Secure Linux
-Only in imap-4.7c/src/osdep/unix: Makefile~
-diff -ur imap-4.7c.orig/src/osdep/unix/os_lnx.c imap-4.7c/src/osdep/unix/os_lnx.c
---- imap-4.7c.orig/src/osdep/unix/os_lnx.c	Wed Dec  3 01:51:31 1997
-+++ imap-4.7c/src/osdep/unix/os_lnx.c	Thu Aug 31 16:39:27 2000
-@@ -58,3 +58,5 @@
- #include "tcp_unix.c"
- #include "gr_waitp.c"
- #include "tz_sv4.c"
-+#undef flock 
-+#include "flock.c" 
-diff -ur imap-4.7c.orig/src/osdep/unix/os_lnx.h imap-4.7c/src/osdep/unix/os_lnx.h
---- imap-4.7c.orig/src/osdep/unix/os_lnx.h	Wed Apr 30 01:16:20 1997
-+++ imap-4.7c/src/osdep/unix/os_lnx.h	Thu Aug 31 16:39:27 2000
-@@ -41,13 +41,13 @@
+diff -Nur imap-2001.BETA.SNAP-0106191041.orig/src/osdep/unix/os_lnx.h imap-2001.BETA.SNAP-0106191041/src/osdep/unix/os_lnx.h
+--- imap-2001.BETA.SNAP-0106191041.orig/src/osdep/unix/os_lnx.h	Tue Feb 20 23:45:54 2001
++++ imap-2001.BETA.SNAP-0106191041/src/osdep/unix/os_lnx.h	Mon Jun 25 15:12:15 2001
+@@ -27,7 +27,7 @@
  #include <fcntl.h>
  #include <syslog.h>
  #include <sys/file.h>
@@ -66,17 +45,10 @@ diff -ur imap-4.7c.orig/src/osdep/unix/os_lnx.h imap-4.7c/src/osdep/unix/os_lnx.
  
  /* Linux gets this wrong */
  
- #define setpgrp setpgid
- 
--
-+#include "lockfix.h"
- #include "env_unix.h"
- #include "fs.h"
- #include "ftl.h"
-diff -ur imap-4.7c.orig/src/osdep/unix/os_slx.h imap-4.7c/src/osdep/unix/os_slx.h
---- imap-4.7c.orig/src/osdep/unix/os_slx.h	Wed Apr 30 01:16:20 1997
-+++ imap-4.7c/src/osdep/unix/os_slx.h	Thu Aug 31 16:39:27 2000
-@@ -41,7 +41,7 @@
+diff -Nur imap-2001.BETA.SNAP-0106191041.orig/src/osdep/unix/os_slx.h imap-2001.BETA.SNAP-0106191041/src/osdep/unix/os_slx.h
+--- imap-2001.BETA.SNAP-0106191041.orig/src/osdep/unix/os_slx.h	Tue Feb 20 23:45:54 2001
++++ imap-2001.BETA.SNAP-0106191041/src/osdep/unix/os_slx.h	Mon Jun 25 15:12:45 2001
+@@ -27,7 +27,7 @@
  #include <fcntl.h>
  #include <syslog.h>
  #include <sys/file.h>
@@ -85,9 +57,3 @@ diff -ur imap-4.7c.orig/src/osdep/unix/os_slx.h imap-4.7c/src/osdep/unix/os_slx.
  
  /* Linux gets this wrong */
  
-@@ -53,3 +53,4 @@
- #include "ftl.h"
- #include "nl.h"
- #include "tcp.h"
-+#include "lockfix.h"
-\ No newline at end of file

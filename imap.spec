@@ -1,21 +1,26 @@
 Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
-Version:	4.7c2
-Release:	7
+%define		snap	0106252013
+Version:	2001.BETA
+Release:	0.%{snap}
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Group(de):	Netzwerkwesen/Server
-Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
+Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.SNAP-%{snap}.tar.Z
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
+Source5:	%{name}-imaps.inetd
+Source6:	%{name}-pop3s.inetd
+Source7:	%{name}-pop.pamd
 Patch0:		%{name}.patch
 Patch1:		%{name}-pop2d-mbox-param.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
+BuildRequires:	openssl-devel
 Requires:	pam >= 0.66
 Requires:	%{name}-common
 PreReq:		/etc/rc.d/init.d/rc-inetd
@@ -23,7 +28,7 @@ Requires:	rc-inetd >= 0.8.1
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
 
-%define		_includedir	%_prefix/include/imap
+%define		_includedir	%{_prefix}/include/imap
 
 %description
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
@@ -138,16 +143,16 @@ Common files for WU imap and pop daemons.
 Pliki wspólne dla serwerów imap i pop.
 
 %prep
-%setup -q -n imap-4.7c
+%setup -q -n imap-%{version}.SNAP-%{snap}
 %patch0 -p1 
 %patch1 -p1 
 
 %build
-%{__make} CC="gcc" OPTIMIZE="%{rpmcflags} -pipe" slx
+%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe" LDOPT="%{rpmldflags}" SSLTYPE=unix slx
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{pam.d,sysconfig/rc-inetd} \
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,%{_includedir},%{_libdir}}
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
@@ -162,17 +167,22 @@ install ./c-client/c-client.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
 rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
 	
-install %{!?debug:-s} ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
-install %{!?debug:-s} ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
+install ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
+install ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imapd
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop2d
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imaps
+install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3s
+install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
+
+touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop,imap}
 
 rm -rf docs/{rfc,BUILD}
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* README docs/*
+gzip -9nf README docs/*
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -215,27 +225,32 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(640,root,root) /etc/sysconfig/rc-inetd/imapd
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imapd
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imaps
+%attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/imap
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.imap
 %attr(755,root,root) %{_sbindir}/imapd
-%{_mandir}/man8/imapd.8.gz
+%{_mandir}/man8/imapd.8*
 
 %files pop2
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop2d
 %attr(755,root,root) %{_sbindir}/ipop2d
-%{_mandir}/man8/ipop2d.8.gz
+%{_mandir}/man8/ipop2d.8*
 
 %files pop3
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3d
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3s
 %attr(755,root,root) %{_sbindir}/ipop3d
-%{_mandir}/man8/ipop3d.8.gz
+%{_mandir}/man8/ipop3d.8*
 
 %files common
 %defattr(644,root,root,755)
 %doc README.gz docs/*
 %defattr(644,root,root,755)
-%attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/imap
+%attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/pop
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
 
 %files devel
 %defattr(644,root,root,755)
