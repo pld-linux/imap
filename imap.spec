@@ -17,7 +17,7 @@ Source4:	%{name}-ipop3d.inetd
 Patch:		%{name}.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	pam >= 0.66
-Requires:	inetdaemon
+Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	rc-inetd
 
 %description
