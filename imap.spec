@@ -42,15 +42,15 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{etc/pam.d,usr/{sbin,man/man8}}
 
-install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT/usr/man/man8/ipopd.8
-install ./src/imapd/imapd.8c $RPM_BUILD_ROOT/usr/man/man8/imapd.8
+install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipopd.8
+install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 
 install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT/usr/sbin
 install -s ./imapd/imapd $RPM_BUILD_ROOT/usr/sbin
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 
-gzip -9fn $RPM_BUILD_ROOT/usr/man/man8/*
+gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/*
 
 bzip2 -9 README
 
@@ -66,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/sbin/ipop3d
 %attr(755,root,root) /usr/sbin/imapd
 
-/usr/man/man8/*
+%{_mandir}/man8/*
 
 %changelog
 * Wed Feb 10 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
