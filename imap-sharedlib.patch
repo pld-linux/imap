@@ -1,6 +1,6 @@
-diff -ur imap-2004/Makefile imap-patched/Makefile
---- imap-2004/Makefile	Tue Apr 27 19:56:49 2004
-+++ imap-patched/Makefile	Sun May 30 06:38:32 2004
+diff -ur imap-2004a.orig/Makefile imap-2004a/Makefile
+--- imap-2004a.orig/Makefile	2004-04-27 21:56:49.000000000 +0200
++++ imap-2004a/Makefile	2004-07-21 01:31:03.889862984 +0200
 @@ -76,6 +76,7 @@
  # lnx	Linux with traditional passwords and crypt() in the C library
  #	 (see lnp, sl4, sl5, and slx)
@@ -18,9 +18,9 @@ diff -ur imap-2004/Makefile imap-patched/Makefile
  	$(BUILD) BUILDTYPE=$@
  
  # If you use sv4, you may find that it works to move it to use the an process.
-diff -ur imap-2004/src/dmail/Makefile imap-patched/src/dmail/Makefile
---- imap-2004/src/dmail/Makefile	Tue Nov 19 00:43:31 2002
-+++ imap-patched/src/dmail/Makefile	Sun May 30 06:35:55 2004
+diff -ur imap-2004a.orig/src/dmail/Makefile imap-2004a/src/dmail/Makefile
+--- imap-2004a.orig/src/dmail/Makefile	2002-11-19 01:43:31.000000000 +0100
++++ imap-2004a/src/dmail/Makefile	2004-07-21 01:31:03.890862832 +0200
 @@ -18,14 +18,14 @@
  
  
@@ -38,27 +38,27 @@ diff -ur imap-2004/src/dmail/Makefile imap-patched/src/dmail/Makefile
  
  dmail: $(CCLIENTLIB) dmail.o
  	$(CC) $(CFLAGS) -o dmail dmail.o $(LDFLAGS)
-diff -ur imap-2004/src/imapd/Makefile imap-patched/src/imapd/Makefile
---- imap-2004/src/imapd/Makefile	Mon Nov 18 16:48:25 2002
-+++ imap-patched/src/imapd/Makefile	Sun May 30 06:35:55 2004
-@@ -44,12 +44,12 @@
+diff -ur imap-2004a.orig/src/imapd/Makefile imap-2004a/src/imapd/Makefile
+--- imap-2004a.orig/src/imapd/Makefile	2004-06-29 23:26:28.000000000 +0200
++++ imap-2004a/src/imapd/Makefile	2004-07-21 01:37:05.483892336 +0200
+@@ -45,12 +45,12 @@
  # Get local definitions from c-client directory
  
  C = ../c-client
 -CCLIENTLIB = $C/c-client.a
 +CCLIENTLIB = $C/`cat $C/ARCHIVENAME`
  CC = `cat $C/CCTYPE`
- CFLAGS = -I$C `cat $C/CFLAGS` $(NSBD) $(ENBD) \
- 	-DANOFILE=\"$(ANO)\" -DALERTFILE=\"$(ALERT)\" \
+ CFLAGS = -I$C `cat $C/CFLAGS` $(NSBD) $(ENBD) -DANOFILE=\"$(ANO)\" \
+ 	-DALERTFILE=\"$(ALERT)\" -DNNTPFILE=\"$(NNTP)\" \
  	-DUSERALERTFILE=\"$(USERALERT)\" -DSHUTDOWNFILE=\"$(SHUTDOWN)\"
 -LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
 +LDFLAGS = `cat $C/LDFLAGS`
  
  all:	imapd
  
-diff -ur imap-2004/src/ipopd/Makefile imap-patched/src/ipopd/Makefile
---- imap-2004/src/ipopd/Makefile	Tue Oct 24 23:55:07 2000
-+++ imap-patched/src/ipopd/Makefile	Sun May 30 06:35:55 2004
+diff -ur imap-2004a.orig/src/ipopd/Makefile imap-2004a/src/ipopd/Makefile
+--- imap-2004a.orig/src/ipopd/Makefile	2000-10-25 01:55:07.000000000 +0200
++++ imap-2004a/src/ipopd/Makefile	2004-07-21 01:31:03.893862376 +0200
 @@ -19,14 +19,14 @@
  
  
@@ -76,9 +76,9 @@ diff -ur imap-2004/src/ipopd/Makefile imap-patched/src/ipopd/Makefile
  
  ipopd: ipop2d ipop3d
  
-diff -ur imap-2004/src/mailutil/Makefile imap-patched/src/mailutil/Makefile
---- imap-2004/src/mailutil/Makefile	Tue Nov 19 00:41:46 2002
-+++ imap-patched/src/mailutil/Makefile	Sun May 30 06:35:55 2004
+diff -ur imap-2004a.orig/src/mailutil/Makefile imap-2004a/src/mailutil/Makefile
+--- imap-2004a.orig/src/mailutil/Makefile	2002-11-19 01:41:46.000000000 +0100
++++ imap-2004a/src/mailutil/Makefile	2004-07-21 01:31:03.894862224 +0200
 @@ -19,14 +19,14 @@
  
  
@@ -96,9 +96,9 @@ diff -ur imap-2004/src/mailutil/Makefile imap-patched/src/mailutil/Makefile
  
  mailutil: $(CCLIENTLIB) mailutil.o
  	$(CC) $(CFLAGS) -o mailutil mailutil.o $(LDFLAGS)
-diff -ur imap-2004/src/mtest/Makefile imap-patched/src/mtest/Makefile
---- imap-2004/src/mtest/Makefile	Tue Oct 24 23:55:39 2000
-+++ imap-patched/src/mtest/Makefile	Sun May 30 06:35:55 2004
+diff -ur imap-2004a.orig/src/mtest/Makefile imap-2004a/src/mtest/Makefile
+--- imap-2004a.orig/src/mtest/Makefile	2000-10-25 01:55:39.000000000 +0200
++++ imap-2004a/src/mtest/Makefile	2004-07-21 01:31:03.895862072 +0200
 @@ -19,14 +19,14 @@
  
  
@@ -116,9 +116,9 @@ diff -ur imap-2004/src/mtest/Makefile imap-patched/src/mtest/Makefile
  
  all:	mtest
  
-diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
---- imap-2004/src/osdep/unix/Makefile	Sun May 30 06:33:23 2004
-+++ imap-patched/src/osdep/unix/Makefile	Sun May 30 07:07:43 2004
+diff -ur imap-2004a.orig/src/osdep/unix/Makefile imap-2004a/src/osdep/unix/Makefile
+--- imap-2004a.orig/src/osdep/unix/Makefile	2004-07-21 01:30:10.000000000 +0200
++++ imap-2004a/src/osdep/unix/Makefile	2004-07-21 01:35:31.847127288 +0200
 @@ -152,7 +152,7 @@
  	 SPOOLDIR=/var/spool \
  	 RSHPATH=/usr/bin/rsh \
@@ -461,7 +461,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  	 SIGTYPE=psx CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g3 -O2 -Olimit 1500"
+ 	 BASECFLAGS="-g3 -w -O2 -Olimit 1500"
  
  # Note: sia_become_user() used by LOGINPW=os4 doesn't seem to work right.  The
 @@ -531,12 +562,14 @@
@@ -469,7 +469,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  	 SIGTYPE=psx CHECKPW=os4 LOGINPW=os4 CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g3 -std0 -O2"
+ 	 BASECFLAGS="-g3 -w -std0 -O2"
  
  osx:	# Mac OS X
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
@@ -587,8 +587,8 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
 +	 BASELDFLAGS="../c-client/c-client.a -lsocket -lnsl -lgen" \
  	 RANLIB=true
  
- soc:	os_sol.h	# Solaris with cc
-@@ -716,26 +754,26 @@
+ # Sorry about the -w, but the cretinous SUN Workshop Pro C compiler barfs on
+@@ -719,26 +757,26 @@
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -O2" \
@@ -599,7 +599,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  sos:	# Secure OSF/1
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
  	 SIGTYPE=psx CHECKPW=sce LOGINPW=sec CRXTYPE=nfs \
- 	 BASECFLAGS="-g3 -O2 -Olimit 1500" \
+ 	 BASECFLAGS="-g3 -w -O2 -Olimit 1500" \
 -	 BASELDFLAGS="-lsecurity -laud"
 +	 BASELDFLAGS="../c-client/c-client.a -lsecurity -laud"
  
@@ -619,7 +619,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  
  sv2:	# SVR2
  	@echo You are being *very* optimistic!
-@@ -744,7 +782,7 @@
+@@ -747,7 +785,7 @@
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-Dconst= -DSYSTEM5 -DSHORT_IDENT -I/usr/ethernet/include" \
@@ -628,7 +628,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  	 RANLIB=true LN=ln
  
  sv4:	# SVR4
-@@ -754,14 +792,14 @@
+@@ -757,14 +795,14 @@
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/resh \
  	 BASECFLAGS="-g -Dconst=" \
@@ -645,7 +645,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  
  uw2:	# UnixWare SVR4.2
  	$(BUILD) `$(CAT) SPECIALS` OS=sv4 \
-@@ -770,18 +808,19 @@
+@@ -773,18 +811,19 @@
  	 ACTIVEFILE=/var/news/lib/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g" \
@@ -667,7 +667,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  	 BASECFLAGS="-O2 -Dconst= -Dvoid=char"
  
  
-@@ -803,7 +842,7 @@
+@@ -806,7 +845,7 @@
  # Cleanup
  
  clean:
@@ -676,7 +676,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  
  
  # Dependencies
-@@ -911,6 +950,7 @@
+@@ -914,6 +953,7 @@
  	echo $(BASELDFLAGS) $(EXTRALDFLAGS) > LDFLAGS
  	echo "$(ARRC) $(ARCHIVE) $(BINARIES);$(RANLIB) $(ARCHIVE)" > ARCHIVE
  	echo $(OS) > OSTYPE
@@ -684,9 +684,9 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  	./drivers $(EXTRADRIVERS) $(DEFAULTDRIVERS) dummy
  	./mkauths $(EXTRAAUTHENTICATORS) $(DEFAULTAUTHENTICATORS)
  	$(LN) os_$(OS).h osdep.h
-diff -ur imap-2004/src/tmail/Makefile imap-patched/src/tmail/Makefile
---- imap-2004/src/tmail/Makefile	Tue Nov 19 00:45:14 2002
-+++ imap-patched/src/tmail/Makefile	Sun May 30 06:35:55 2004
+diff -ur imap-2004a.orig/src/tmail/Makefile imap-2004a/src/tmail/Makefile
+--- imap-2004a.orig/src/tmail/Makefile	2002-11-19 01:45:14.000000000 +0100
++++ imap-2004a/src/tmail/Makefile	2004-07-21 01:31:03.903860856 +0200
 @@ -18,14 +18,14 @@
  
  

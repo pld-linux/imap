@@ -1,36 +1,36 @@
-diff -ur imap-2004/src/imapd/imapd.c imap-patched/src/imapd/imapd.c
---- imap-2004/src/imapd/imapd.c	Sun May 30 07:14:15 2004
-+++ imap-patched/src/imapd/imapd.c	Sun May 30 07:16:59 2004
+diff -ur imap-2004a.orig/src/imapd/imapd.c imap-2004a/src/imapd/imapd.c
+--- imap-2004a.orig/src/imapd/imapd.c	2004-06-29 23:56:17.000000000 +0200
++++ imap-2004a/src/imapd/imapd.c	2004-07-21 01:46:39.075693128 +0200
 @@ -183,7 +183,7 @@
  
  /* Global storage */
  
--char *version = "2004.350";	/* version number of this server */
-+char *version = "2004.350PLD";	/* version number of this server */
+-char *version = "2004.352";	/* version number of this server */
++char *version = "2004.352PLD";	/* version number of this server */
  time_t alerttime = 0;		/* time of last alert */
  time_t sysalerttime = 0;	/* time of last system alert */
  time_t useralerttime = 0;	/* time of last user alert */
-diff -ur imap-2004/src/ipopd/ipop2d.c imap-patched/src/ipopd/ipop2d.c
---- imap-2004/src/ipopd/ipop2d.c	Sun May 30 06:35:12 2004
-+++ imap-patched/src/ipopd/ipop2d.c	Sun May 30 07:16:29 2004
+diff -ur imap-2004a.orig/src/ipopd/ipop2d.c imap-2004a/src/ipopd/ipop2d.c
+--- imap-2004a.orig/src/ipopd/ipop2d.c	2004-07-21 01:30:30.000000000 +0200
++++ imap-2004a/src/ipopd/ipop2d.c	2004-07-21 01:46:49.398123880 +0200
 @@ -51,7 +51,7 @@
  
  /* Global storage */
  
--char *version = "2004.67";	/* server version */
-+char *version = "2004.67PLD";	/* server version */
+-char *version = "2004.68";	/* server version */
++char *version = "2004.68PLD";	/* server version */
  short state = LISN;		/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */
-diff -ur imap-2004/src/ipopd/ipop3d.c imap-patched/src/ipopd/ipop3d.c
---- imap-2004/src/ipopd/ipop3d.c	Tue Apr 27 21:50:29 2004
-+++ imap-patched/src/ipopd/ipop3d.c	Sun May 30 07:16:42 2004
+diff -ur imap-2004a.orig/src/ipopd/ipop3d.c imap-2004a/src/ipopd/ipop3d.c
+--- imap-2004a.orig/src/ipopd/ipop3d.c	2004-06-22 02:58:07.000000000 +0200
++++ imap-2004a/src/ipopd/ipop3d.c	2004-07-21 01:46:53.876443072 +0200
 @@ -57,7 +57,7 @@
  
  /* Global storage */
  
--char *version = "2004.87";	/* server version */
-+char *version = "2004.87PLD";	/* server version */
+-char *version = "2004.88";	/* server version */
++char *version = "2004.88PLD";	/* server version */
  short state = AUTHORIZATION;	/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */
