@@ -56,22 +56,28 @@ zdalnemu u¿ytkownikowi na czytanie poczty na zdalnej maszynie bez konieczno¶ci
 jej pobierania.
 
 %package devel
-Summary:        provides support for POP network mail protocol
-Summary(pl):    Wspomaganie dla protoko³u pocztowego POP
-Group:          Networking/Daemons
-Group(pl):      Sieciowe/Serwery
+Summary:        Development files for IMAP.
+Summary(pl):    Pliki nag³ówkowe IMAP.
+Group:          Development/Libraries
+Group(pl):      Programowanie/Biblioteki
 
 %description devel 
-IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
+Development files for IMAP.
+
+%description -l pl
+Pliki nag³ówkowe dla IMAP.
 
 %package static
-Summary:        provides support for POP network mail protocol
-Summary(pl):    Wspomaganie dla protoko³u pocztowego POP
-Group:          Networking/Daemons
-Group(pl):      Sieciowe/Serwery
+Summary:        IMAP static library.
+Summary(pl):    Statyczna biblioteka IMAP.
+Group:          Development/Libraries 
+Group(pl):      Programowanie/Biblioteki
 
 %description static
-IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
+IMAP static library.
+
+%description -l pl
+Statyczna biblioteka IMAP.
 
 %prep
 %setup -q 
@@ -91,7 +97,7 @@ install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 install ./src/c-client/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./src/osdep/tops-20/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./src/osdep/unix/*.h $RPM_BUILD_ROOT%{_includedir}
-install ./c-client/*.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
+install ./c-client/c-client.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
 
 install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
 install -s ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
