@@ -6,9 +6,12 @@
 #			  Possibly not secure.
 #
 Summary:	Provides support for IMAP network mail protocol
+Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
+Summary(pt_BR):	Provê suporte para os protocolos de mail IMAP e POP
 Summary(ru):	ïÂÅÓĞÅŞÉ×ÁÅÔ ĞÏÄÄÅÒÖËÕ ÓÅÔÅ×ÏÇÏ ĞÏŞÔÏ×ÏÇÏ ĞÒÏÔÏËÏÌÁ IMAP
 Summary(uk):	úÁÂÅÚĞÅŞÕ¤ Ğ¦ÄÔÒÉÍËÕ ÍÅÒÅÖÅ×ÏÇÏ ĞÏÛÔÏ×ÏÇÏ ĞÒÏÔÏËÏÌÕ IMAP
+Summary(zh_CN):	IMAPºÍPOP·şÎñÆ÷
 Name:		imap
 Version:	2002b
 Release:	0.1
@@ -60,12 +63,28 @@ umo¾òuje, aby u¾ivatel mohl naèítat svoji do¹lou po¹tu ze vzdáleného
 poèítaèe. Protokol IMAP umo¾òuje u¾ivateli ètení po¹ty na vzdáleném
 stroji bez pøesouvání na místní poèítaè.
 
+%description -l es
+IMAP es un servidor para los protocolos de mail POP (Post Office
+Protocol) y IMAP. El protocolo POP permite a una máquina de correo
+colectar mail para usuarios y permite download del mail a la máquina
+local del usuario para lectura. El protocolo IMAP nos ofrece la
+funcionalidad de POP, y permite a un usuario leer su mail en una
+máquina remota sin moverlo a su caja postal local.
+
 %description -l pl
 Imap jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP.
 Protokó³ POP pozwala serwerowi poczty elektronicznej na przechowywanie
 przesy³ek i nastêpnie pobieranie ich przez maszyny klienckie w sieci.
 Protokó³ IMAP pozwala zdalnemu u¿ytkownikowi na czytanie poczty na
 zdalnej maszynie bez konieczno¶ci jej pobierania.
+
+%description -l pt_BR
+IMAP é um servidor para os protocolos de mail POP (Post Office
+Protocol) e IMAP. O protocolo POP permite uma máquina de correio
+coletar mail para usuários e permite o download do mail para a máquina
+local do usuário para leitura. O protocolo IMAP oferece a
+funcionalidade de POP, e permite um usuário ler seu mail em uma
+máquina remota sem movê-lo para a sua caixa postal local.
 
 %description -l ru
 IMAP ÜÔÏ ÓÅÒ×ÅÒ ÄÌÑ ĞÏŞÔÏ×ÙÈ ĞÒÏÔÏËÏÌÏ× POP (Post Office Protocol) É
@@ -172,9 +191,12 @@ Pliki wspólne dla serwerów imap i pop.
 
 %package devel
 Summary:	Development files for IMAP
+Summary(es):	Libraries, includes, etc to develop IMAP applications
 Summary(pl):	Pliki nag³ówkowe IMAP
+Summary(pt_BR):	Bibliotecas, arquivos de inclusão, etc para desenvolver programas IMAP
 Summary(ru):	èÅÄÅÒÁ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ ĞÒÏÇÒÁÍÍ Ó ÉÓĞÏÌØÚÏ×ÁÎÉÅÍ ÂÉÂÌÉÏÔÅËÉ IMAP
 Summary(uk):	èÅÄÅÒÉ ÄÌÑ ÒÏÚÒÏÂËÉ ĞÒÏÇÒÁÍ Ú ×ÉËÏÒÉÓÔÁÎÎÑÍ Â¦ÂÌ¦ÏÔÅË¦ IMAP
+Summary(zh_CN):	IMAPºÍPOP·şÎñÆ÷¿ª·¢¹¤¾ß¼¯
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{version}
 
@@ -185,8 +207,15 @@ Development files for IMAP.
 Balíèek imap-devel obsahuje hlavièkové soubory pro vıvoj programù,
 které pou¾ívají knihovnu IMAP (Internet Message Access Protocol).
 
+%description devel -l es
+Libraries, include files, etc to develop POP/IMAP applications
+
 %description devel -l pl
 Pliki nag³ówkowe dla IMAP.
+
+%description devel -l pt_BR
+Bibliotecas, arquivos de inclusão, etc para desenvolver programas que
+utilizem POP/IMAP.
 
 %description devel -l ru
 èÅÄÅÒÁ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ ĞÒÏÇÒÁÍÍ Ó ÉÓĞÏÌØÚÏ×ÁÎÉÅÍ ÂÉÂÌÉÏÔÅËÉ IMAP.
@@ -215,7 +244,9 @@ Biblioteka IMAP.
 
 %package static
 Summary:	IMAP static library
+Summary(es):	Libraries to develop IMAP applications (static)
 Summary(pl):	Statyczna biblioteka IMAP
+Summary(pt_BR):	Bibliotecas estáticas para desenvolver programas IMAP
 Summary(ru):	óÔÁÔÉŞÅÓËÁÑ ÂÉÂÌÉÏÔÅËÁ IMAP
 Summary(uk):	óÔÁÔÉŞÎÁ Â¦ÂÌ¦ÏÔÅËÁ IMAP
 Group:		Development/Libraries
@@ -247,10 +278,17 @@ Requires:	%{name}-lib = %{version}
 IMAP tools: mailutil (mail utility program), dmail (procmail mail
 delivery module), tmail (direct mail delivery module).
 
+%description static -l es
+Libraries to develop POP/IMAP applications (estático).
+
 %description utils -l pl
 Narzêdzia IMAP: mailutil (program narzêdziowy do poczty), dmail (modu³
-dostarczaj±cy pocztê dla procmaila), tmail (modu³ dostarczaj±cy
-pocztê bezpo¶rednio).
+dostarczaj±cy pocztê dla procmaila), tmail (modu³ dostarczaj±cy pocztê
+bezpo¶rednio).
+
+%description static -l pt_BR
+Bibliotecas estáticas para desenvolver programas que utilizem
+POP/IMAP.
 
 %prep
 %setup -q
