@@ -1,0 +1,113 @@
+Summary:	provides support for IMAP and POP network mail protocols
+Summary(de):	Bietet Unterstützung für IMAP- und POP-Netz-Mail-Protokolle
+Summary(fr):	Fournit un support pour les protocoles de mail IMAP et POP.
+Summary(pl):	Wspomaganie dla protoko³ów pocztowych IMAP i POP 
+Summary(tr):	IMAP ve POP posta indirme protokollarý için sunucu
+Name:		imap
+Version:	4.5
+Release:	2d
+Copyright:	BSD
+Group:		Daemons
+Group(pl):	Serwery
+Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
+Source1:	%{name}.pamd
+Patch:		%{name}-pld.patch
+Buildroot:	/tmp/%{name}-%{version}-root
+Requires:	pam >= 0.66
+Requires:	krb5-lib >= 1.0.5
+
+%description
+IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
+The POP protocol allows a "post office" machine to collect mail for users
+and have that mail downloaded to the user's local machine for reading. The
+IMAP protocol provides the functionality of POP, and allows a user to
+read mail on a remote machine without moving it to his local mailbox.
+
+%description -l pl
+Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP. Protokó³ 
+POP pozwala serwerowi poczty elektronicznej na przechowywanie przesy³ek i 
+nastêpnie pobieranie ich przez maszyny klienckie w sieci. Protokó³ IMAP pozwala
+zdalnemu u¿ytkownikowi na czytanie poczty na zdalnej maszynie bez konieczno¶ci
+jej pobierania.
+
+%prep
+%setup -q 
+%patch -p1 
+
+%build
+make CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
+
+%install
+rm -rf $RPM_BUILD_ROOT
+
+install -d $RPM_BUILD_ROOT/{etc/pam.d,usr/{sbin,man/man8}}
+install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT/usr/man/man8/ipopd.8
+install ./src/imapd/imapd.8c $RPM_BUILD_ROOT/usr/man/man8/imapd.8
+
+install -s ./ipopd/ipop2d $RPM_BUILD_ROOT/usr/sbin
+install -s ./ipopd/ipop3d $RPM_BUILD_ROOT/usr/sbin
+install -s ./imapd/imapd $RPM_BUILD_ROOT/usr/sbin
+
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
+
+gzip -9fn $RPM_BUILD_ROOT/usr/man/man8/*
+bzip2 -9 README
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc README.bz2
+
+%attr(640,root,root) %config /etc/pam.d/imap
+%attr(755,root,root) /usr/sbin/ipop2d
+%attr(755,root,root) /usr/sbin/ipop3d
+%attr(755,root,root) /usr/sbin/imapd
+%attr(644,root, man) /usr/man/man8/*
+
+%changelog
+* Wed Feb 10 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [4.5-2d]
+- updated to stable release,
+- added Group(pl),
+- fixed group of ELF binaries.
+
+* Thu Nov 12 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [4.5-1d]
+- build for Linux PLD,
+- major changes,
+
+* Fri Sep 11 1998 Jeff Johnson <jbj@redhat.com>
+- use only fcntl locking.
+
+* Thu Sep 10 1998 Jeff Johnson <jbj@redhat.com>
+- update to 4.4.
+- removed g+s bit to imapd.
+
+* Wed Jul 22 1998 Jeff Johnson <jbj@redhat.com>
+- updated to 4.2.
+- added g+s bit to imapd so that lock files can be created.
+
+* Thu May 07 1998 Prospector System <bugs@redhat.com>
+- translations modified for de, fr, tr
+
+* Wed Apr 08 1998 Cristian Gafton <gafton@redhat.com>
+- Updated to the latest imap as of today...
+
+* Wed Dec 10 1997 Cristian Gafton <gafton@redhat.com>
+- Updated to the latest imap as of today...
+- Updated the pam patch to reflect the new directory organization
+
+* Thu Oct 23 1997 Michael K. Johnson <johnsonm@redhat.com>
+- Fix patch for new PAM spec compliance.
+
+* Thu Oct 02 1997 Michael K. Johnson <johnsonm@redhat.com>
+- Comply with change in PAM spec.
+- Use a buildroot.
+
+* Mon Mar 03 1997 Michael K. Johnson <johnsonm@redhat.com>
+- Moved from pam.conf to pam.d
+
+* Mon Mar 03 1997 Erik Troan <ewt@redhat.com>
+- Fixed buffer overrun in server_login().
