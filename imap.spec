@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	non_root_auth	- build with non_root patch (authentication
+%bcond_with	non_root_auth	# build with non_root patch (authentication
 #				  without root privileges and more configuration
 #				  options). Possibly not secure.
 #
