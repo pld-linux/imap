@@ -273,10 +273,13 @@ install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop,imap}
 
-( cd docs/rfc; ls rfc* > ../INDEX.rfc )
+cd docs/rfc
+ls rfc* > ../INDEX.rfc
+cd ../..
 rm -rf docs/{rfc,BUILD}
 
-gzip -9nf README docs/*
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -317,9 +320,6 @@ fi
 %post   lib -p /sbin/ldconfig
 %postun lib -p /sbin/ldconfig
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imapd
@@ -344,7 +344,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc README.gz docs/*
+%doc README docs/*
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
