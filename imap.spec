@@ -2,7 +2,7 @@ Summary:	provides support for IMAP network mail protocol
 Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7c2
-Release:	2
+Release:	3
 License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -135,7 +135,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 
 rm -rf docs/{rfc,BUILD}
 
-gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/* README docs/*
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* README docs/*
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -179,6 +179,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/ipopd.8.gz
 
 %files common
+%defattr(644,root,root,755)
 %doc README.gz docs/*
 %defattr(644,root,root,755)
 %attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/imap
