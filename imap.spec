@@ -139,14 +139,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.gz
-%attr(640,root,root) %config /etc/pam.d/imap
+%attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/imap
 %attr(640,root,root) /etc/sysconfig/rc-inetd/imapd
 %attr(755,root,root) %{_sbindir}/imapd
 %{_mandir}/man8/imapd.8.gz
 
 %files pop
 %defattr(644,root,root,755)
-%attr(640,root,root) %config /etc/pam.d/imap
+%attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/imap
 %attr(640,root,root) /etc/sysconfig/rc-inetd/ipop2d
 %attr(640,root,root) /etc/sysconfig/rc-inetd/ipop3d
 %attr(755,root,root) %{_sbindir}/ipop2d
