@@ -1,0 +1,7 @@
+SERVICE_NAME=pop-2
+SOCK_TYPE=stream
+PROTOCOL=tcp
+FLAGS=nowait
+USER=root
+SERVER=tcpd
+DAEMON=/usr/sbin/ipop2d
