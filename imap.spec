@@ -191,7 +191,6 @@ Pliki wspólne dla serwerów imap i pop.
 
 %package devel
 Summary:	Development files for IMAP
-Summary(es):	Libraries, includes, etc to develop IMAP applications
 Summary(pl):	Pliki nag³ówkowe IMAP
 Summary(pt_BR):	Bibliotecas, arquivos de inclusão, etc para desenvolver programas IMAP
 Summary(ru):	èÅÄÅÒÁ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ ĞÒÏÇÒÁÍÍ Ó ÉÓĞÏÌØÚÏ×ÁÎÉÅÍ ÂÉÂÌÉÏÔÅËÉ IMAP
@@ -206,9 +205,6 @@ Development files for IMAP.
 %description devel -l cs
 Balíèek imap-devel obsahuje hlavièkové soubory pro vıvoj programù,
 které pou¾ívají knihovnu IMAP (Internet Message Access Protocol).
-
-%description devel -l es
-Libraries, include files, etc to develop POP/IMAP applications
 
 %description devel -l pl
 Pliki nag³ówkowe dla IMAP.
@@ -244,7 +240,6 @@ Biblioteka IMAP.
 
 %package static
 Summary:	IMAP static library
-Summary(es):	Libraries to develop IMAP applications (static)
 Summary(pl):	Statyczna biblioteka IMAP
 Summary(pt_BR):	Bibliotecas estáticas para desenvolver programas IMAP
 Summary(ru):	óÔÁÔÉŞÅÓËÁÑ ÂÉÂÌÉÏÔÅËÁ IMAP
@@ -277,9 +272,6 @@ Requires:	%{name}-lib = %{version}
 %description utils
 IMAP tools: mailutil (mail utility program), dmail (procmail mail
 delivery module), tmail (direct mail delivery module).
-
-%description static -l es
-Libraries to develop POP/IMAP applications (estático).
 
 %description utils -l pl
 Narzêdzia IMAP: mailutil (program narzêdziowy do poczty), dmail (modu³
