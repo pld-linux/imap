@@ -1,0 +1,22 @@
+diff -urN imap-2001.BETA.SNAP-0107022325.org/src/osdep/unix/Makefile imap-2001.BETA.SNAP-0107022325/src/osdep/unix/Makefile
+--- imap-2001.BETA.SNAP-0107022325.org/src/osdep/unix/Makefile	Wed Oct  3 15:16:24 2001
++++ imap-2001.BETA.SNAP-0107022325/src/osdep/unix/Makefile	Wed Oct  3 15:19:23 2001
+@@ -441,7 +441,7 @@
+ lnps:  # Linux Pluggable Authentication modules (c-client as shared lib)
+ 	$(BUILD) `cat EXTRASPECIALS` OS=lnx \
+ 	SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
+-	SPOOLDIR=/var/spool \
++	SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
+ 	ACTIVEFILE=/var/lib/news/active \
+ 	RSHPATH=/usr/bin/rsh \
+ 	BASECFLAGS="-fPIC -g -fno-omit-frame-pointer -O2 -DNFSKLUDGE" \
+@@ -454,7 +454,7 @@
+ 	 BASELDFALGS="../c-client/c-client.a" \
+ 	$(BUILD) `$(CAT) SPECIALS` OS=lnx \
+ 	 SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
+-	 SPOOLDIR=/var/spool \
++	 SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
+ 	 ACTIVEFILE=/var/lib/news/active \
+ 	 RSHPATH=/usr/bin/rsh \
+ 	 BASECFLAGS="-g -fno-omit-frame-pointer -O6" \
+
