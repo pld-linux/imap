@@ -37,7 +37,7 @@ Patch9:		%{name}-no_1777_warning.patch
 Patch10:	%{name}-non_root.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.6m
 PreReq:		rc-inetd >= 0.8.1
 Requires:	pam >= 0.66
 Requires:	%{name}-common
