@@ -3,7 +3,7 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 Version:	4.7b
 Release:	1
-Copyright:	BSD
+License:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
@@ -11,7 +11,7 @@ Source1:	%{name}.pamd
 Source2:	%{name}-imapd.inetd
 Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
-Patch:		%{name}.patch
+Patch0:		%{name}.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 Requires:	pam >= 0.66
@@ -21,18 +21,19 @@ Provides:	imapdaemon
 Obsoletes:	imapdaemon
 
 %description
-IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
-The POP protocol allows a "post office" machine to collect mail for users
-and have that mail downloaded to the user's local machine for reading. The
-IMAP protocol provides the functionality of POP, and allows a user to
-read mail on a remote machine without moving it to his local mailbox.
+IMAP is a server for the POP (Post Office Protocol) and IMAP mail
+protocols. The POP protocol allows a "post office" machine to collect
+mail for users and have that mail downloaded to the user's local
+machine for reading. The IMAP protocol provides the functionality of
+POP, and allows a user to read mail on a remote machine without moving
+it to his local mailbox.
 
 %description -l pl
-Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP. Protokó³ 
-POP pozwala serwerowi poczty elektronicznej na przechowywanie przesy³ek i 
-nastêpnie pobieranie ich przez maszyny klienckie w sieci. Protokó³ IMAP pozwala
-zdalnemu u¿ytkownikowi na czytanie poczty na zdalnej maszynie bez konieczno¶ci
-jej pobierania.
+Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP.
+Protokó³ POP pozwala serwerowi poczty elektronicznej na przechowywanie
+przesy³ek i nastêpnie pobieranie ich przez maszyny klienckie w sieci.
+Protokó³ IMAP pozwala zdalnemu u¿ytkownikowi na czytanie poczty na
+zdalnej maszynie bez konieczno¶ci jej pobierania.
 
 %package pop
 Summary:	provides support for POP network mail protocol
@@ -43,24 +44,26 @@ Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	rc-inetd >= 0.8.1
 
 %description pop
-IMAP is a server for the POP (Post Office Protocol) and IMAP mail protocols.
-The POP protocol allows a "post office" machine to collect mail for users
-and have that mail downloaded to the user's local machine for reading. The
-IMAP protocol provides the functionality of POP, and allows a user to
-read mail on a remote machine without moving it to his local mailbox.
+IMAP is a server for the POP (Post Office Protocol) and IMAP mail
+protocols. The POP protocol allows a "post office" machine to collect
+mail for users and have that mail downloaded to the user's local
+machine for reading. The IMAP protocol provides the functionality of
+POP, and allows a user to read mail on a remote machine without moving
+it to his local mailbox.
 
 %description pop -l pl
-Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP. Protokó³ 
-POP pozwala serwerowi poczty elektronicznej na przechowywanie przesy³ek i 
-nastêpnie pobieranie ich przez maszyny klienckie w sieci. Protokó³ IMAP pozwala
-zdalnemu u¿ytkownikowi na czytanie poczty na zdalnej maszynie bez konieczno¶ci
-jej pobierania.
+Imapd jest serwerem dla POP (Post Office Protocol) i protoko³u IMAP.
+Protokó³ POP pozwala serwerowi poczty elektronicznej na przechowywanie
+przesy³ek i nastêpnie pobieranie ich przez maszyny klienckie w sieci.
+Protokó³ IMAP pozwala zdalnemu u¿ytkownikowi na czytanie poczty na
+zdalnej maszynie bez konieczno¶ci jej pobierania.
 
 %package devel
-Summary:        Development files for IMAP.
-Summary(pl):    Pliki nag³ówkowe IMAP.
-Group:          Development/Libraries
-Group(pl):      Programowanie/Biblioteki
+Summary:	Development files for IMAP.
+Summary(pl):	Pliki nag³ówkowe IMAP.
+Group:		Development/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 
 %description devel 
 Development files for IMAP.
@@ -69,10 +72,10 @@ Development files for IMAP.
 Pliki nag³ówkowe dla IMAP.
 
 #%package static
-#Summary:        IMAP static library.
-#Summary(pl):    Statyczna biblioteka IMAP.
-#Group:          Development/Libraries 
-#Group(pl):      Programowanie/Biblioteki
+#Summary:	IMAP static library
+#Summary(pl):	Statyczna biblioteka IMAP
+#Group:		Development/Libraries 
+#Group(pl):	Programowanie/Biblioteki
 #
 #%description static
 #IMAP static library.
@@ -89,7 +92,6 @@ make CC="gcc" OPTIMIZE="$RPM_OPT_FLAGS -pipe" slx
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/{etc/{pam.d,sysconfig/rc-inetd},usr/{sbin,share/man/man8},%{_includedir},%{_libdir}}
 
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipopd.8
@@ -111,7 +113,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imapd
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop2d
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 
-gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man8/* README
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man8/* README
 
 %post
 if [ -f /var/lock/subsys/rc-inetd ]; then
