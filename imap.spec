@@ -7,8 +7,6 @@ Release:	0.BETA.20%{snap}.7
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
-Group(pl):	Sieciowe/Serwery
-Group(de):	Netzwerkwesen/Server
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.BETA.SNAP-%{snap}.tar.Z
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
@@ -54,8 +52,6 @@ zdalnej maszynie bez konieczno╤ci jej pobierania.
 Summary:	provides support for POP network mail protocol
 Summary(pl):	Wspomaganie dla protokoЁu pocztowego POP
 Group:		Networking/Daemons
-Group(pl):	Sieciowe/Serwery
-Group(de):	Netzwerkwesen/Server
 Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	%{name}-common
 Requires:	rc-inetd >= 0.8.1
@@ -81,8 +77,6 @@ zdalnej maszynie bez konieczno╤ci jej pobierania.
 Summary:	provides support for POP network mail protocol
 Summary(pl):	Wspomaganie dla protokoЁu pocztowego POP
 Group:		Networking/Daemons
-Group(pl):	Sieciowe/Serwery
-Group(de):	Netzwerkwesen/Server
 Prereq:		/etc/rc.d/init.d/rc-inetd
 Requires:	%{name}-common
 Requires:	rc-inetd >= 0.8.1
@@ -110,13 +104,6 @@ zdalnej maszynie bez konieczno╤ci jej pobierania.
 Summary:	Development files for IMAP.
 Summary(pl):	Pliki nagЁСwkowe IMAP.
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-lib = %{version}
 
 %description devel 
@@ -129,13 +116,6 @@ Pliki nagЁСwkowe dla IMAP.
 Summary:	IMAP client library
 Summary(pl):	Biblioteka IMAP
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 
 %description lib
 IMAP client library.
@@ -148,13 +128,6 @@ Biblioteka IMAP.
 Summary:	IMAP static library
 Summary(pl):	Statyczna biblioteka IMAP
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -167,8 +140,6 @@ Statyczna biblioteka IMAP.
 Summary:	Common files for WU imap and pop daemons.
 Summary(pl):	Pliki wspСlne dla serwerСw imap i pop.
 Group:		Networking/Daemons
-Group(pl):	Sieciowe/Serwery
-Group(de):	Netzwerkwesen/Server
 
 %description common
 Common files for WU imap and pop daemons.
