@@ -14,7 +14,7 @@ Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
 Version:	2004
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
