@@ -45,8 +45,8 @@ install -d $RPM_BUILD_ROOT/{etc/pam.d,usr/{sbin,man/man8}}
 install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipopd.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 
-install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT/usr/sbin
-install -s ./imapd/imapd $RPM_BUILD_ROOT/usr/sbin
+install -s ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
+install -s ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 
@@ -62,9 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.bz2
 
 %attr(640,root,root) %config /etc/pam.d/imap
-%attr(755,root,root) /usr/sbin/ipop2d
-%attr(755,root,root) /usr/sbin/ipop3d
-%attr(755,root,root) /usr/sbin/imapd
+%attr(755,root,root) %{_sbindir}/ipop2d
+%attr(755,root,root) %{_sbindir}/ipop3d
+%attr(755,root,root) %{_sbindir}/imapd
 
 %{_mandir}/man8/*
 
