@@ -4,7 +4,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Name:		imap
 Version:	2001a
-Release:	9
+Release:	10
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -25,6 +25,7 @@ Patch5:		%{name}-starttls.patch
 Patch6:		%{name}-man.patch
 Patch7:		%{name}-overflow.patch
 Patch8:		%{name}-version-pld.patch
+Patch9:		%{name}-no_1777_warning.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
@@ -240,6 +241,7 @@ Pliki wspСlne dla serwerСw imap i pop.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 %{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="%{version}" lnp
