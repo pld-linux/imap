@@ -1,0 +1,28 @@
+diff -ur imap-2004/src/osdep/unix/os_lnx.h imap-2004-patched/src/osdep/unix/os_lnx.h
+--- imap-2004/src/osdep/unix/os_lnx.h	2003-07-15 22:53:32.000000000 +0000
++++ imap-2004-patched/src/osdep/unix/os_lnx.h	2004-06-09 11:46:44.000000000 +0000
+@@ -23,8 +23,8 @@
+  *** Debian Linux on an Alpha.
+  */
+ 
+-#define _XOPEN_SOURCE 1
+-#define _BSD_SOURCE 1
++//#define _XOPEN_SOURCE 1
++//#define _BSD_SOURCE 1
+ 
+ /* end Debian Linux on Alpha strangeness */
+ 
+diff -ur imap-2004/src/osdep/unix/os_slx.h imap-2004-patched/src/osdep/unix/os_slx.h
+--- imap-2004/src/osdep/unix/os_slx.h	2003-07-15 22:53:32.000000000 +0000
++++ imap-2004-patched/src/osdep/unix/os_slx.h	2004-06-09 11:46:39.000000000 +0000
+@@ -23,8 +23,8 @@
+  *** Debian Linux on an Alpha.
+  */
+ 
+-#define _XOPEN_SOURCE 1
+-#define _BSD_SOURCE 1
++//#define _XOPEN_SOURCE 1
++//#define _BSD_SOURCE 1
+ 
+ /* end Debian Linux on Alpha strangeness */
+ 
