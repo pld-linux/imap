@@ -3,7 +3,7 @@ Summary(pl):	Wspomaganie dla protoko³u pocztowego IMAP
 Name:		imap
 %define		snap	0107022325
 Version:	2001
-Release:	0.BETA.%{snap}
+Release:	0.BETA.20%{snap}.2
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -19,6 +19,7 @@ Source6:	%{name}-pop3s.inetd
 Source7:	%{name}-pop.pamd
 Patch0:		%{name}.patch
 Patch1:		%{name}-pop2d-mbox-param.patch
+Patch2:		%{name}-sharedlib.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel
@@ -109,12 +110,28 @@ Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Requires:	%{name}-lib = %{version}
 
 %description devel 
 Development files for IMAP.
 
 %description -l pl devel
 Pliki nag³ówkowe dla IMAP.
+
+%package lib
+Summary:	IMAP client library
+Summary(pl):	Biblioteka IMAP
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
+
+%description lib
+IMAP client library.
+
+%description -l pl lib
+Biblioteka IMAP.
+
 
 %package static
 Summary:	IMAP static library
@@ -123,11 +140,12 @@ Group:		Development/Libraries
 Group(pl):	Programowanie/Biblioteki
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Requires:	%{name}-devel = %{version}
 
 %description static
 IMAP static library.
 
-%description -l pl
+%description -l pl static
 Statyczna biblioteka IMAP.
 
 %package common
@@ -147,9 +165,13 @@ Pliki wspólne dla serwerów imap i pop.
 %setup -q -n imap-%{version}.BETA.SNAP-%{snap}
 %patch0 -p1 
 %patch1 -p1 
+%patch2 -p1
 
 %build
-%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe" LDOPT="%{rpmldflags}" SSLTYPE=unix slx
+%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="20%{snap}" lnp
+mv c-client/c-client.a libc-client.a
+%{__make} clean
+%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="20%{snap}" lnps
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -161,7 +183,10 @@ install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
 install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
 
 install ./c-client/*.h $RPM_BUILD_ROOT%{_includedir}
-install ./c-client/c-client.a $RPM_BUILD_ROOT%{_libdir}/libimap.a
+install ./c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
+install libc-client.a $RPM_BUILD_ROOT%{_libdir}/libc-client.a
+install ./c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.20%{snap}.0
+ln -s libc-client.so.20%{snap}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
 rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
@@ -219,6 +244,9 @@ if [ -f /var/lock/subsys/rc-inetd ]; then
 	/etc/rc.d/init.d/rc-inetd reload
 fi
 
+%post   lib -p /sbin/ldconfig
+%postun lib -p /sbin/ldconfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -251,10 +279,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config %verify(not size, mtime, md5) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
 
+%files lib
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libc-client.so.*.*
+
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/*
+%{_libdir}/libc-client.so
 
-#%files static
-#%defattr(644,root,root,755)
-%{_libdir}/libimap.a
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libc-client.a
