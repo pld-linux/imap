@@ -1,22 +1,25 @@
 #
 # Conditional build:
 #
-# _with_non_root_auth	- build with non_root patch (authentication without
-#			  root privilages and more configuration options).
-#			  Possibly not secure.
+%bcond_with	non_root_auth	- build with non_root patch (authentication
+#				  without root privileges and more configuration
+#				  options). Possibly not secure.
 #
 Summary:	Provides support for IMAP network mail protocol
+Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
 Summary(pl):	Wspomaganie dla protokoЁu pocztowego IMAP
+Summary(pt_BR):	ProvЙ suporte para os protocolos de mail IMAP e POP
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
+Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2001a
-Release:	10
+Version:	2004b
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
-Source0:	ftp://ftp.cac.washington.edu/mail/old/%{name}-%{version}.tar.Z
-# Source0-md5:	42c5c8d049c209b15513a4f6ebba34d2
+Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
+# Source0-md5:	4dbd8d28ed9b2bda186a23277a95b486
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -24,26 +27,27 @@ Source4:	%{name}-pop3d.inetd
 Source5:	%{name}-%{name}s.inetd
 Source6:	%{name}-pop3s.inetd
 Source7:	%{name}-pop.pamd
+Source8:	shared-ssl-key.pem
 Patch0:		%{name}.patch
 Patch1:		%{name}-pop2d-mbox-param.patch
 Patch2:		%{name}-sharedlib.patch
 Patch3:		%{name}-sstupidity.patch
 Patch4:		%{name}-mailpath.patch
-Patch5:		%{name}-starttls.patch
-Patch6:		%{name}-man.patch
-Patch7:		%{name}-overflow.patch
-Patch8:		%{name}-version-pld.patch
-Patch9:		%{name}-no_1777_warning.patch
-Patch10:	%{name}-non_root.patch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Patch5:		%{name}-man.patch
+Patch6:		%{name}-overflow.patch
+Patch7:		%{name}-version-pld.patch
+Patch8:		%{name}-non_root.patch
+Patch9:		%{name}-headers_fix.patch
+URL:		http://www.washington.edu/imap/
 BuildRequires:	pam-devel
 BuildRequires:	openssl-devel >= 0.9.6m
 PreReq:		rc-inetd >= 0.8.1
-Requires:	pam >= 0.66
-Requires:	%{name}-common
+Requires:	pam >= 0.77.3
+Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
 Conflicts:	courier-imap
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/imap
 
@@ -62,12 +66,28 @@ umo╬Рuje, aby u╬ivatel mohl naХМtat svoji do╧lou po╧tu ze vzdАlenИho
 poХМtaХe. Protokol IMAP umo╬Рuje u╬ivateli ХtenМ po╧ty na vzdАlenИm
 stroji bez pЬesouvАnМ na mМstnМ poХМtaХ.
 
+%description -l es
+IMAP es un servidor para los protocolos de mail POP (Post Office
+Protocol) y IMAP. El protocolo POP permite a una mАquina de correo
+colectar mail para usuarios y permite download del mail a la mАquina
+local del usuario para lectura. El protocolo IMAP nos ofrece la
+funcionalidad de POP, y permite a un usuario leer su mail en una
+mАquina remota sin moverlo a su caja postal local.
+
 %description -l pl
 Imap jest serwerem dla POP (Post Office Protocol) i protokoЁu IMAP.
 ProtokСЁ POP pozwala serwerowi poczty elektronicznej na przechowywanie
 przesyЁek i nastЙpnie pobieranie ich przez maszyny klienckie w sieci.
 ProtokСЁ IMAP pozwala zdalnemu u©ytkownikowi na czytanie poczty na
 zdalnej maszynie bez konieczno╤ci jej pobierania.
+
+%description -l pt_BR
+IMAP И um servidor para os protocolos de mail POP (Post Office
+Protocol) e IMAP. O protocolo POP permite uma mАquina de correio
+coletar mail para usuАrios e permite o download do mail para a mАquina
+local do usuАrio para leitura. O protocolo IMAP oferece a
+funcionalidade de POP, e permite um usuАrio ler seu mail em uma
+mАquina remota sem movЙ-lo para a sua caixa postal local.
 
 %description -l ru
 IMAP это сервер для почтовых протоколов POP (Post Office Protocol) и
@@ -92,7 +112,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP2
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP2
 Group:		Networking/Daemons
 Prereq:		/etc/rc.d/init.d/rc-inetd
-Requires:	%{name}-common
+Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
 Provides:	pop2daemon
 Obsoletes:	pop2daemon
@@ -128,7 +148,7 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP3
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP3
 Group:		Networking/Daemons
 Prereq:		/etc/rc.d/init.d/rc-inetd
-Requires:	%{name}-common
+Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
 Provides:	pop3daemon
 Obsoletes:	pop3daemon
@@ -161,13 +181,28 @@ IMAP. Протокол POP дозволя╓ поштов╕й машин╕ (post office) приймати
 пошту для користувач╕в, як╕ пот╕м можуть забирати ╖╖ на сво╖ локальн╕
 машини для читання. POP3 это нова верс╕я протоколу POP.
 
+%package common
+Summary:	Common files for WU imap and pop daemons
+Summary(pl):	Pliki wspСlne dla serwerСw imap i pop
+Group:		Networking/Daemons
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
+Requires:	pam >= 0.77.3
+
+%description common
+Common files for WU imap and pop daemons.
+
+%description common -l pl
+Pliki wspСlne dla serwerСw imap i pop.
+
 %package devel
 Summary:	Development files for IMAP
 Summary(pl):	Pliki nagЁСwkowe IMAP
+Summary(pt_BR):	Bibliotecas, arquivos de inclusЦo, etc para desenvolver programas IMAP
 Summary(ru):	Хедера для разработки программ с использованием библиотеки IMAP
 Summary(uk):	Хедери для розробки програм з використанням б╕бл╕отек╕ IMAP
+Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ©╙╥╒╧╓╬ъ╪╞
 Group:		Development/Libraries
-Requires:	%{name}-lib = %{version}
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
 %description devel
 Development files for IMAP.
@@ -178,6 +213,10 @@ kterИ pou╬МvajМ knihovnu IMAP (Internet Message Access Protocol).
 
 %description devel -l pl
 Pliki nagЁСwkowe dla IMAP.
+
+%description devel -l pt_BR
+Bibliotecas, arquivos de inclusЦo, etc para desenvolver programas que
+utilizem POP/IMAP.
 
 %description devel -l ru
 Хедера для разработки программ с использованием библиотеки IMAP.
@@ -207,10 +246,11 @@ Biblioteka IMAP.
 %package static
 Summary:	IMAP static library
 Summary(pl):	Statyczna biblioteka IMAP
+Summary(pt_BR):	Bibliotecas estАticas para desenvolver programas IMAP
 Summary(ru):	Статическая библиотека IMAP
 Summary(uk):	Статична б╕бл╕отека IMAP
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 IMAP static library.
@@ -228,16 +268,24 @@ Statyczna biblioteka IMAP.
 %description static -l uk
 Статична б╕бл╕отека, необх╕дна для розробки POP/IMAP-програм.
 
-%package common
-Summary:	Common files for WU imap and pop daemons.
-Summary(pl):	Pliki wspСlne dla serwerСw imap i pop.
-Group:		Networking/Daemons
+%package utils
+Summary:	IMAP tools: mailutil, dmail, tmail
+Summary(pl):	NarzЙdzia IMAP: mailutil, dmail, tmail
+Group:		Applications/Mail
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
-%description common
-Common files for WU imap and pop daemons.
+%description utils
+IMAP tools: mailutil (mail utility program), dmail (procmail mail
+delivery module), tmail (direct mail delivery module).
 
-%description common -l pl
-Pliki wspСlne dla serwerСw imap i pop.
+%description utils -l pl
+NarzЙdzia IMAP: mailutil (program narzЙdziowy do poczty), dmail (moduЁ
+dostarczaj╠cy pocztЙ dla procmaila), tmail (moduЁ dostarczaj╠cy pocztЙ
+bezpo╤rednio).
+
+%description static -l pt_BR
+Bibliotecas estАticas para desenvolver programas que utilizem
+POP/IMAP.
 
 %prep
 %setup -q
@@ -249,25 +297,36 @@ Pliki wspСlne dla serwerСw imap i pop.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
+%{?with_non_root_auth:%patch8 -p1}
 %patch9 -p1
-%{?_with_non_root_auth:%patch10 -p1}
 
 %build
-%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="%{version}" lnp
+# build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
+# support for plain-text auth w/o SSL/TLS
+# (but it should be made some runtime option!
+echo 'y' | %{__make} lnp \
+	CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" \
+	SSLTYPE=unix VERSION="%{version}"
 mv -f c-client/c-client.a libc-client.a
+
 %{__make} clean
-%{__make} CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" SSLTYPE=unix VERSION="%{version}" lnps
+echo 'y' | %{__make} lnps \
+	CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" \
+	SSLTYPE=unix VERSION="%{version}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{pam.d,security,sysconfig/rc-inetd} \
-	$RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8,%{_includedir},%{_libdir}} \
-	$RPM_BUILD_ROOT%{_var}/lib/imap
+install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
+	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
+	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_var}/lib/imap} \
+	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
 
-install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
-install ./src/ipopd/ipopd.8c $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
-install ./src/imapd/imapd.8c $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
+install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
+install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
+install ./src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
+install ./src/dmail/dmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install ./src/mailutil/mailutil.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install ./src/tmail/tmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install ./c-client/*.h $RPM_BUILD_ROOT%{_includedir}
 install ./c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
@@ -280,6 +339,10 @@ rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 
 install ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
 install ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
+install ./dmail/dmail $RPM_BUILD_ROOT%{_bindir}
+install ./mailutil/mailutil $RPM_BUILD_ROOT%{_bindir}
+install ./tmail/tmail $RPM_BUILD_ROOT%{_bindir}
+#./mlock/mlock - (sgid mail) standalone mailbox lock program
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imapd
@@ -288,6 +351,8 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imaps
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3s
 install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
+install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/imapd.pem
+install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop,imap}
 
@@ -344,6 +409,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/imaps
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.imap
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) %{_var}/lib/openssl/certs/imapd.pem
 %attr(755,root,root) %{_sbindir}/imapd
 %dir %attr(750,imap,mail) %{_var}/lib/imap
 %{_mandir}/man8/imapd.8*
@@ -358,6 +424,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3d
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/sysconfig/rc-inetd/ipop3s
+%attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) %{_var}/lib/openssl/certs/ipop3d.pem
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipop3d.8*
 
@@ -367,6 +434,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not size, mtime, md5) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/security/blacklist.pop
+%dir %{_var}/lib/openssl/certs
 
 %files lib
 %defattr(644,root,root,755)
@@ -374,9 +442,14 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libc-client.so
 %{_includedir}
-%{_libdir}/libc-client.so
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libc-client.a
+
+%files utils
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_mandir}/man1/*
