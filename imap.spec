@@ -64,17 +64,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/imapd
 
 %{_mandir}/man8/*
-
-%changelog
-* Wed Feb 10 1999 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [4.5-2d]
-- updated to stable release,
-- added Group(pl),
-- fixed group of ELF binaries.
-
-* Thu Nov 12 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [4.5-1d]
-- build for Linux PLD,
-- major changes,
-- build against GNU libc-2.1,
-- start at RH spec file.
