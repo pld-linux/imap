@@ -12,7 +12,7 @@ Source2:	%{name}-imapd.inetd
 Source3:	%{name}-pop2d.inetd
 Source4:	%{name}-pop3d.inetd
 Patch:		%{name}.patch
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	pam-devel
 Requires:	pam >= 0.66
 Prereq:		/etc/rc.d/init.d/rc-inetd
