@@ -171,7 +171,7 @@ diff -urN imap-2001.BETA.SNAP-0107022325.orig/src/osdep/unix/env_unix.c imap-200
      fs_give ((void **) &home);	/* clean up */
      if (user) fs_give ((void **) &user);
    }
-+  syslog (LOG_AUTH, "imapd 005\n");
++
    return ret;			/* return status */
  }
  
