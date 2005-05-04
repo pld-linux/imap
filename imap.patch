@@ -28,7 +28,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
 +	 MAILSPOOL=/var/mail \
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
--	 BASECFLAGS="-g -fno-omit-frame-pointer -O6" \
+-	 BASECFLAGS="-g -fno-omit-frame-pointer $(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="-lcrypt"
 +	 BASECFLAGS="$(OPT)" \
 +	 BASELDFLAGS="$(LDOPT) -lpam -ldl -lcrypt"

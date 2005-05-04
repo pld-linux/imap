@@ -176,7 +176,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
  	 ACTIVEFILE=/var/news/etc/active \
  	 RSHPATH=/usr/bin/rsh \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g -O2 -pipe" CC=shlicc
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL) -pipe" CC=shlicc
  
  bsd:	# BSD UNIX
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
@@ -190,7 +190,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
  	 ACTIVEFILE=/var/news/etc/active \
  	 RSHPATH=/usr/bin/rsh \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g -O2 -pipe"
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL) -pipe"
  
  bso:	# OpenBSD
 @@ -236,6 +242,7 @@
@@ -198,7 +198,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
  	 ACTIVEFILE=/usr/local/news/lib/active \
  	 RSHPATH=/usr/bin/rsh \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-O2 -pipe"
+ 	 BASECFLAGS="$(GCCOPTLEVEL) -pipe"
  
  cvx:	# Convex
 @@ -261,7 +268,7 @@
@@ -271,7 +271,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -336,6 +345,7 @@
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bin/remsh \
- 	 BASECFLAGS="-g -O2" \
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL)" \
 +	 BASELDFLAGS="../c-client/c-client.a" \
  	 RANLIB=true CC=gcc
  
@@ -279,7 +279,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -345,6 +355,7 @@
  	 ACTIVEFILE=/var/news/active \
  	 RSHPATH=/usr/bin/remsh \
- 	 BASECFLAGS="-g -O2" \
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL)" \
 +	 BASELDFLAGS="../c-client/c-client.a" \
  	 RANLIB=true CC=gcc
  
@@ -287,7 +287,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -354,7 +365,7 @@
  	 ACTIVEFILE=/var/news/active \
  	 RSHPATH=/usr/bin/remsh \
- 	 BASECFLAGS="-g -O2" \
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="-lnet -lV3 -lsec" \
 +	 BASELDFLAGS="../c-client/c-client.a -lnet -lV3 -lsec" \
  	 RANLIB=true CC=gcc
@@ -296,7 +296,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -365,7 +376,7 @@
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rcmd \
- 	 BASECFLAGS="-O3 -I/usr/include -L/lib" \
+ 	 BASECFLAGS="$(GCCOPTLEVEL) -I/usr/include -L/lib" \
 -	 BASELDFLAGS="-lsocket -lprot -lx -ltinfo -lm" \
 +	 BASELDFLAGS="../c-client/c-client.a -lsocket -lprot -lx -ltinfo -lm" \
  	 RANLIB=true CC=gcc
@@ -305,7 +305,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -374,7 +385,7 @@
  	 CREATEPROTO=mmdfproto EMPTYPROTO=mmdfproto \
  	 RSHPATH=/usr/bin/rcmd \
- 	 BASECFLAGS="-O3" \
+ 	 BASECFLAGS="$(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="-lsocket -lprot -lcrypt_i -lx -los" \
 +	 BASELDFLAGS="../c-client/c-client.a -lsocket -lprot -lcrypt_i -lx -los" \
  	 RANLIB=true LN=ln CC=gcc
@@ -314,7 +314,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -383,6 +394,7 @@
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bsd/rsh \
- 	 BASECFLAGS="-g -O2" \
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL)" \
 +	 BASELDFLAGS="../c-client/c-client.a" \
  	 RANLIB=true CC=gcc
  
@@ -322,7 +322,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -392,21 +404,21 @@
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/rsh \
- 	 BASECFLAGS="-g -O2" \
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="-lsocket -lnsl -lgen" \
 +	 BASELDFLAGS="../c-client/c-client.a -lsocket -lnsl -lgen" \
  	 RANLIB=true CC=gcc
@@ -330,7 +330,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
  gsu:	# GCC SUN-OS
  	$(BUILD) `$(CAT) SPECIALS` OS=sun \
  	 CRXTYPE=nfs \
- 	 BASECFLAGS="-g -O2" \
+ 	 BASECFLAGS="-g $(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="-ldl" \
 +	 BASELDFLAGS="../c-client/c-client.a -ldl" \
  	 CC=gcc
@@ -388,7 +388,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -444,7 +468,7 @@
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
- 	 BASECFLAGS="-g -fno-omit-frame-pointer -O6" \
+ 	 BASECFLAGS="-g -fno-omit-frame-pointer $(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="$(PAMLDFLAGS)"
 +	 BASELDFLAGS="../c-client/c-client.a $(PAMLDFLAGS)"
  
@@ -565,7 +565,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
 @@ -638,7 +675,7 @@
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
- 	 BASECFLAGS="-g -fno-omit-frame-pointer -O6" \
+ 	 BASECFLAGS="-g -fno-omit-frame-pointer $(GCCOPTLEVEL)" \
 -	 BASELDFLAGS="-lshadow"
 +	 BASELDFLAGS="../c-client/c-client.a -lshadow"
  
@@ -576,7 +576,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g -fno-omit-frame-pointer -O6"
+ 	 BASECFLAGS="-g -fno-omit-frame-pointer $(GCCOPTLEVEL)"
  
  snx:	# Siemens Nixdorf SINIX and Reliant UNIX
 @@ -658,7 +696,7 @@
