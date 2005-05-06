@@ -1,7 +1,6 @@
-#
-Summary:	Provides support for IMAP network mail protocol
+Summary:	Support for IMAP network mail protocol
 Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
-Summary(pl):	Wspomaganie dla protokoЁu pocztowego IMAP
+Summary(pl):	ObsЁuga protokoЁu pocztowego IMAP
 Summary(pt_BR):	ProvЙ suporte para os protocolos de mail IMAP e POP
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
