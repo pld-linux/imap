@@ -7,7 +7,7 @@ Summary(uk):	úÁÂÅÚÐÅÞÕ¤ Ð¦ÄÔÒÉÍËÕ ÍÅÒÅÖÅ×ÏÇÏ ÐÏÛÔÏ×ÏÇÏ ÐÒÏÔÏËÏÌÕ IMAP
 Summary(zh_CN):	IMAPºÍPOP·þÎñÆ÷
 Name:		imap
 Version:	2004d
-Release:	2
+Release:	3
 Epoch:		1
 License:	BSD
 Group:		Networking/Daemons
@@ -34,7 +34,7 @@ URL:		http://www.washington.edu/imap/
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
 PreReq:		rc-inetd >= 0.8.1
-Requires:	pam >= 0.77.3
+Requires:	pam >= 0.79.0
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
