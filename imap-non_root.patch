@@ -1,0 +1,239 @@
+diff -urN imap-2004b.orig/src/c-client/env.h imap-2004b/src/c-client/env.h
+--- imap-2004b.orig/src/c-client/env.h	2004-04-27 21:51:17.000000000 +0200
++++ imap-2004b/src/c-client/env.h	2005-01-11 00:32:32.000000000 +0100
+@@ -18,6 +18,16 @@
+  * CPYRIGHT, included with this Distribution.
+  */
+ 
++
++/* global configuration variables set to defaults in env_*.c files and altered
++ * via command line arguments. */
++
++extern char *mailsubdir;		/* mail subdirectory name */
++extern char mailspoolstyle;
++extern char *mailspoolloc;
++extern int useloggedinusername;
++extern char *myUserName;		/* user name */
++
+ /* Function prototypes */
+ 
+ long pmatch_full (unsigned char *s,unsigned char *pat,unsigned char delim);
+diff -urN imap-2004b.orig/src/imapd/imapd.8 imap-2004b/src/imapd/imapd.8
+--- imap-2004b.orig/src/imapd/imapd.8	2005-01-11 00:24:00.000000000 +0100
++++ imap-2004b/src/imapd/imapd.8	2005-01-11 00:37:45.000000000 +0100
+@@ -31,5 +31,47 @@
+ binary must have a link to
+ .I /etc/rimapd
+ since this is where this software expects it to be located.
++.TP
++\fB\-l\fR
++perform login even if not running as root. With carefull configuration imapd can be run as (for example) \fIimap.mail\fR. Without this option imapd, whenrunning not as root, considers that authentication has been done by external program and serves mail of user it is running as.
++.TP
++\fB-m\fR \fIsubdir\fR
++specifiy subdirectory of user's home directory which will be served by default. Giving this option prevents listing entire home directory in imap client.
++.TP
++\fB-a\fR \fIdirectory\fR
++specify that mail is delivered to \fBdirectory/<username>\fR files. This is for \fB/var/mail/username\fR style systems.
++.TP
++\fB-r\fR \fIfile\fR
++specify that mail is delivered to \fB~/file\fR files. \fIfile\fR may contain subdirectory name. It will be appended to user's home directory.
++.SH "RUNNING NON-ROOT IMAPD"
++If configured carefully, imapd will not require root privilages at all. Here are condition that must be meet:
++
++All mailboxes must be accessible for imapd, including WRITE access. This can be acomplished by running imapd with group mail and setting group of all mailboxes to mail. Note that members of this group will be allowed to read and WRITE all mailboxes on the system. Be carefull adding members to this group. It may be a good idea to \fIchmod g+s ~/Mail\fR directories. Also note that user, which imapd is running as, must be able to enter into user's home directory and then subdirectory in which mailboxes are stored. This usualy reqires \fIchmod a+x ~; chgrp mail ~/Mail; chmod g+rw ~/Mail\fR.
++
++imapd must be able to authenticate users. On most systems this means read access for \fI/etc/shadow\fR or \fI/var/db/shadow.db\fR. One way is to \fIchgrpshadow /var/db/shadow/db\fR and add imap user to the shadow group.
++
++BIG FAT WARNING: in the setup described above imapd will have read access for the shadow (either file or database) even after user authentication. In normal situation it starts as root, authorises the user and then performs
++.BR setuid(2)
++and
++.BR initgroups(3)
++dropping root privilages.
++.SH EXAMPLES
++Mail is delivered to \fB~/Mail/Mailbox\fR files. \fIprocmail\fR sorts mail into other mailboxes in \fB~/Mail\fB. \fIimapd\fR is running as \fIimap.mail\fR.
++
++.EX
++imapd -l -m Mail -r Mail/Mailbox
++.EE
++
++Mail is delivered to \fB/var/spool/mail/<username>\fR. \fIprocmail\fR sorts mail into mailboxes in \fB~/.mail\fR.
++
++.EX
++imapd -m .mail -a /var/spool/mail
++.EE
++
+ .SH "SEE ALSO"
+ rsh(1) ipopd(8)
++
++.SH AUTHORS
++imapd has been made on the University of Washington.
++
++Command line options, logic required by them and non-root mode support has been made by Michal Kochanowicz <michal@michal.waw.pl>
+\ No newline at end of file
+diff -urN imap-2004b.orig/src/imapd/imapd.c imap-2004b/src/imapd/imapd.c
+--- imap-2004b.orig/src/imapd/imapd.c	2005-01-11 00:27:09.000000000 +0100
++++ imap-2004b/src/imapd/imapd.c	2005-01-11 00:32:47.000000000 +0100
+@@ -247,6 +247,41 @@
+   msg_string_setpos		/* set position in string structure */
+ };
+ 
++
++/* Get command line opts */
++
++void dogetopt(int argc, char *argv[])
++{
++  int opt;
++  openlog("imapd", LOG_PID, LOG_DAEMON);
++  syslog(LOG_DEBUG, "Processing args...\n");
++  opterr = 0;
++  while(-1 != (opt = getopt(argc, argv, "lm:a:r:")))
++    switch(opt) {
++      case 'l':
++	syslog(LOG_DEBUG, "arg: -l\n");
++	useloggedinusername = 1;
++	break;
++      case 'm':
++	syslog(LOG_DEBUG, "arg: -m %s\n", optarg);
++	mailsubdir = optarg;
++	break;
++      case 'a':
++	syslog(LOG_DEBUG, "arg: -a %s\n", optarg);
++	mailspoolstyle = 'a';	/* Absolute path: /var/spool style spool. */
++	mailspoolloc = optarg;
++	break;
++      case 'r':
++	syslog(LOG_DEBUG, "arg: -r %s\n", optarg);
++	mailspoolstyle = 'r';	/* Relative path: ~/ style spool. */
++	mailspoolloc = optarg;	/* relatively to home. */
++	break;
++      default:
++	/* TODO: in the line below "?" will be substitued always. */
++	syslog(LOG_INFO, "Unknow command line option: %c\n", (char)opt);
++    }
++}
++
+ /* Main program */
+ 
+ int main (int argc,char *argv[])
+@@ -256,6 +291,9 @@
+   unsigned char *s,*t,*u,*v,tmp[MAILTMPLEN];
+   struct stat sbuf;
+   time_t autologouttime = 0;
++
++  dogetopt(argc, argv);
++  
+   char *pgmname = (argc && argv[0]) ?
+     (((s = strrchr (argv[0],'/')) || (s = strrchr (argv[0],'\\'))) ?
+      (char *) s+1 : argv[0]) : "imapd";
+@@ -286,6 +324,14 @@
+       fclose (nntp);		/* done reading proxy name */
+     }
+     s = myusername_full (&i);	/* get user name and flags */
++    /* Enforce takeing user name form login even if we already have non-root
++     * euid. This let us run root-free imap on properly configured system. */
++    if(i == MU_LOGGEDIN && useloggedinusername) {
++      i = MU_NOTLOGGEDIN;
++      syslog(LOG_DEBUG, "fake\n");
++    } else
++      syslog(LOG_DEBUG, "normal way\n");
++    syslog(LOG_DEBUG, "s = %s\n", s);
+     switch (i) {
+     case MU_NOTLOGGEDIN:
+       PSOUT ("* OK [");		/* not logged in, ordinary startup */
+diff -urN imap-2004b.orig/src/osdep/unix/env_unix.c imap-2004b/src/osdep/unix/env_unix.c
+--- imap-2004b.orig/src/osdep/unix/env_unix.c	2005-01-11 00:23:25.000000000 +0100
++++ imap-2004b/src/osdep/unix/env_unix.c	2005-01-11 00:32:47.000000000 +0100
+@@ -24,12 +24,16 @@
+ 
+ /* c-client environment parameters */
+ 
+-static char *myUserName = NIL;	/* user name */
++char mailspoolstyle = 'v';
++char *mailspoolloc = MAILSPOOL;
++int useloggedinusername = 0;
++char *myUserName = NIL;	/* user name */
++
+ static char *myHomeDir = NIL;	/* home directory name */
+ static char *myMailboxDir = NIL;/* mailbox directory name */
+ static char *myLocalHost = NIL;	/* local host name */
+ static char *myNewsrc = NIL;	/* newsrc file name */
+-static char *mailsubdir = NIL;	/* mail subdirectory name */
++char *mailsubdir = NIL;	/* mail subdirectory name */
+ static char *sysInbox = NIL;	/* system inbox name */
+ static char *newsActive = NIL;	/* news active file */
+ static char *newsSpool = NIL;	/* news spool */
+@@ -640,7 +644,7 @@
+       else fatal ("Login failed after chroot");
+     }
+ 				/* normal login */
+-    else if (((pw->pw_uid == geteuid ()) || loginpw (pw,argc,argv)) &&
++    else if (((pw->pw_uid == geteuid ()) || loginpw (pw,argc,argv) || useloggedinusername) &&
+ 	     (ret = env_init (user,home))) chdir (myhomedir ());
+     fs_give ((void **) &home);	/* clean up */
+     if (user) fs_give ((void **) &user);
+@@ -762,10 +766,12 @@
+     if (((s = (char *) getlogin ()) && *s && (strlen (s) < NETMAXUSER) &&
+ 	 (pw = getpwnam (s)) && (pw->pw_uid == euid)) ||
+ 	(pw = getpwuid (euid)))
+-      env_init (pw->pw_name,
++	{
++        if(!useloggedinusername) env_init (pw->pw_name,
+ 		((s = getenv ("HOME")) && *s && (strlen (s) < NETMAXMBX) &&
+ 		 !stat (s,&sbuf) && ((sbuf.st_mode & S_IFMT) == S_IFDIR)) ?
+ 		s : pw->pw_dir);
++	}
+     else fatal ("Unable to look up user name");
+   }
+   if (myUserName) {		/* logged in? */
+@@ -830,7 +836,11 @@
+ {
+   char tmp[MAILTMPLEN];
+   if (!sysInbox) {		/* initialize if first time */
+-    sprintf (tmp,"%s/%s",MAILSPOOL,myusername ());
++    /*sprintf (tmp,"%s/%s",MAILSPOOL,myusername ());*/
++    if(mailspoolstyle == 'r')
++      snprintf(tmp, sizeof(tmp), "%s/%s", myHomeDir, mailspoolloc);
++    else
++      snprintf(tmp, sizeof(tmp), "%s/%s", mailspoolloc, myUserName);
+     sysInbox = cpystr (tmp);	/* system inbox is from mail spool */
+   }
+   return sysInbox;
+diff -urN imap-2004b.orig/src/osdep/unix/env_unix.h imap-2004b/src/osdep/unix/env_unix.h
+--- imap-2004b.orig/src/osdep/unix/env_unix.h	2002-02-23 05:03:45.000000000 +0100
++++ imap-2004b/src/osdep/unix/env_unix.h	2005-01-11 00:32:47.000000000 +0100
+@@ -33,9 +33,25 @@
+ 
+ /* Subscription definitions for UNIX */
+ 
++#include "env.h"
++
++#if 0
+ #define SUBSCRIPTIONFILE(t) sprintf (t,"%s/.mailboxlist",myhomedir ())
+ #define SUBSCRIPTIONTEMP(t) sprintf (t,"%s/.mlbxlsttmp",myhomedir ())
+-
++#endif /* 0 */
++#define SUBSCRIPTIONFILE(t) { \
++  if(useloggedinusername) \
++    sprintf (t,"/var/lib/imap/%s",myUserName); \
++  else \
++    sprintf (t,"%s/.mailboxlist",myhomedir ()); \
++}
++
++#define SUBSCRIPTIONTEMP(t) { \
++  if(useloggedinusername) \
++    sprintf (t,"/var/lib/imap/%s.tmp",myUserName); \
++  else \
++    sprintf (t,"%s/.mlbxlsttmp",myhomedir ()); \
++}
+ 
+ /* dorc() options */
+ 
+@@ -60,8 +76,6 @@
+ 
+ /* Function prototypes */
+ 
+-#include "env.h"
+-
+ void rfc822_fixed_date (char *date);
+ long env_init (char *user,char *home);
+ char *myusername_full (unsigned long *flags);
