@@ -6,7 +6,7 @@ diff -ur imap-2004b.orig/Makefile imap-2004b/Makefile
  #	 (see lnp, sl4, sl5, and slx)
  # lnp	Linux with Pluggable Authentication Modules (PAM)
 +# lnps	Linux with Pluggable Authentication Modules (PAM) (with shared libc-client)
- # lmd	Mankdrake Linux
+ # lmd	Mandrake Linux
  # lrh	RedHat Linux 7.2 and later
  # lsu	SuSE Linux
 @@ -285,7 +286,7 @@
@@ -476,7 +476,7 @@ diff -ur imap-2004b.orig/src/osdep/unix/Makefile imap-2004b/src/osdep/unix/Makef
  	 CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
 +	 BASELDFLAGS="../c-client/c-client.a" \
- 	 BASECFLAGS="-g -O"
+ 	 BASECFLAGS="-g -O -Wno-pointer-sign"
  
  ptx:	# PTX
 @@ -545,12 +578,13 @@
