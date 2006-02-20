@@ -309,7 +309,7 @@ echo 'y' | %{__make} lnps \
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
-	$RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_var}/lib/imap} \
+	$RPM_BUILD_ROOT%{_mandir}/man{1,8} \
 	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
 
 install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
