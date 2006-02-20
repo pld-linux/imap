@@ -35,7 +35,6 @@ BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
 Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
-Requires:	pam >= 0.79.0
 Requires:	rc-inetd >= 0.8.1
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
@@ -179,7 +178,7 @@ Summary:	Common files for WU imap and pop daemons
 Summary(pl):	Pliki wspólne dla serwerów imap i pop
 Group:		Networking/Daemons
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
-Requires:	pam >= 0.77.3
+Requires:	pam >= 0.79.0
 
 %description common
 Common files for WU imap and pop daemons.
@@ -297,14 +296,20 @@ POP/IMAP.
 # support for plain-text auth w/o SSL/TLS
 # (but it should be made some runtime option!
 echo 'y' | %{__make} lnp \
-	CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" \
-	SSLTYPE=unix VERSION="%{version}"
+	CC="%{__cc}" \
+	OPT="%{rpmcflags} -pipe -fPIC" \
+	LDOPT="%{rpmldflags}" \
+	SSLTYPE=unix \
+	VERSION="%{version}"
 mv -f c-client/c-client.a libc-client.a
 
 %{__make} clean
 echo 'y' | %{__make} lnps \
-	CC="%{__cc}" OPT="%{rpmcflags} -pipe -fPIC" LDOPT="%{rpmldflags}" \
-	SSLTYPE=unix VERSION="%{version}"
+	CC="%{__cc}" \
+	OPT="%{rpmcflags} -pipe -fPIC" \
+	LDOPT="%{rpmldflags}" \
+	SSLTYPE=unix \
+	VERSION="%{version}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
