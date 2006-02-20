@@ -33,9 +33,10 @@ Patch8:		%{name}-headers_fix.patch
 URL:		http://www.washington.edu/imap/
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
-PreReq:		rc-inetd >= 0.8.1
-Requires:	pam >= 0.79.0
+Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
+Requires:	pam >= 0.79.0
+Requires:	rc-inetd >= 0.8.1
 Provides:	imapdaemon
 Obsoletes:	imapdaemon
 Conflicts:	courier-imap
@@ -103,7 +104,7 @@ Summary(pl):	Wspomaganie dla protokoЁu pocztowego POP2
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP2
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP2
 Group:		Networking/Daemons
-Prereq:		/etc/rc.d/init.d/rc-inetd
+Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
 Provides:	pop2daemon
@@ -139,7 +140,7 @@ Summary(pl):	Wspomaganie dla protokoЁu pocztowego POP3
 Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP3
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP3
 Group:		Networking/Daemons
-Prereq:		/etc/rc.d/init.d/rc-inetd
+Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
 Provides:	pop3daemon
