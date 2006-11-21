@@ -6,13 +6,13 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2004g
-Release:	3
+Version:	2006c1
+Release:	0.1
 Epoch:		1
-License:	BSD
+License:	Apache 2.0
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
-# Source0-md5:	9a80f58d8d6a0979c13714ae69050020
+# Source0-md5:	35a9976cc0c57e0423cd49fb0f967d5e
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
@@ -298,7 +298,7 @@ POP/IMAP.
 # (but it should be made some runtime option!
 echo 'y' | %{__make} lnp \
 	CC="%{__cc}" \
-	OPT="%{rpmcflags} -pipe -fPIC" \
+	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
 	VERSION="%{version}"
@@ -307,7 +307,7 @@ mv -f c-client/c-client.a libc-client.a
 %{__make} clean
 echo 'y' | %{__make} lnps \
 	CC="%{__cc}" \
-	OPT="%{rpmcflags} -pipe -fPIC" \
+	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
 	VERSION="%{version}"
