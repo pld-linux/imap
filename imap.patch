@@ -1,7 +1,13 @@
-diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
---- imap-2004/src/osdep/unix/Makefile	Fri Apr 30 02:08:48 2004
-+++ imap-patched/src/osdep/unix/Makefile	Sun May 30 06:33:23 2004
-@@ -29,11 +29,11 @@
+--- imap-2006c1/src/osdep/unix/Makefile.orig	2006-10-23 23:35:38.000000000 +0200
++++ imap-2006c1/src/osdep/unix/Makefile	2006-11-21 11:14:20.849505000 +0100
+@@ -48,17 +48,17 @@
+ # Try to have some consistency in GCC builds.  We want optimization, but we
+ # also want to be able to debug.
+ 
+-GCCCFLAGS= -g $(GCCOPTLEVEL) -pipe -fno-omit-frame-pointer
++GCCCFLAGS= $(GCCOPTLEVEL) -pipe
+ GCC4CFLAGS= $(GCCCFLAGS) -Wno-pointer-sign
+ 
  
  # Extended flags needed for SSL.  You may need to modify.
  
@@ -18,7 +24,7 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
  
  SSLCRYPTO=-lcrypto
  
-@@ -620,12 +620,13 @@
+@@ -656,12 +656,13 @@
  	@echo If you want libc5 versions you must use sl5 instead!
  	@echo If you want libc4 versions you must use sl4 instead!
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
@@ -28,9 +34,8 @@ diff -ur imap-2004/src/osdep/unix/Makefile imap-patched/src/osdep/unix/Makefile
 +	 MAILSPOOL=/var/mail \
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
--	 BASECFLAGS="-g -fno-omit-frame-pointer $(GCCOPTLEVEL)" \
+ 	 BASECFLAGS="$(GCCCFLAGS)" \
 -	 BASELDFLAGS="-lcrypt"
-+	 BASECFLAGS="$(OPT)" \
 +	 BASELDFLAGS="$(LDOPT) -lpam -ldl -lcrypt"
  
  sl4:	# Secure Linux using libc4
