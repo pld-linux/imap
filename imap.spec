@@ -6,13 +6,13 @@ Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
 Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
-Version:	2006c1
+Version:	2006d
 Release:	0.1
 Epoch:		1
 License:	Apache 2.0
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
-# Source0-md5:	35a9976cc0c57e0423cd49fb0f967d5e
+# Source0-md5:	db28da518698ec006edbfc5c96bbed28
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
 Source3:	%{name}-pop2d.inetd
