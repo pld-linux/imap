@@ -7,7 +7,7 @@ Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
 Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
 Name:		imap
 Version:	2006d
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	Apache 2.0
 Group:		Networking/Daemons
