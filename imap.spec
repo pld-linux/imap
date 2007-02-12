@@ -1,10 +1,10 @@
 Summary:	Support for IMAP network mail protocol
-Summary(es):	Provee soporte para los protocolos de mail IMAP y POP
-Summary(pl):	ObsЁuga protokoЁu pocztowego IMAP
-Summary(pt_BR):	ProvЙ suporte para os protocolos de mail IMAP e POP
-Summary(ru):	Обеспечивает поддержку сетевого почтового протокола IMAP
-Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу IMAP
-Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ
+Summary(es.UTF-8):   Provee soporte para los protocolos de mail IMAP y POP
+Summary(pl.UTF-8):   Obsе┌uga protokoе┌u pocztowego IMAP
+Summary(pt_BR.UTF-8):   Provц╙ suporte para os protocolos de mail IMAP e POP
+Summary(ru.UTF-8):   п·п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ я│п╣я┌п╣п╡п╬пЁп╬ п©п╬я┤я┌п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩п╟ IMAP
+Summary(uk.UTF-8):   п≈п╟п╠п╣п╥п©п╣я┤я┐я■ п©я√п╢я┌я─п╦п╪п╨я┐ п╪п╣я─п╣п╤п╣п╡п╬пЁп╬ п©п╬я┬я┌п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩я┐ IMAP
+Summary(zh_CN.UTF-8):   IMAPЕ▓▄POPФ°█Е┼║Е≥╗
 Name:		imap
 Version:	2006d
 Release:	1
@@ -52,57 +52,57 @@ machine for reading. The IMAP protocol provides the functionality of
 POP, and allows a user to read mail on a remote machine without moving
 it to his local mailbox.
 
-%description -l cs
-BalМХek imap obsahuje server pro po╧tovnМ protokoly POP (Post Office
+%description -l cs.UTF-8
+Balц╜д█ek imap obsahuje server pro poе║tovnц╜ protokoly POP (Post Office
 Protocol) a IMAP (Internet Message Access Protocol). Protokol POP
-umo╬Рuje, aby u╬ivatel mohl naХМtat svoji do╧lou po╧tu ze vzdАlenИho
-poХМtaХe. Protokol IMAP umo╬Рuje u╬ivateli ХtenМ po╧ty na vzdАlenИm
-stroji bez pЬesouvАnМ na mМstnМ poХМtaХ.
+umoе╬е┬uje, aby uе╬ivatel mohl naд█ц╜tat svoji doе║lou poе║tu ze vzdц║lenц╘ho
+poд█ц╜taд█e. Protokol IMAP umoе╬е┬uje uе╬ivateli д█tenц╜ poе║ty na vzdц║lenц╘m
+stroji bez pе≥esouvц║nц╜ na mц╜stnц╜ poд█ц╜taд█.
 
-%description -l es
+%description -l es.UTF-8
 IMAP es un servidor para los protocolos de mail POP (Post Office
-Protocol) y IMAP. El protocolo POP permite a una mАquina de correo
-colectar mail para usuarios y permite download del mail a la mАquina
+Protocol) y IMAP. El protocolo POP permite a una mц║quina de correo
+colectar mail para usuarios y permite download del mail a la mц║quina
 local del usuario para lectura. El protocolo IMAP nos ofrece la
 funcionalidad de POP, y permite a un usuario leer su mail en una
-mАquina remota sin moverlo a su caja postal local.
+mц║quina remota sin moverlo a su caja postal local.
 
-%description -l pl
-Imap jest serwerem dla POP (Post Office Protocol) i protokoЁu IMAP.
-ProtokСЁ POP pozwala serwerowi poczty elektronicznej na przechowywanie
-przesyЁek i nastЙpnie pobieranie ich przez maszyny klienckie w sieci.
-ProtokСЁ IMAP pozwala zdalnemu u©ytkownikowi na czytanie poczty na
-zdalnej maszynie bez konieczno╤ci jej pobierania.
+%description -l pl.UTF-8
+Imap jest serwerem dla POP (Post Office Protocol) i protokoе┌u IMAP.
+ProtokцЁе┌ POP pozwala serwerowi poczty elektronicznej na przechowywanie
+przesyе┌ek i nastд≥pnie pobieranie ich przez maszyny klienckie w sieci.
+ProtokцЁе┌ IMAP pozwala zdalnemu uе╪ytkownikowi na czytanie poczty na
+zdalnej maszynie bez koniecznoе⌡ci jej pobierania.
 
-%description -l pt_BR
-IMAP И um servidor para os protocolos de mail POP (Post Office
-Protocol) e IMAP. O protocolo POP permite uma mАquina de correio
-coletar mail para usuАrios e permite o download do mail para a mАquina
-local do usuАrio para leitura. O protocolo IMAP oferece a
-funcionalidade de POP, e permite um usuАrio ler seu mail em uma
-mАquina remota sem movЙ-lo para a sua caixa postal local.
+%description -l pt_BR.UTF-8
+IMAP ц╘ um servidor para os protocolos de mail POP (Post Office
+Protocol) e IMAP. O protocolo POP permite uma mц║quina de correio
+coletar mail para usuц║rios e permite o download do mail para a mц║quina
+local do usuц║rio para leitura. O protocolo IMAP oferece a
+funcionalidade de POP, e permite um usuц║rio ler seu mail em uma
+mц║quina remota sem movц╙-lo para a sua caixa postal local.
 
-%description -l ru
-IMAP это сервер для почтовых протоколов POP (Post Office Protocol) и
-IMAP. Протокол POP позволяет почтовой машине (post office) принимать
-почту для пользователей, которые затем могут забирать ее на свои
-локальные машины для чтения. Протокол IMAP предоставляет все
-возможности POP и позволяет пользователю читать почту на удаленной
-машине без перекачки ее на свою локальную машину.
+%description -l ru.UTF-8
+IMAP я█я┌п╬ я│п╣я─п╡п╣я─ п╢п╩я▐ п©п╬я┤я┌п╬п╡я▀я┘ п©я─п╬я┌п╬п╨п╬п╩п╬п╡ POP (Post Office Protocol) п╦
+IMAP. п÷я─п╬я┌п╬п╨п╬п╩ POP п©п╬п╥п╡п╬п╩я▐п╣я┌ п©п╬я┤я┌п╬п╡п╬п╧ п╪п╟я┬п╦п╫п╣ (post office) п©я─п╦п╫п╦п╪п╟я┌я▄
+п©п╬я┤я┌я┐ п╢п╩я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╧, п╨п╬я┌п╬я─я▀п╣ п╥п╟я┌п╣п╪ п╪п╬пЁя┐я┌ п╥п╟п╠п╦я─п╟я┌я▄ п╣п╣ п╫п╟ я│п╡п╬п╦
+п╩п╬п╨п╟п╩я▄п╫я▀п╣ п╪п╟я┬п╦п╫я▀ п╢п╩я▐ я┤я┌п╣п╫п╦я▐. п÷я─п╬я┌п╬п╨п╬п╩ IMAP п©я─п╣п╢п╬я│я┌п╟п╡п╩я▐п╣я┌ п╡я│п╣
+п╡п╬п╥п╪п╬п╤п╫п╬я│я┌п╦ POP п╦ п©п╬п╥п╡п╬п╩я▐п╣я┌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▌ я┤п╦я┌п╟я┌я▄ п©п╬я┤я┌я┐ п╫п╟ я┐п╢п╟п╩п╣п╫п╫п╬п╧
+п╪п╟я┬п╦п╫п╣ п╠п╣п╥ п©п╣я─п╣п╨п╟я┤п╨п╦ п╣п╣ п╫п╟ я│п╡п╬я▌ п╩п╬п╨п╟п╩я▄п╫я┐я▌ п╪п╟я┬п╦п╫я┐.
 
-%description -l uk
-IMAP це сервер для поштових протокол╕в POP (Post Office Protocol) та
-IMAP. Протокол POP дозволя╓ поштов╕й машин╕ (post office) приймати
-пошту для користувач╕в, як╕ пот╕м можуть забирати ╖╖ на сво╖ локальн╕
-машини для читання. Протокол IMAP нада╓ вс╕ можливост╕ POP ╕ дозволя╓
-користувачу читати пошту на в╕ддален╕й машин╕ без перекачування ╖╖ на
-свою локальну машину.
+%description -l uk.UTF-8
+IMAP я├п╣ я│п╣я─п╡п╣я─ п╢п╩я▐ п©п╬я┬я┌п╬п╡п╦я┘ п©я─п╬я┌п╬п╨п╬п╩я√п╡ POP (Post Office Protocol) я┌п╟
+IMAP. п÷я─п╬я┌п╬п╨п╬п╩ POP п╢п╬п╥п╡п╬п╩я▐я■ п©п╬я┬я┌п╬п╡я√п╧ п╪п╟я┬п╦п╫я√ (post office) п©я─п╦п╧п╪п╟я┌п╦
+п©п╬я┬я┌я┐ п╢п╩я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤я√п╡, я▐п╨я√ п©п╬я┌я√п╪ п╪п╬п╤я┐я┌я▄ п╥п╟п╠п╦я─п╟я┌п╦ я≈я≈ п╫п╟ я│п╡п╬я≈ п╩п╬п╨п╟п╩я▄п╫я√
+п╪п╟я┬п╦п╫п╦ п╢п╩я▐ я┤п╦я┌п╟п╫п╫я▐. п÷я─п╬я┌п╬п╨п╬п╩ IMAP п╫п╟п╢п╟я■ п╡я│я√ п╪п╬п╤п╩п╦п╡п╬я│я┌я√ POP я√ п╢п╬п╥п╡п╬п╩я▐я■
+п╨п╬я─п╦я│я┌я┐п╡п╟я┤я┐ я┤п╦я┌п╟я┌п╦ п©п╬я┬я┌я┐ п╫п╟ п╡я√п╢п╢п╟п╩п╣п╫я√п╧ п╪п╟я┬п╦п╫я√ п╠п╣п╥ п©п╣я─п╣п╨п╟я┤я┐п╡п╟п╫п╫я▐ я≈я≈ п╫п╟
+я│п╡п╬я▌ п╩п╬п╨п╟п╩я▄п╫я┐ п╪п╟я┬п╦п╫я┐.
 
 %package pop2
 Summary:	Provides support for POP2 network mail protocol
-Summary(pl):	Wspomaganie dla protokoЁu pocztowego POP2
-Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP2
-Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP2
+Summary(pl.UTF-8):   Wspomaganie dla protokoе┌u pocztowego POP2
+Summary(ru.UTF-8):   п·п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ я│п╣я┌п╣п╡п╬пЁп╬ п©п╬я┤я┌п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩п╟ POP2
+Summary(uk.UTF-8):   п≈п╟п╠п╣п╥п©п╣я┤я┐я■ п©я√п╢я┌я─п╦п╪п╨я┐ п╪п╣я─п╣п╤п╣п╡п╬пЁп╬ п©п╬я┬я┌п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩я┐ POP2
 Group:		Networking/Daemons
 Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -116,29 +116,29 @@ protocols. The POP protocol allows a "post office" machine to collect
 mail for users and have that mail downloaded to the user's local
 machine for reading. POP2 is an older POP protocol.
 
-%description pop2 -l pl
-Imap jest serwerem dla POP (Post Office Protocol) i protokoЁu IMAP.
-ProtokСЁ POP pozwala serwerowi poczty elektronicznej na przechowywanie
-przesyЁek i nastЙpnie pobieranie ich przez maszyny klienckie w sieci.
-POP2 jest starsz╠ wersj╠ protokoЁu POP.
+%description pop2 -l pl.UTF-8
+Imap jest serwerem dla POP (Post Office Protocol) i protokoе┌u IMAP.
+ProtokцЁе┌ POP pozwala serwerowi poczty elektronicznej na przechowywanie
+przesyе┌ek i nastд≥pnie pobieranie ich przez maszyny klienckie w sieci.
+POP2 jest starszд┘ wersjд┘ protokoе┌u POP.
 
-%description pop2 -l ru
-IMAP это сервер для почтовых протоколов POP (Post Office Protocol) и
-IMAP. Протокол POP позволяет почтовой машине (post office) принимать
-почту для пользователей, которые затем могут забирать ее на свои
-локальные машины для чтения. POP2 это старая версия протокола POP.
+%description pop2 -l ru.UTF-8
+IMAP я█я┌п╬ я│п╣я─п╡п╣я─ п╢п╩я▐ п©п╬я┤я┌п╬п╡я▀я┘ п©я─п╬я┌п╬п╨п╬п╩п╬п╡ POP (Post Office Protocol) п╦
+IMAP. п÷я─п╬я┌п╬п╨п╬п╩ POP п©п╬п╥п╡п╬п╩я▐п╣я┌ п©п╬я┤я┌п╬п╡п╬п╧ п╪п╟я┬п╦п╫п╣ (post office) п©я─п╦п╫п╦п╪п╟я┌я▄
+п©п╬я┤я┌я┐ п╢п╩я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╧, п╨п╬я┌п╬я─я▀п╣ п╥п╟я┌п╣п╪ п╪п╬пЁя┐я┌ п╥п╟п╠п╦я─п╟я┌я▄ п╣п╣ п╫п╟ я│п╡п╬п╦
+п╩п╬п╨п╟п╩я▄п╫я▀п╣ п╪п╟я┬п╦п╫я▀ п╢п╩я▐ я┤я┌п╣п╫п╦я▐. POP2 я█я┌п╬ я│я┌п╟я─п╟я▐ п╡п╣я─я│п╦я▐ п©я─п╬я┌п╬п╨п╬п╩п╟ POP.
 
-%description pop2 -l uk
-IMAP це сервер для поштових протокол╕в POP (Post Office Protocol) та
-IMAP. Протокол POP дозволя╓ поштов╕й машин╕ (post office) приймати
-пошту для користувач╕в, як╕ пот╕м можуть забирати ╖╖ на сво╖ локальн╕
-машини для читання. POP2 это стара верс╕я протоколу POP.
+%description pop2 -l uk.UTF-8
+IMAP я├п╣ я│п╣я─п╡п╣я─ п╢п╩я▐ п©п╬я┬я┌п╬п╡п╦я┘ п©я─п╬я┌п╬п╨п╬п╩я√п╡ POP (Post Office Protocol) я┌п╟
+IMAP. п÷я─п╬я┌п╬п╨п╬п╩ POP п╢п╬п╥п╡п╬п╩я▐я■ п©п╬я┬я┌п╬п╡я√п╧ п╪п╟я┬п╦п╫я√ (post office) п©я─п╦п╧п╪п╟я┌п╦
+п©п╬я┬я┌я┐ п╢п╩я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤я√п╡, я▐п╨я√ п©п╬я┌я√п╪ п╪п╬п╤я┐я┌я▄ п╥п╟п╠п╦я─п╟я┌п╦ я≈я≈ п╫п╟ я│п╡п╬я≈ п╩п╬п╨п╟п╩я▄п╫я√
+п╪п╟я┬п╦п╫п╦ п╢п╩я▐ я┤п╦я┌п╟п╫п╫я▐. POP2 я█я┌п╬ я│я┌п╟я─п╟ п╡п╣я─я│я√я▐ п©я─п╬я┌п╬п╨п╬п╩я┐ POP.
 
 %package pop3
 Summary:	Provides support for POP3 network mail protocol
-Summary(pl):	Wspomaganie dla protokoЁu pocztowego POP3
-Summary(ru):	Обеспечивает поддержку сетевого почтового протокола POP3
-Summary(uk):	Забезпечу╓ п╕дтримку мережевого поштового протоколу POP3
+Summary(pl.UTF-8):   Wspomaganie dla protokoе┌u pocztowego POP3
+Summary(ru.UTF-8):   п·п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ я│п╣я┌п╣п╡п╬пЁп╬ п©п╬я┤я┌п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩п╟ POP3
+Summary(uk.UTF-8):   п≈п╟п╠п╣п╥п©п╣я┤я┐я■ п©я√п╢я┌я─п╦п╪п╨я┐ п╪п╣я─п╣п╤п╣п╡п╬пЁп╬ п©п╬я┬я┌п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩я┐ POP3
 Group:		Networking/Daemons
 Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -156,27 +156,27 @@ protocols. The POP protocol allows a "post office" machine to collect
 mail for users and have that mail downloaded to the user's local
 machine for reading. POP3 is a newer POP protocol.
 
-%description pop3 -l pl
-Imap jest serwerem dla POP (Post Office Protocol) i protokoЁu IMAP.
-ProtokСЁ POP pozwala serwerowi poczty elektronicznej na przechowywanie
-przesyЁek i nastЙpnie pobieranie ich przez maszyny klienckie w sieci.
-POP3 jest nowsz╠ wersj╠ protokoЁu POP.
+%description pop3 -l pl.UTF-8
+Imap jest serwerem dla POP (Post Office Protocol) i protokoе┌u IMAP.
+ProtokцЁе┌ POP pozwala serwerowi poczty elektronicznej na przechowywanie
+przesyе┌ek i nastд≥pnie pobieranie ich przez maszyny klienckie w sieci.
+POP3 jest nowszд┘ wersjд┘ protokoе┌u POP.
 
-%description pop3 -l ru
-IMAP это сервер для почтовых протоколов POP (Post Office Protocol) и
-IMAP. Протокол POP позволяет почтовой машине (post office) принимать
-почту для пользователей, которые затем могут забирать ее на свои
-локальные машины для чтения. POP3 это новая версия протокола POP.
+%description pop3 -l ru.UTF-8
+IMAP я█я┌п╬ я│п╣я─п╡п╣я─ п╢п╩я▐ п©п╬я┤я┌п╬п╡я▀я┘ п©я─п╬я┌п╬п╨п╬п╩п╬п╡ POP (Post Office Protocol) п╦
+IMAP. п÷я─п╬я┌п╬п╨п╬п╩ POP п©п╬п╥п╡п╬п╩я▐п╣я┌ п©п╬я┤я┌п╬п╡п╬п╧ п╪п╟я┬п╦п╫п╣ (post office) п©я─п╦п╫п╦п╪п╟я┌я▄
+п©п╬я┤я┌я┐ п╢п╩я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╧, п╨п╬я┌п╬я─я▀п╣ п╥п╟я┌п╣п╪ п╪п╬пЁя┐я┌ п╥п╟п╠п╦я─п╟я┌я▄ п╣п╣ п╫п╟ я│п╡п╬п╦
+п╩п╬п╨п╟п╩я▄п╫я▀п╣ п╪п╟я┬п╦п╫я▀ п╢п╩я▐ я┤я┌п╣п╫п╦я▐. POP3 я█я┌п╬ п╫п╬п╡п╟я▐ п╡п╣я─я│п╦я▐ п©я─п╬я┌п╬п╨п╬п╩п╟ POP.
 
-%description pop3 -l uk
-IMAP це сервер для поштових протокол╕в POP (Post Office Protocol) та
-IMAP. Протокол POP дозволя╓ поштов╕й машин╕ (post office) приймати
-пошту для користувач╕в, як╕ пот╕м можуть забирати ╖╖ на сво╖ локальн╕
-машини для читання. POP3 это нова верс╕я протоколу POP.
+%description pop3 -l uk.UTF-8
+IMAP я├п╣ я│п╣я─п╡п╣я─ п╢п╩я▐ п©п╬я┬я┌п╬п╡п╦я┘ п©я─п╬я┌п╬п╨п╬п╩я√п╡ POP (Post Office Protocol) я┌п╟
+IMAP. п÷я─п╬я┌п╬п╨п╬п╩ POP п╢п╬п╥п╡п╬п╩я▐я■ п©п╬я┬я┌п╬п╡я√п╧ п╪п╟я┬п╦п╫я√ (post office) п©я─п╦п╧п╪п╟я┌п╦
+п©п╬я┬я┌я┐ п╢п╩я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤я√п╡, я▐п╨я√ п©п╬я┌я√п╪ п╪п╬п╤я┐я┌я▄ п╥п╟п╠п╦я─п╟я┌п╦ я≈я≈ п╫п╟ я│п╡п╬я≈ п╩п╬п╨п╟п╩я▄п╫я√
+п╪п╟я┬п╦п╫п╦ п╢п╩я▐ я┤п╦я┌п╟п╫п╫я▐. POP3 я█я┌п╬ п╫п╬п╡п╟ п╡п╣я─я│я√я▐ п©я─п╬я┌п╬п╨п╬п╩я┐ POP.
 
 %package common
 Summary:	Common files for WU imap and pop daemons
-Summary(pl):	Pliki wspСlne dla serwerСw imap i pop
+Summary(pl.UTF-8):   Pliki wspцЁlne dla serwerцЁw imap i pop
 Group:		Networking/Daemons
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.79.0
@@ -184,86 +184,86 @@ Requires:	pam >= 0.79.0
 %description common
 Common files for WU imap and pop daemons.
 
-%description common -l pl
-Pliki wspСlne dla serwerСw imap i pop.
+%description common -l pl.UTF-8
+Pliki wspцЁlne dla serwerцЁw imap i pop.
 
 %package devel
 Summary:	Development files for IMAP
-Summary(pl):	Pliki nagЁСwkowe IMAP
-Summary(pt_BR):	Bibliotecas, arquivos de inclusЦo, etc para desenvolver programas IMAP
-Summary(ru):	Хедера для разработки программ с использованием библиотеки IMAP
-Summary(uk):	Хедери для розробки програм з використанням б╕бл╕отек╕ IMAP
-Summary(zh_CN):	IMAP╨мPOP╥ЧнЯфВ©╙╥╒╧╓╬ъ╪╞
+Summary(pl.UTF-8):   Pliki nagе┌цЁwkowe IMAP
+Summary(pt_BR.UTF-8):   Bibliotecas, arquivos de inclusцёo, etc para desenvolver programas IMAP
+Summary(ru.UTF-8):   п╔п╣п╢п╣я─п╟ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪ я│ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ IMAP
+Summary(uk.UTF-8):   п╔п╣п╢п╣я─п╦ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪ п╥ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ п╠я√п╠п╩я√п╬я┌п╣п╨я√ IMAP
+Summary(zh_CN.UTF-8):   IMAPЕ▓▄POPФ°█Е┼║Е≥╗Е╪─Е▐▒Е╥╔Е┘╥И⌡├
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
 %description devel
 Development files for IMAP.
 
-%description devel -l cs
-BalМХek imap-devel obsahuje hlaviХkovИ soubory pro vЩvoj programЫ,
-kterИ pou╬МvajМ knihovnu IMAP (Internet Message Access Protocol).
+%description devel -l cs.UTF-8
+Balц╜д█ek imap-devel obsahuje hlaviд█kovц╘ soubory pro vц╫voj programе╞,
+kterц╘ pouе╬ц╜vajц╜ knihovnu IMAP (Internet Message Access Protocol).
 
-%description devel -l pl
-Pliki nagЁСwkowe dla IMAP.
+%description devel -l pl.UTF-8
+Pliki nagе┌цЁwkowe dla IMAP.
 
-%description devel -l pt_BR
-Bibliotecas, arquivos de inclusЦo, etc para desenvolver programas que
+%description devel -l pt_BR.UTF-8
+Bibliotecas, arquivos de inclusцёo, etc para desenvolver programas que
 utilizem POP/IMAP.
 
-%description devel -l ru
-Хедера для разработки программ с использованием библиотеки IMAP.
+%description devel -l ru.UTF-8
+п╔п╣п╢п╣я─п╟ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪ я│ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ IMAP.
 
-%description devel -l uk
-Хедери для розробки програм з використанням б╕бл╕отек╕ IMAP.
+%description devel -l uk.UTF-8
+п╔п╣п╢п╣я─п╦ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪ п╥ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ п╠я√п╠п╩я√п╬я┌п╣п╨я√ IMAP.
 
 %package lib
 Summary:	IMAP client library
-Summary(pl):	Biblioteka IMAP
-Summary(ru):	Библиотека IMAP
-Summary(uk):	Б╕бл╕отека IMAP
+Summary(pl.UTF-8):   Biblioteka IMAP
+Summary(ru.UTF-8):   п▒п╦п╠п╩п╦п╬я┌п╣п╨п╟ IMAP
+Summary(uk.UTF-8):   п▒я√п╠п╩я√п╬я┌п╣п╨п╟ IMAP
 Group:		Development/Libraries
 
 %description lib
 IMAP client library.
 
-%description lib -l pl
+%description lib -l pl.UTF-8
 Biblioteka IMAP.
 
-%description lib -l ru
-Разделяемая библиотека для POP/IMAP-программ.
+%description lib -l ru.UTF-8
+п═п╟п╥п╢п╣п╩я▐п╣п╪п╟я▐ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟ п╢п╩я▐ POP/IMAP-п©я─п╬пЁя─п╟п╪п╪.
 
-%description lib -l uk
-Б╕бл╕отека сп╕льного використання для POP/IMAP-програм.
+%description lib -l uk.UTF-8
+п▒я√п╠п╩я√п╬я┌п╣п╨п╟ я│п©я√п╩я▄п╫п╬пЁп╬ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐ п╢п╩я▐ POP/IMAP-п©я─п╬пЁя─п╟п╪.
 
 %package static
 Summary:	IMAP static library
-Summary(pl):	Statyczna biblioteka IMAP
-Summary(pt_BR):	Bibliotecas estАticas para desenvolver programas IMAP
-Summary(ru):	Статическая библиотека IMAP
-Summary(uk):	Статична б╕бл╕отека IMAP
+Summary(pl.UTF-8):   Statyczna biblioteka IMAP
+Summary(pt_BR.UTF-8):   Bibliotecas estц║ticas para desenvolver programas IMAP
+Summary(ru.UTF-8):   п║я┌п╟я┌п╦я┤п╣я│п╨п╟я▐ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟ IMAP
+Summary(uk.UTF-8):   п║я┌п╟я┌п╦я┤п╫п╟ п╠я√п╠п╩я√п╬я┌п╣п╨п╟ IMAP
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 IMAP static library.
 
-%description devel -l cs
-BalМХek imap-static obsahuje statickИ knihovny pro vЩvoj programЫ,
-kterИ pou╬МvajМ knihovnu IMAP.
+%description devel -l cs.UTF-8
+Balц╜д█ek imap-static obsahuje statickц╘ knihovny pro vц╫voj programе╞,
+kterц╘ pouе╬ц╜vajц╜ knihovnu IMAP.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka IMAP.
 
-%description static -l ru
-Статическая библиотека, необходимая для разработки POP/IMAP-программ.
+%description static -l ru.UTF-8
+п║я┌п╟я┌п╦я┤п╣я│п╨п╟я▐ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟, п╫п╣п╬п╠я┘п╬п╢п╦п╪п╟я▐ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ POP/IMAP-п©я─п╬пЁя─п╟п╪п╪.
 
-%description static -l uk
-Статична б╕бл╕отека, необх╕дна для розробки POP/IMAP-програм.
+%description static -l uk.UTF-8
+п║я┌п╟я┌п╦я┤п╫п╟ п╠я√п╠п╩я√п╬я┌п╣п╨п╟, п╫п╣п╬п╠я┘я√п╢п╫п╟ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ POP/IMAP-п©я─п╬пЁя─п╟п╪.
 
 %package utils
 Summary:	IMAP tools: mailutil, dmail, tmail
-Summary(pl):	NarzЙdzia IMAP: mailutil, dmail, tmail
+Summary(pl.UTF-8):   Narzд≥dzia IMAP: mailutil, dmail, tmail
 Group:		Applications/Mail
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
@@ -271,13 +271,13 @@ Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 IMAP tools: mailutil (mail utility program), dmail (procmail mail
 delivery module), tmail (direct mail delivery module).
 
-%description utils -l pl
-NarzЙdzia IMAP: mailutil (program narzЙdziowy do poczty), dmail (moduЁ
-dostarczaj╠cy pocztЙ dla procmaila), tmail (moduЁ dostarczaj╠cy pocztЙ
-bezpo╤rednio).
+%description utils -l pl.UTF-8
+Narzд≥dzia IMAP: mailutil (program narzд≥dziowy do poczty), dmail (moduе┌
+dostarczajд┘cy pocztд≥ dla procmaila), tmail (moduе┌ dostarczajд┘cy pocztд≥
+bezpoе⌡rednio).
 
-%description static -l pt_BR
-Bibliotecas estАticas para desenvolver programas que utilizem
+%description static -l pt_BR.UTF-8
+Bibliotecas estц║ticas para desenvolver programas que utilizem
 POP/IMAP.
 
 %prep
