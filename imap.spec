@@ -1,10 +1,10 @@
 Summary:	Support for IMAP network mail protocol
-Summary(es.UTF-8):   Provee soporte para los protocolos de mail IMAP y POP
-Summary(pl.UTF-8):   Obsługa protokołu pocztowego IMAP
-Summary(pt_BR.UTF-8):   Provê suporte para os protocolos de mail IMAP e POP
-Summary(ru.UTF-8):   Обеспечивает поддержку сетевого почтового протокола IMAP
-Summary(uk.UTF-8):   Забезпечує підтримку мережевого поштового протоколу IMAP
-Summary(zh_CN.UTF-8):   IMAP和POP服务器
+Summary(es.UTF-8):	Provee soporte para los protocolos de mail IMAP y POP
+Summary(pl.UTF-8):	Obsługa protokołu pocztowego IMAP
+Summary(pt_BR.UTF-8):	Provê suporte para os protocolos de mail IMAP e POP
+Summary(ru.UTF-8):	Обеспечивает поддержку сетевого почтового протокола IMAP
+Summary(uk.UTF-8):	Забезпечує підтримку мережевого поштового протоколу IMAP
+Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2006d
 Release:	1
@@ -100,9 +100,9 @@ IMAP. Протокол POP дозволяє поштовій машині (post 
 
 %package pop2
 Summary:	Provides support for POP2 network mail protocol
-Summary(pl.UTF-8):   Wspomaganie dla protokołu pocztowego POP2
-Summary(ru.UTF-8):   Обеспечивает поддержку сетевого почтового протокола POP2
-Summary(uk.UTF-8):   Забезпечує підтримку мережевого поштового протоколу POP2
+Summary(pl.UTF-8):	Wspomaganie dla protokołu pocztowego POP2
+Summary(ru.UTF-8):	Обеспечивает поддержку сетевого почтового протокола POP2
+Summary(uk.UTF-8):	Забезпечує підтримку мережевого поштового протоколу POP2
 Group:		Networking/Daemons
 Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -136,9 +136,9 @@ IMAP. Протокол POP дозволяє поштовій машині (post 
 
 %package pop3
 Summary:	Provides support for POP3 network mail protocol
-Summary(pl.UTF-8):   Wspomaganie dla protokołu pocztowego POP3
-Summary(ru.UTF-8):   Обеспечивает поддержку сетевого почтового протокола POP3
-Summary(uk.UTF-8):   Забезпечує підтримку мережевого поштового протоколу POP3
+Summary(pl.UTF-8):	Wspomaganie dla protokołu pocztowego POP3
+Summary(ru.UTF-8):	Обеспечивает поддержку сетевого почтового протокола POP3
+Summary(uk.UTF-8):	Забезпечує підтримку мережевого поштового протоколу POP3
 Group:		Networking/Daemons
 Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
@@ -176,7 +176,7 @@ IMAP. Протокол POP дозволяє поштовій машині (post 
 
 %package common
 Summary:	Common files for WU imap and pop daemons
-Summary(pl.UTF-8):   Pliki wspólne dla serwerów imap i pop
+Summary(pl.UTF-8):	Pliki wspólne dla serwerów imap i pop
 Group:		Networking/Daemons
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 Requires:	pam >= 0.79.0
@@ -189,11 +189,11 @@ Pliki wspólne dla serwerów imap i pop.
 
 %package devel
 Summary:	Development files for IMAP
-Summary(pl.UTF-8):   Pliki nagłówkowe IMAP
-Summary(pt_BR.UTF-8):   Bibliotecas, arquivos de inclusão, etc para desenvolver programas IMAP
-Summary(ru.UTF-8):   Хедера для разработки программ с использованием библиотеки IMAP
-Summary(uk.UTF-8):   Хедери для розробки програм з використанням бібліотекі IMAP
-Summary(zh_CN.UTF-8):   IMAP和POP服务器开发工具集
+Summary(pl.UTF-8):	Pliki nagłówkowe IMAP
+Summary(pt_BR.UTF-8):	Bibliotecas, arquivos de inclusão, etc para desenvolver programas IMAP
+Summary(ru.UTF-8):	Хедера для разработки программ с использованием библиотеки IMAP
+Summary(uk.UTF-8):	Хедери для розробки програм з використанням бібліотекі IMAP
+Summary(zh_CN.UTF-8):	IMAP和POP服务器开发工具集
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
@@ -219,9 +219,9 @@ utilizem POP/IMAP.
 
 %package lib
 Summary:	IMAP client library
-Summary(pl.UTF-8):   Biblioteka IMAP
-Summary(ru.UTF-8):   Библиотека IMAP
-Summary(uk.UTF-8):   Бібліотека IMAP
+Summary(pl.UTF-8):	Biblioteka IMAP
+Summary(ru.UTF-8):	Библиотека IMAP
+Summary(uk.UTF-8):	Бібліотека IMAP
 Group:		Development/Libraries
 
 %description lib
@@ -238,10 +238,10 @@ Biblioteka IMAP.
 
 %package static
 Summary:	IMAP static library
-Summary(pl.UTF-8):   Statyczna biblioteka IMAP
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolver programas IMAP
-Summary(ru.UTF-8):   Статическая библиотека IMAP
-Summary(uk.UTF-8):   Статична бібліотека IMAP
+Summary(pl.UTF-8):	Statyczna biblioteka IMAP
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolver programas IMAP
+Summary(ru.UTF-8):	Статическая библиотека IMAP
+Summary(uk.UTF-8):	Статична бібліотека IMAP
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -263,7 +263,7 @@ Statyczna biblioteka IMAP.
 
 %package utils
 Summary:	IMAP tools: mailutil, dmail, tmail
-Summary(pl.UTF-8):   Narzędzia IMAP: mailutil, dmail, tmail
+Summary(pl.UTF-8):	Narzędzia IMAP: mailutil, dmail, tmail
 Group:		Applications/Mail
 Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
 
