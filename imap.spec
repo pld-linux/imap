@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2006d
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache 2.0
 Group:		Networking/Daemons
@@ -352,7 +352,7 @@ install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
 install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/imapd.pem
 install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
 
-touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop,imap}
+touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
 
 cd docs/rfc
 ls rfc* > ../INDEX.rfc
@@ -418,7 +418,7 @@ fi
 %doc README docs/*
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/pop
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.pop
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.pop3
 %dir %{_var}/lib/openssl/certs
 
 %files lib
