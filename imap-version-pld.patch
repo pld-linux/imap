@@ -1,33 +1,33 @@
---- imap-2006h/src/imapd/imapd.c.orig	2007-04-24 23:18:24.000000000 +0200
-+++ imap-2006h/src/imapd/imapd.c	2007-05-17 20:50:21.419511769 +0200
+--- imap-2006i/src/imapd/imapd.c.orig	2007-06-05 23:34:53.000000000 +0200
++++ imap-2006i/src/imapd/imapd.c	2007-06-17 22:16:16.522601779 +0200
 @@ -203,7 +203,7 @@
  
  /* Global storage */
  
--char *version = "2006h.380";	/* version number of this server */
-+char *version = "2006h.380PLD";	/* version number of this server */
+-char *version = "385";		/* edit number of this server */
++char *version = "385PLD";	/* edit number of this server */
  char *logout = "Logout";	/* syslogreason for logout */
  char *goodbye = NIL;		/* bye reason */
  time_t alerttime = 0;		/* time of last alert */
---- imap-2006h/src/ipopd/ipop2d.c.orig	2007-05-17 20:49:45.073440524 +0200
-+++ imap-2006h/src/ipopd/ipop2d.c	2007-05-17 20:50:55.389447605 +0200
+--- imap-2006i/src/ipopd/ipop2d.c.orig	2007-06-17 22:15:56.521461979 +0200
++++ imap-2006i/src/ipopd/ipop2d.c	2007-06-17 22:16:25.547116057 +0200
 @@ -59,7 +59,7 @@
  
  /* Global storage */
  
--char *version = "2006h.72";	/* server version */
-+char *version = "2006h.72PLD";	/* server version */
+-char *version = "74";		/* edit number of this server */
++char *version = "74PLD";	/* edit number of this server */
  short state = LISN;		/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */
---- imap-2006h/src/ipopd/ipop3d.c.orig	2007-04-05 01:04:42.000000000 +0200
-+++ imap-2006h/src/ipopd/ipop3d.c	2007-05-17 20:51:00.829757631 +0200
+--- imap-2006i/src/ipopd/ipop3d.c.orig	2007-05-22 01:23:47.000000000 +0200
++++ imap-2006i/src/ipopd/ipop3d.c	2007-06-17 22:16:35.331673647 +0200
 @@ -65,7 +65,7 @@
  
  /* Global storage */
  
--char *version = "2006h.96";	/* server version */
-+char *version = "2006h.96PLD";	/* server version */
+-char *version = "98";		/* edit number of this server */
++char *version = "98PLD";	/* edit number of this server */
  short state = AUTHORIZATION;	/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */
