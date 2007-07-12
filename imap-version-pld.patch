@@ -1,11 +1,11 @@
---- imap-2006i/src/imapd/imapd.c.orig	2007-06-05 23:34:53.000000000 +0200
-+++ imap-2006i/src/imapd/imapd.c	2007-06-17 22:16:16.522601779 +0200
+--- imap-2006j/src/imapd/imapd.c.orig	2007-07-11 22:08:16.000000000 +0200
++++ imap-2006j/src/imapd/imapd.c	2007-07-12 19:03:42.292463305 +0200
 @@ -203,7 +203,7 @@
  
  /* Global storage */
  
--char *version = "385";		/* edit number of this server */
-+char *version = "385PLD";	/* edit number of this server */
+-char *version = "389";		/* edit number of this server */
++char *version = "389PLD";	/* edit number of this server */
  char *logout = "Logout";	/* syslogreason for logout */
  char *goodbye = NIL;		/* bye reason */
  time_t alerttime = 0;		/* time of last alert */
