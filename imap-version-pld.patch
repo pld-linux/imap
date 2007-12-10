@@ -4,8 +4,8 @@
  
  /* Global storage */
  
--char *version = "389";		/* edit number of this server */
-+char *version = "389PLD";	/* edit number of this server */
+-char *version = "398";		/* edit number of this server */
++char *version = "398PLD";	/* edit number of this server */
  char *logout = "Logout";	/* syslogreason for logout */
  char *goodbye = NIL;		/* bye reason */
  time_t alerttime = 0;		/* time of last alert */
@@ -26,8 +26,8 @@
  
  /* Global storage */
  
--char *version = "98";		/* edit number of this server */
-+char *version = "98PLD";	/* edit number of this server */
+-char *version = "101";		/* edit number of this server */
++char *version = "101PLD";	/* edit number of this server */
  short state = AUTHORIZATION;	/* server state */
  short critical = NIL;		/* non-zero if in critical code */
  MAILSTREAM *stream = NIL;	/* mailbox stream */
