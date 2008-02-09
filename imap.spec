@@ -9,7 +9,7 @@ Name:		imap
 Version:	2007
 Release:	1
 Epoch:		1
-License:	Apache 2.0
+License:	Apache v2.0
 Group:		Networking/Daemons
 Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.Z
 # Source0-md5:	8162c341dd3a08d18b369a745cf83838
