@@ -139,7 +139,7 @@ Summary:	Provides support for POP3 network mail protocol
 Summary(pl.UTF-8):	Wspomaganie dla protokołu pocztowego POP3
 Summary(ru.UTF-8):	Обеспечивает поддержку сетевого почтового протокола POP3
 Summary(uk.UTF-8):	Забезпечує підтримку мережевого поштового протоколу POP3
-Group:		Networking/Daemons
+Group:		Networking/Daemons/POP3
 Requires(post,postun):	rc-inetd >= 0.8.1
 Requires:	%{name}-common = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd >= 0.8.1
@@ -332,7 +332,7 @@ install libc-client.a $RPM_BUILD_ROOT%{_libdir}/libc-client.a
 install ./c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.%{version}.0
 ln -sf libc-client.so.%{version}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
-rm -f 	$RPM_BUILD_ROOT%{_includedir}/unix.h \
+rm -f	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
 
 install ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
