@@ -4,8 +4,8 @@
  
  /* Global storage */
  
--char *version = "403";		/* edit number of this server */
-+char *version = "403PLD";	/* edit number of this server */
+-char *version = "404";		/* edit number of this server */
++char *version = "404PLD";	/* edit number of this server */
  char *logout = "Logout";	/* syslogreason for logout */
  char *goodbye = NIL;		/* bye reason */
  time_t alerttime = 0;		/* time of last alert */
