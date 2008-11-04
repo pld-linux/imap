@@ -312,8 +312,8 @@ echo 'y' | %{__make} lnps \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
-        SSLCERTS=/etc/openssl/certs \
-        SSLKEYS=/etc/openssl/private \
+	SSLCERTS=/etc/openssl/certs \
+	SSLKEYS=/etc/openssl/private \
 	VERSION="%{version}"
 
 %install
