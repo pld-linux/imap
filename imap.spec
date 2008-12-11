@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007d
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
@@ -301,8 +301,13 @@ echo 'y' | %{__make} lnp \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
+%if "%{pld_release}" == "ti"
+	SSLCERTS=/var/lib/openssl/certs \
+	SSLKEYS=/var/lib/openssl/private \
+%else
 	SSLCERTS=/etc/openssl/certs \
 	SSLKEYS=/etc/openssl/private \
+%endif
 	VERSION="%{version}"
 mv -f c-client/c-client.a libc-client.a
 
@@ -312,8 +317,13 @@ echo 'y' | %{__make} lnps \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
+%if "%{pld_release}" == "ti"
+	SSLCERTS=/var/lib/openssl/certs \
+	SSLKEYS=/var/lib/openssl/private \
+%else
 	SSLCERTS=/etc/openssl/certs \
 	SSLKEYS=/etc/openssl/private \
+%endif
 	VERSION="%{version}"
 
 %install
@@ -321,7 +331,11 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
 	$RPM_BUILD_ROOT%{_mandir}/man{1,8} \
+%if "%{pld_release}" == "ti"
+	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
+%else
 	$RPM_BUILD_ROOT/etc/openssl/certs
+%endif
 
 install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
 install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
@@ -353,8 +367,13 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imaps
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3s
 install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
+%if "%{pld_release}" == "ti"
+install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/imapd.pem
+install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
+%else
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/imapd.pem
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/ipop3d.pem
+%endif
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
 
@@ -399,7 +418,11 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/imaps
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.imap
+%if "%{pld_release}" == "ti"
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/imapd.pem
+%else
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/openssl/certs/imapd.pem
+%endif
 %attr(755,root,root) %{_sbindir}/imapd
 %{_mandir}/man8/imapd.8*
 
@@ -413,7 +436,11 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3d
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3s
+%if "%{pld_release}" == "ti"
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/ipop3d.pem
+%else
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/openssl/certs/ipop3d.pem
+%endif
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipop3d.8*
 
