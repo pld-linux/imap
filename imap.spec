@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007e
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
@@ -30,6 +30,7 @@ Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-headers_fix.patch
+Patch9:		%{name}-annotations.patch
 URL:		http://www.washington.edu/imap/
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
@@ -291,6 +292,12 @@ POP/IMAP.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
+
+cd docs/rfc
+ls rfc* > ../INDEX.rfc
+cd ../..
+rm -rf docs/{rfc,BUILD}
 
 %build
 # build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
@@ -337,27 +344,27 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT/etc/openssl/certs
 %endif
 
-install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
-install ./src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
-install ./src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
-install ./src/dmail/dmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install ./src/mailutil/mailutil.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install ./src/tmail/tmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
+install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
+install src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
+install src/dmail/dmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install src/mailutil/mailutil.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install src/tmail/tmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
-install ./c-client/*.h $RPM_BUILD_ROOT%{_includedir}
-install ./c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
+install c-client/*.h $RPM_BUILD_ROOT%{_includedir}
+install c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
 install libc-client.a $RPM_BUILD_ROOT%{_libdir}/libc-client.a
-install ./c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.%{version}.0
+install c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.%{version}.0
 ln -sf libc-client.so.%{version}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
 rm -f	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
 
-install ./ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
-install ./imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
-install ./dmail/dmail $RPM_BUILD_ROOT%{_bindir}
-install ./mailutil/mailutil $RPM_BUILD_ROOT%{_bindir}
-install ./tmail/tmail $RPM_BUILD_ROOT%{_bindir}
+install ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
+install imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
+install dmail/dmail $RPM_BUILD_ROOT%{_bindir}
+install mailutil/mailutil $RPM_BUILD_ROOT%{_bindir}
+install tmail/tmail $RPM_BUILD_ROOT%{_bindir}
 #./mlock/mlock - (sgid mail) standalone mailbox lock program
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/imap
@@ -376,11 +383,6 @@ install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/ipop3d.pem
 %endif
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
-
-cd docs/rfc
-ls rfc* > ../INDEX.rfc
-cd ../..
-rm -rf docs/{rfc,BUILD}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
