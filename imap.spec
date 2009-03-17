@@ -308,7 +308,7 @@ echo 'y' | %{__make} lnp \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
-%if "%{pld_release}" == "ti"
+%if "%{pld_release}" != "th"
 	SSLCERTS=/var/lib/openssl/certs \
 	SSLKEYS=/var/lib/openssl/private \
 %else
@@ -324,7 +324,7 @@ echo 'y' | %{__make} lnps \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLTYPE=unix \
-%if "%{pld_release}" == "ti"
+%if "%{pld_release}" != "th"
 	SSLCERTS=/var/lib/openssl/certs \
 	SSLKEYS=/var/lib/openssl/private \
 %else
@@ -338,7 +338,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
 	$RPM_BUILD_ROOT%{_mandir}/man{1,8} \
-%if "%{pld_release}" == "ti"
+%if "%{pld_release}" != "th"
 	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
 %else
 	$RPM_BUILD_ROOT/etc/openssl/certs
@@ -374,7 +374,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imaps
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3s
 install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
-%if "%{pld_release}" == "ti"
+%if "%{pld_release}" != "th"
 install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/imapd.pem
 install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
 %else
@@ -420,7 +420,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/imaps
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.imap
-%if "%{pld_release}" == "ti"
+%if "%{pld_release}" != "th"
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/imapd.pem
 %else
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/openssl/certs/imapd.pem
@@ -438,7 +438,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3d
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3s
-%if "%{pld_release}" == "ti"
+%if "%{pld_release}" != "th"
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/ipop3d.pem
 %else
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/openssl/certs/ipop3d.pem
