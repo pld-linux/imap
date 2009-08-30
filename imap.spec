@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007e
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
