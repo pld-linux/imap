@@ -223,7 +223,7 @@ Summary:	IMAP client library
 Summary(pl.UTF-8):	Biblioteka IMAP
 Summary(ru.UTF-8):	Библиотека IMAP
 Summary(uk.UTF-8):	Бібліотека IMAP
-Group:		Development/Libraries
+Group:		Libraries
 
 %description lib
 IMAP client library.
