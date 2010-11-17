@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007e
-Release:	4
+Release:	5
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
@@ -44,6 +44,8 @@ Conflicts:	courier-imap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/imap
+
+%define		skip_post_check_so	libc-client.so.%{version}.0
 
 %description
 IMAP is a server for the POP (Post Office Protocol) and IMAP mail
