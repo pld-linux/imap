@@ -251,7 +251,7 @@ Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 %description static
 IMAP static library.
 
-%description devel -l cs.UTF-8
+%description static -l cs.UTF-8
 Balíček imap-static obsahuje statické knihovny pro vývoj programů,
 které používají knihovnu IMAP.
 
@@ -279,7 +279,7 @@ Narzędzia IMAP: mailutil (program narzędziowy do poczty), dmail (moduł
 dostarczający pocztę dla procmaila), tmail (moduł dostarczający pocztę
 bezpośrednio).
 
-%description static -l pt_BR.UTF-8
+%description utils -l pt_BR.UTF-8
 Bibliotecas estáticas para desenvolver programas que utilizem
 POP/IMAP.
 
