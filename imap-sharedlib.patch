@@ -1,19 +1,19 @@
---- imap-2006c1/Makefile.orig	2006-09-15 20:10:32.000000000 +0200
-+++ imap-2006c1/Makefile	2006-11-21 11:30:48.549505000 +0100
-@@ -85,6 +85,7 @@
+--- imap-2007f/Makefile.orig	2011-07-23 02:20:21.000000000 +0200
++++ imap-2007f/Makefile	2011-08-12 19:44:29.146452797 +0200
+@@ -84,6 +84,7 @@
  # lnx	Linux with traditional passwords and crypt() in the C library
  #	 (see lnp, sl4, sl5, and slx)
  # lnp	Linux with Pluggable Authentication Modules (PAM)
 +# lnps	Linux with Pluggable Authentication Modules (PAM) (with shared libc-client)
  # lmd	Mandrake Linux
+ # lr5	RedHat Enterprise 5 and later (same as lfd)
  # lrh	RedHat Linux 7.2 and later
- # lsu	SuSE Linux (same as lrh)
 @@ -307,7 +308,7 @@
  
  # Note on SCO you may have to set LN to "ln".
  
--a32 a41 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul h11 hpp hpx lnp lyn mct mnt nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
-+a32 a41 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul h11 hpp hpx lnp lnps lyn mct mnt nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
+-a32 a41 a52 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul h11 hpp hpx lnp lyn mct mnt nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
++a32 a41 a52 aix bs3 bsi d-g d54 do4 drs epx ga4 gas gh9 ghp ghs go5 gsc gsg gso gul h11 hpp hpx lnp lnps lyn mct mnt nec nto nxt nx3 osf os4 ptx qnx sc5 sco sgi sg6 shp sl4 sl5 slx snx soc sol sos uw2: an
  	$(BUILD) BUILDTYPE=$@
  
  # If you use sv4, you may find that it works to move it to use the an process.
