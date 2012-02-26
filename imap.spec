@@ -32,6 +32,7 @@ Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-headers_fix.patch
 Patch9:		%{name}-annotations.patch
 URL:		http://www.washington.edu/imap/
+BuildRequires:	/sbin/ldconfig
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pam-devel
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -383,6 +384,8 @@ install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/imapd.pem
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/ipop3d.pem
 %endif
+
+/sbin/ldconfig -n $RPM_BUILD_ROOT%{_libdir}
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
 
