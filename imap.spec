@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007f
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
@@ -458,6 +458,7 @@ fi
 %files lib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libc-client.so.*.*
+%ghost %{_libdir}/libc-client.so.2007f
 
 %files devel
 %defattr(644,root,root,755)
