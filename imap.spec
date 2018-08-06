@@ -7,7 +7,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007f
-Release:	4
+Release:	5
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
@@ -32,6 +32,7 @@ Patch7:		%{name}-version-pld.patch
 Patch8:		%{name}-headers_fix.patch
 Patch9:		%{name}-annotations.patch
 Patch10:	%{name}-werror.patch
+Patch11:	no-ustat.h.patch
 URL:		http://www.washington.edu/imap/
 BuildRequires:	/sbin/ldconfig
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -298,6 +299,7 @@ POP/IMAP.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 cd docs/rfc
 ls rfc* > ../INDEX.rfc

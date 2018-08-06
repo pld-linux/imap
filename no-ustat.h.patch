@@ -1,0 +1,22 @@
+--- imap-2007f/src/osdep/unix/os_lnx.h~	2018-08-06 20:01:34.000000000 +0000
++++ imap-2007f/src/osdep/unix/os_lnx.h	2018-08-06 20:04:43.542554901 +0000
+@@ -36,7 +36,7 @@
+ #include <fcntl.h>
+ #include <syslog.h>
+ #include <sys/file.h>
+-#include <ustat.h>
++//#include <ustat.h>
+ 
+ /* Linux gets this wrong */
+ 
+--- imap-2007f/src/osdep/unix/os_slx.h~	2018-08-06 20:01:34.000000000 +0000
++++ imap-2007f/src/osdep/unix/os_slx.h	2018-08-06 20:03:23.613729212 +0000
+@@ -36,7 +36,7 @@
+ #include <fcntl.h>
+ #include <syslog.h>
+ #include <sys/file.h>
+-#include <ustat.h>
++//#include <ustat.h>
+ 
+ /* Linux gets this wrong */
+ 
