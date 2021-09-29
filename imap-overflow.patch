@@ -1,6 +1,7 @@
---- imap-2001a/src/c-client/rfc822.c.overflow	Wed Apr 17 22:39:13 2002
-+++ imap-2001a/src/c-client/rfc822.c	Wed Apr 17 22:40:25 2002
-@@ -610,6 +610,9 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/c-client/rfc822.c imap-2007f/src/c-client/rfc822.c
+--- imap-2007f.org/src/c-client/rfc822.c	2011-07-23 02:20:18.000000000 +0200
++++ imap-2007f/src/c-client/rfc822.c	2021-09-29 21:57:47.019342032 +0200
+@@ -384,6 +384,9 @@ void rfc822_parse_content (BODY *body,ST
  	if (CHR (bs) == '\012'){/* following LF? */
  	  c = SNX (bs); i--;	/* yes, slurp it */
  	}
@@ -8,5 +9,5 @@
 +	  break;		/* messages ending on \015 (or the following */
 +				/* i-- will cause i to be MAXINT. Not good.) */
        case '\012':		/* at start of a line, start with -- ? */
- 	if (i-- && ((c = SNX (bs)) == '-') && i-- && ((c = SNX (bs)) == '-')) {
- 				/* see if cookie matches */
+ 	if (!(i && i-- && ((c = SNX (bs)) == '-') && i-- &&
+ 	      ((c = SNX (bs)) == '-'))) break;

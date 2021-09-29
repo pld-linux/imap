@@ -1,5 +1,6 @@
---- imap-2007f/Makefile.orig	2011-07-23 02:20:21.000000000 +0200
-+++ imap-2007f/Makefile	2011-08-12 19:44:29.146452797 +0200
+diff -urNp -x '*.orig' imap-2007f.org/Makefile imap-2007f/Makefile
+--- imap-2007f.org/Makefile	2011-07-23 02:20:21.000000000 +0200
++++ imap-2007f/Makefile	2021-09-29 21:57:46.362676816 +0200
 @@ -84,6 +84,7 @@
  # lnx	Linux with traditional passwords and crypt() in the C library
  #	 (see lnp, sl4, sl5, and slx)
@@ -8,7 +9,7 @@
  # lmd	Mandrake Linux
  # lr5	RedHat Enterprise 5 and later (same as lfd)
  # lrh	RedHat Linux 7.2 and later
-@@ -307,7 +308,7 @@
+@@ -307,7 +308,7 @@ SPECIALS:
  
  # Note on SCO you may have to set LN to "ln".
  
@@ -17,10 +18,10 @@
  	$(BUILD) BUILDTYPE=$@
  
  # If you use sv4, you may find that it works to move it to use the an process.
-diff -ur imap-2004b.orig/src/dmail/Makefile imap-2004b/src/dmail/Makefile
---- imap-2004b.orig/src/dmail/Makefile	2002-11-19 01:43:31.000000000 +0100
-+++ imap-2004b/src/dmail/Makefile	2005-01-11 00:18:13.000000000 +0100
-@@ -18,14 +18,14 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/dmail/Makefile imap-2007f/src/dmail/Makefile
+--- imap-2007f.org/src/dmail/Makefile	2011-07-23 02:19:57.000000000 +0200
++++ imap-2007f/src/dmail/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -26,14 +26,14 @@
  
  
  C = ../c-client
@@ -35,12 +36,12 @@ diff -ur imap-2004b.orig/src/dmail/Makefile imap-2004b/src/dmail/Makefile
 -LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
 +LDFLAGS = `cat $C/LDFLAGS`
  
- dmail: $(CCLIENTLIB) dmail.o
- 	$(CC) $(CFLAGS) -o dmail dmail.o $(LDFLAGS)
-diff -ur imap-2004b.orig/src/imapd/Makefile imap-2004b/src/imapd/Makefile
---- imap-2004b.orig/src/imapd/Makefile	2004-06-29 23:26:28.000000000 +0200
-+++ imap-2004b/src/imapd/Makefile	2005-01-11 00:18:13.000000000 +0100
-@@ -45,12 +45,12 @@
+ dmail: $(CCLIENTLIB) dmail.o dquota.o
+ 	$(CC) $(CFLAGS) -o dmail dmail.o dquota.o $(LDFLAGS)
+diff -urNp -x '*.orig' imap-2007f.org/src/imapd/Makefile imap-2007f/src/imapd/Makefile
+--- imap-2007f.org/src/imapd/Makefile	2011-07-23 02:20:00.000000000 +0200
++++ imap-2007f/src/imapd/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -43,12 +43,12 @@ SHELL= /bin/sh
  # Get local definitions from c-client directory
  
  C = ../c-client
@@ -55,10 +56,10 @@ diff -ur imap-2004b.orig/src/imapd/Makefile imap-2004b/src/imapd/Makefile
  
  all:	imapd
  
-diff -ur imap-2004b.orig/src/ipopd/Makefile imap-2004b/src/ipopd/Makefile
---- imap-2004b.orig/src/ipopd/Makefile	2000-10-25 01:55:07.000000000 +0200
-+++ imap-2004b/src/ipopd/Makefile	2005-01-11 00:18:13.000000000 +0100
-@@ -19,14 +19,14 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/ipopd/Makefile imap-2007f/src/ipopd/Makefile
+--- imap-2007f.org/src/ipopd/Makefile	2011-07-23 02:20:17.000000000 +0200
++++ imap-2007f/src/ipopd/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -26,14 +26,14 @@
  
  
  C = ../c-client
@@ -75,10 +76,10 @@ diff -ur imap-2004b.orig/src/ipopd/Makefile imap-2004b/src/ipopd/Makefile
  
  ipopd: ipop2d ipop3d
  
-diff -ur imap-2004b.orig/src/mailutil/Makefile imap-2004b/src/mailutil/Makefile
---- imap-2004b.orig/src/mailutil/Makefile	2002-11-19 01:41:46.000000000 +0100
-+++ imap-2004b/src/mailutil/Makefile	2005-01-11 00:18:13.000000000 +0100
-@@ -19,14 +19,14 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/mailutil/Makefile imap-2007f/src/mailutil/Makefile
+--- imap-2007f.org/src/mailutil/Makefile	2011-07-23 02:19:56.000000000 +0200
++++ imap-2007f/src/mailutil/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -26,14 +26,14 @@
  
  
  C = ../c-client
@@ -95,10 +96,10 @@ diff -ur imap-2004b.orig/src/mailutil/Makefile imap-2004b/src/mailutil/Makefile
  
  mailutil: $(CCLIENTLIB) mailutil.o
  	$(CC) $(CFLAGS) -o mailutil mailutil.o $(LDFLAGS)
-diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
---- imap-2004b.orig/src/mtest/Makefile	2000-10-25 01:55:39.000000000 +0200
-+++ imap-2004b/src/mtest/Makefile	2005-01-11 00:18:13.000000000 +0100
-@@ -19,14 +19,14 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/mtest/Makefile imap-2007f/src/mtest/Makefile
+--- imap-2007f.org/src/mtest/Makefile	2011-07-23 02:20:17.000000000 +0200
++++ imap-2007f/src/mtest/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -26,14 +26,14 @@
  
  
  C = ../c-client
@@ -115,9 +116,10 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  all:	mtest
  
---- imap-2006j/src/osdep/unix/Makefile.orig	2007-07-12 19:01:17.428207961 +0200
-+++ imap-2006j/src/osdep/unix/Makefile	2007-07-12 19:02:02.394770459 +0200
-@@ -184,7 +184,7 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/osdep/unix/Makefile imap-2007f/src/osdep/unix/Makefile
+--- imap-2007f.org/src/osdep/unix/Makefile	2021-09-29 21:57:46.299343621 +0200
++++ imap-2007f/src/osdep/unix/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -189,7 +189,7 @@ a32:	# AIX 3.2 for RS/6000
  	 SPOOLDIR=/var/spool \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -Dunix=1 -D_BSD" \
@@ -126,7 +128,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  a41:	# AIX 4.1 for RS/6000
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
-@@ -200,12 +200,13 @@
+@@ -213,12 +213,13 @@ aix:	# AIX/370
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
  	 CRXTYPE=nfs \
  	 BASECFLAGS="-g" \
@@ -142,7 +144,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  art:	# AIX 2.2.1 for RT
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
-@@ -214,7 +215,8 @@
+@@ -227,7 +228,8 @@ art:	# AIX 2.2.1 for RT
  	 ACTIVEFILE=/usr/local/news/control/active \
  	 RSHPATH=/bin/rsh \
  	 BASECFLAGS="-g -Dconst= -Dvoid=char" \
@@ -152,7 +154,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  asv:	# Altos SVR4
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
-@@ -222,7 +224,7 @@
+@@ -235,7 +237,7 @@ asv:	# Altos SVR4
  	 ACTIVEFILE=/usr/spool/news/active \
  	 RSHPATH=/usr/bin/rcmd \
  	 BASECFLAGS="-Dconst= -DSIGSTOP=SIGKILL" \
@@ -161,7 +163,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  aux:	# A/UX
-@@ -230,6 +232,7 @@
+@@ -243,6 +245,7 @@ aux:	# A/UX
  	 CRXTYPE=nfs \
  	 MAILSPOOL=/usr/mail \
  	 BASECFLAGS="-g -B/usr/lib/big/ -Dvoid=char -Dconst=" \
@@ -169,7 +171,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true ARRC="ar -rc"
  
  bs3:	# BSD/i386 3.0 or higher
-@@ -238,11 +241,13 @@
+@@ -251,11 +254,13 @@ bs3:	# BSD/i386 3.0 or higher
  	 SPOOLDIR=/var NEWSSPOOL=/var/news/spool \
  	 ACTIVEFILE=/var/news/etc/active \
  	 RSHPATH=/usr/bin/rsh \
@@ -183,7 +185,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="-g -Dconst="
  
  bsf:	# FreeBSD
-@@ -260,6 +265,7 @@
+@@ -273,6 +278,7 @@ bsi:	# BSD/i386
  	 SPOOLDIR=/var NEWSSPOOL=/var/news/spool \
  	 ACTIVEFILE=/var/news/etc/active \
  	 RSHPATH=/usr/bin/rsh \
@@ -191,7 +193,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="$(GCCCFLAGS)"
  
  bso:	# OpenBSD
-@@ -268,6 +274,7 @@
+@@ -281,6 +287,7 @@ bso:	# OpenBSD
  	 SPOOLDIR=/var \
  	 ACTIVEFILE=/usr/local/news/lib/active \
  	 RSHPATH=/usr/bin/rsh \
@@ -199,7 +201,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="$(GCCCFLAGS)"
  
  cvx:	# Convex
-@@ -293,7 +300,7 @@
+@@ -306,7 +313,7 @@ d-g:	# Data General DG/UX
  	 ACTIVEFILE=/local/news/active \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-g -Dconst=" \
@@ -208,7 +210,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  d54:	# Data General DG/UX 5.4
-@@ -303,7 +310,7 @@
+@@ -316,7 +323,7 @@ d54:	# Data General DG/UX 5.4
  	 ACTIVEFILE=/local/news/active \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-g -Dconst=" \
@@ -217,7 +219,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  dpx:	# Bull DPX/2
-@@ -311,7 +318,7 @@
+@@ -324,7 +331,7 @@ dpx:	# Bull DPX/2
  	 SIGTYPE=sv4 CHECKPW=sv4 LOGINPW=sv4 \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-Dconst= -DSYSTEM5 -DSHORT_IDENT" \
@@ -226,7 +228,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true LN=ln
  
  drs:	# ICL DRS/NX
-@@ -321,18 +328,20 @@
+@@ -334,18 +341,20 @@ drs:	# ICL DRS/NX
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-O" \
@@ -248,7 +250,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="-g -Dconst="
  
  epx:	# EP/IX
-@@ -351,7 +360,7 @@
+@@ -364,7 +373,7 @@ ga4:	# GCC AIX 4.1 for RS/6000
  	 SPOOLDIR=/var/spool \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -Dunix=1 -D_BSD" \
@@ -257,7 +259,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  gas:	# GCC Altos SVR4
  	$(BUILD) `$(CAT) SPECIALS` OS=asv \
-@@ -359,7 +368,7 @@
+@@ -372,7 +381,7 @@ gas:	# GCC Altos SVR4
  	 ACTIVEFILE=/usr/spool/news/active \
  	 RSHPATH=/usr/bin/rcmd \
  	 BASECFLAGS="-g -O -DALTOS_SYSTEM_V -DSIGSTOP=SIGKILL" \
@@ -266,7 +268,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=gcc
  
  gh9:	# GCC HP-UX 9.x
-@@ -368,6 +377,7 @@
+@@ -381,6 +390,7 @@ gh9:	# GCC HP-UX 9.x
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -274,7 +276,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=gcc
  
  ghp:	# GCC HP-UX 10.x
-@@ -377,6 +387,7 @@
+@@ -390,6 +400,7 @@ ghp:	# GCC HP-UX 10.x
  	 ACTIVEFILE=/var/news/active \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -282,7 +284,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=gcc
  
  ghs:	# GCC HP-UX with Trusted Computer Base
-@@ -386,7 +397,7 @@
+@@ -399,7 +410,7 @@ ghs:	# GCC HP-UX with Trusted Computer B
  	 ACTIVEFILE=/var/news/active \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -291,7 +293,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=gcc
  
  go5:	# GCC 2.7.1 (95q4) SCO Open Server 5.0.x
-@@ -397,7 +408,7 @@
+@@ -410,7 +421,7 @@ go5:	# GCC 2.7.1 (95q4) SCO Open Server
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rcmd \
  	 BASECFLAGS="$(GCCCFLAGS) -I/usr/include -L/lib" \
@@ -300,7 +302,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=gcc
  
  gsc:	# Santa Cruz Operation
-@@ -406,7 +417,7 @@
+@@ -419,7 +430,7 @@ gsc:	# Santa Cruz Operation
  	 CREATEPROTO=mmdfproto EMPTYPROTO=mmdfproto \
  	 RSHPATH=/usr/bin/rcmd \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -309,7 +311,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true LN=ln CC=gcc
  
  gsg:	# GCC Silicon Graphics
-@@ -415,6 +426,7 @@
+@@ -428,6 +439,7 @@ gsg:	# GCC Silicon Graphics
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bsd/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -317,7 +319,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=gcc
  
  gso:	os_sol.h	# GCC Solaris
-@@ -424,21 +436,21 @@
+@@ -437,21 +449,21 @@ gso:	os_sol.h	# GCC Solaris
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -342,7 +344,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 CC=gcc
  
  h11:	# HP-UX 11i
-@@ -456,7 +468,7 @@
+@@ -469,7 +481,7 @@ hpp:	# HP-UX 9.x
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-g -Aa -D_HPUX_SOURCE" \
@@ -351,7 +353,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  hpx:	# HP-UX 10.x
-@@ -466,7 +478,7 @@
+@@ -479,7 +491,7 @@ hpx:	# HP-UX 10.x
  	 ACTIVEFILE=/var/news/active \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-g -Ae" \
@@ -360,7 +362,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  isc:	# Interactive
-@@ -475,9 +487,21 @@
+@@ -488,9 +500,21 @@ isc:	# Interactive
  	 SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
  	 ACTIVEFILE=/var/spool/news/active \
  	 BASECFLAGS="-Xp -D_SYSV3" \
@@ -383,7 +385,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  lnp:	# Linux Pluggable Authentication modules
  	$(BUILD) `$(CAT) SPECIALS` OS=slx \
  	 SIGTYPE=psx CHECKPW=pam CRXTYPE=nfs \
-@@ -485,7 +509,7 @@
+@@ -498,7 +522,7 @@ lnp:	# Linux Pluggable Authentication mo
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -392,7 +394,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  lnx:	# Linux non-shadow passwords
  	@echo You are building for traditional Linux *without* shadow
-@@ -504,12 +528,13 @@
+@@ -517,12 +541,13 @@ lyn:	# LynxOS
  	 CRXTYPE=nfs \
  	 RSHPATH=/bin/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -407,7 +409,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="$(GCCCFLAGS)"
  
  mnt:	# Mint
-@@ -527,7 +552,7 @@
+@@ -540,7 +565,7 @@ neb:	# NetBSD
  	 ACTIVEFILE=/var/db/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -416,7 +418,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  nec:	# NEC UX
  	$(BUILD) `$(CAT) SPECIALS` OS=sv4 \
-@@ -536,7 +561,7 @@
+@@ -549,7 +574,7 @@ nec:	# NEC UX
  	 ACTIVEFILE=/var/news/lib/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -Kopt=2 -KOlimit=2000" \
@@ -425,7 +427,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true CC=/usr/abiccs/bin/cc
  
  nto:	# QNX Neutrino RTP
-@@ -545,16 +570,19 @@
+@@ -558,16 +583,19 @@ nto:	# QNX Neutrino RTP
  	 SPOOLDIR=/var/spool \
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
@@ -445,7 +447,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="$(GCCCFLAGS)"
  	echo "void malloc_singlethreaded (void);" >> linkage.h
  	echo "  malloc_singlethreaded ();" >> linkage.c
-@@ -563,6 +591,7 @@
+@@ -576,6 +604,7 @@ osf:	# OSF/1
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
  	 SIGTYPE=psx CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool \
@@ -453,7 +455,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="-g3 -w -O2 -Olimit 1500"
  
  # Note: sia_become_user() used by LOGINPW=os4 doesn't seem to work right.  The
-@@ -572,6 +601,7 @@
+@@ -585,6 +614,7 @@ os4:	# OSF/1 (Digital UNIX) 4
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
  	 SIGTYPE=psx CHECKPW=os4 LOGINPW=os4 CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool \
@@ -461,7 +463,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="-g3 -w -std0 -O2"
  
  osx:	# Mac OS X
-@@ -579,6 +609,7 @@
+@@ -592,6 +622,7 @@ osx:	# Mac OS X
  	 CRXTYPE=nfs \
  	 SPOOLDIR=/var/spool MAILSPOOL=/var/mail \
  	 RSHPATH=/usr/bin/rsh \
@@ -469,7 +471,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="$(GCC4CFLAGS)"
  
  ptx:	# PTX
-@@ -587,12 +618,13 @@
+@@ -600,12 +631,13 @@ ptx:	# PTX
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bin/resh \
  	 BASECFLAGS="-Wc,-O3 -Wc,-seq -Dprivate=PRIVATE" \
@@ -484,7 +486,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="-g -Dconst="
  
  qnx:	# QNX
-@@ -600,12 +632,13 @@
+@@ -613,12 +645,13 @@ qnx:	# QNX
  	 CHECKPW=psx LOGINPW=old \
  	 RSHPATH=/usr/ucb/rsh \
  	 BASECFLAGS="-Otax -g -Dunix=1 -D_POSIX_SOURCE" \
@@ -500,7 +502,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  sc5:	# SCO Open Server 5.0
  	$(BUILD) `$(CAT) SPECIALS` OS=$@ \
-@@ -615,7 +648,7 @@
+@@ -628,7 +661,7 @@ sc5:	# SCO Open Server 5.0
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rcmd \
  	 BASECFLAGS="-O3 -s -belf" \
@@ -509,7 +511,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  sco:	# Santa Cruz Operation
-@@ -624,7 +657,7 @@
+@@ -637,7 +670,7 @@ sco:	# Santa Cruz Operation
  	 CREATEPROTO=mmdfproto EMPTYPROTO=mmdfproto \
  	 RSHPATH=/usr/bin/rcmd \
  	 BASECFLAGS="-O3" \
@@ -518,7 +520,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true LN=ln
  
  # Note: setting _POSIX_SOURCE doesn't seem to build it as of SGI IRIX 5.3
-@@ -635,6 +668,7 @@
+@@ -648,6 +681,7 @@ sgi:	# Silicon Graphics
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bsd/rsh \
  	 BASECFLAGS="-g3 -O2 -Olimit 8192" \
@@ -526,7 +528,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  sg6:	# Silicon Graphics, IRIX 6.5
-@@ -643,6 +677,7 @@
+@@ -656,6 +690,7 @@ sg6:	# Silicon Graphics, IRIX 6.5
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bsd/rsh \
  	 BASECFLAGS="-g3 -O2 -OPT:Olimit=0 -woff 1110,1116" \
@@ -534,7 +536,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  # Note: Mark Kaesling says that setluid() isn't in HP-UX with SecureWare.
-@@ -654,7 +689,7 @@
+@@ -667,7 +702,7 @@ shp:	# HP-UX with Trusted Computer Base
  	 ACTIVEFILE=/var/news/active \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-g -Ae" \
@@ -543,7 +545,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  slx:	# Secure Linux
-@@ -668,7 +703,7 @@
+@@ -681,7 +716,7 @@ slx:	# Secure Linux
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -552,7 +554,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  sl4:	# Secure Linux using libc4
  	@echo You are building for libc4 versions of Secure Linux
-@@ -680,7 +715,7 @@
+@@ -693,7 +728,7 @@ sl4:	# Secure Linux using libc4
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="$(GCCCFLAGS)" \
@@ -561,7 +563,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  sl5:	# Secure Linux using libc5
  	@echo You are building for libc5 versions of Secure Linux
-@@ -691,6 +726,7 @@
+@@ -704,6 +739,7 @@ sl5:	# Secure Linux using libc5
  	 SPOOLDIR=/var/spool \
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
@@ -569,7 +571,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="$(GCCCFLAGS)"
  
  snx:	# Siemens Nixdorf SINIX and Reliant UNIX
-@@ -700,7 +736,7 @@
+@@ -713,7 +749,7 @@ snx:	# Siemens Nixdorf SINIX and Reliant
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -D_SYS_CLOCK_H -Dconst=" \
@@ -578,7 +580,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true
  
  # Sorry about the -w, but the cretinous SUN Workshop Pro C compiler barfs on
-@@ -761,20 +797,20 @@
+@@ -774,20 +810,20 @@ sol:	os_sol.h	# Solaris
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -O2" \
@@ -602,7 +604,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  sua:	# Windows Vista Subsystem for UNIX Applications
  	$(BUILD) `$(CAT) SPECIALS` OS=sua \
-@@ -783,13 +819,13 @@
+@@ -796,13 +832,13 @@ sua:	# Windows Vista Subsystem for UNIX
  	 ACTIVEFILE=/var/lib/news/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g -O2" \
@@ -618,7 +620,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  sv2:	# SVR2
  	@echo You are being *very* optimistic!
-@@ -798,7 +834,7 @@
+@@ -811,7 +847,7 @@ sv2:	# SVR2
  	 MAILSPOOL=/usr/mail \
  	 RSHPATH=/usr/bin/remsh \
  	 BASECFLAGS="-Dconst= -DSYSTEM5 -DSHORT_IDENT -I/usr/ethernet/include" \
@@ -627,7 +629,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 RANLIB=true LN=ln
  
  sv4:	# SVR4
-@@ -808,14 +844,14 @@
+@@ -821,14 +857,14 @@ sv4:	# SVR4
  	 ACTIVEFILE=/usr/share/news/active \
  	 RSHPATH=/usr/bin/resh \
  	 BASECFLAGS="-g -Dconst=" \
@@ -644,7 +646,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  uw2:	# UnixWare SVR4.2
  	$(BUILD) `$(CAT) SPECIALS` OS=sv4 \
-@@ -824,18 +860,19 @@
+@@ -837,18 +873,19 @@ uw2:	# UnixWare SVR4.2
  	 ACTIVEFILE=/var/news/lib/active \
  	 RSHPATH=/usr/bin/rsh \
  	 BASECFLAGS="-g" \
@@ -666,7 +668,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	 BASECFLAGS="-O2 -Dconst= -Dvoid=char"
  
  
-@@ -857,7 +894,7 @@
+@@ -870,7 +907,7 @@ $(ARCHIVE): $(BINARIES)
  # Cleanup
  
  clean:
@@ -675,7 +677,7 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  
  
  # Dependencies
-@@ -964,6 +1001,7 @@
+@@ -979,6 +1016,7 @@ onceenv:
  	echo $(BASELDFLAGS) $(EXTRALDFLAGS) > LDFLAGS
  	echo "$(ARRC) $(ARCHIVE) $(BINARIES);$(RANLIB) $(ARCHIVE)" > ARCHIVE
  	echo $(OS) > OSTYPE
@@ -683,10 +685,10 @@ diff -ur imap-2004b.orig/src/mtest/Makefile imap-2004b/src/mtest/Makefile
  	./drivers $(EXTRADRIVERS) $(DEFAULTDRIVERS) dummy
  	./mkauths $(EXTRAAUTHENTICATORS) $(DEFAULTAUTHENTICATORS)
  	echo "  mail_versioncheck (CCLIENTVERSION);" >> linkage.c
-diff -ur imap-2004b.orig/src/tmail/Makefile imap-2004b/src/tmail/Makefile
---- imap-2004b.orig/src/tmail/Makefile	2002-11-19 01:45:14.000000000 +0100
-+++ imap-2004b/src/tmail/Makefile	2005-01-11 00:18:13.000000000 +0100
-@@ -18,14 +18,14 @@
+diff -urNp -x '*.orig' imap-2007f.org/src/tmail/Makefile imap-2007f/src/tmail/Makefile
+--- imap-2007f.org/src/tmail/Makefile	2011-07-23 02:19:58.000000000 +0200
++++ imap-2007f/src/tmail/Makefile	2021-09-29 21:57:46.362676816 +0200
+@@ -26,14 +26,14 @@
  
  
  C = ../c-client
@@ -701,5 +703,5 @@ diff -ur imap-2004b.orig/src/tmail/Makefile imap-2004b/src/tmail/Makefile
 -LDFLAGS = $(CCLIENTLIB) `cat $C/LDFLAGS`
 +LDFLAGS = `cat $C/LDFLAGS`
  
- tmail: $(CCLIENTLIB) tmail.o
- 	$(CC) $(CFLAGS) -o tmail tmail.o $(LDFLAGS)
+ tmail: $(CCLIENTLIB) tmail.o tquota.o
+ 	$(CC) $(CFLAGS) -o tmail tmail.o tquota.o $(LDFLAGS)

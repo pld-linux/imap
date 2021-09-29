@@ -1,15 +1,16 @@
---- imap-2006k/src/osdep/unix/env_unix.c.orig	2007-10-10 22:52:30.000000000 +0200
-+++ imap-2006k/src/osdep/unix/env_unix.c	2007-10-10 22:51:20.000000000 +0200
-@@ -556,7 +556,7 @@
- void server_init (char *server,char *service,char *sslservice,
- 		  void *clkint,void *kodint,void *hupint,void *trmint)
+diff -urNp -x '*.orig' imap-2007f.org/src/osdep/unix/env_unix.c imap-2007f/src/osdep/unix/env_unix.c
+--- imap-2007f.org/src/osdep/unix/env_unix.c	2011-07-23 02:20:10.000000000 +0200
++++ imap-2007f/src/osdep/unix/env_unix.c	2021-09-29 21:57:46.539343090 +0200
+@@ -568,7 +568,7 @@ void server_init (char *server,char *ser
+ 		  void *clkint,void *kodint,void *hupint,void *trmint,
+ 		  void *staint)
  {
 -  int onceonly = server && service && sslservice;
 +  int onceonly = server && service;
    if (onceonly) {		/* set server name in syslog */
      int mask;
      openlog (myServerName = cpystr (server),LOG_PID,syslog_facility);
-@@ -582,7 +582,7 @@
+@@ -596,7 +596,7 @@ void server_init (char *server,char *ser
      if (((port = tcp_serverport ()) >= 0)) {
        if ((sv = getservbyname (service,"tcp")) && (port == ntohs (sv->s_port)))
  	syslog (LOG_DEBUG,"%s service init from %s",service,tcp_clientaddr ());
