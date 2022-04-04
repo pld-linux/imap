@@ -1,3 +1,4 @@
+%bcond_with	server	# build IMAP/POP servers
 Summary:	Support for IMAP network mail protocol
 Summary(es.UTF-8):	Provee soporte para los protocolos de mail IMAP y POP
 Summary(pl.UTF-8):	Obsługa protokołu pocztowego IMAP
@@ -7,11 +8,13 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007f
-Release:	8
+Release:	9
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
-Source0:	ftp://ftp.cac.washington.edu/mail/%{name}-%{version}.tar.gz
+# Remaining mirror at funet.fi
+# Note: there is also https://github.com/uw-imap/imap
+Source0:	http://ftp.funet.fi/index/unix/mail/imap/ftp.cac.washington.edu/mail/%{name}-%{version}.tar.gz
 # Source0-md5:	2126fd125ea26b73b20f01fcd5940369
 Source1:	%{name}.pamd
 Source2:	%{name}-%{name}d.inetd
@@ -309,14 +312,11 @@ cd ../..
 rm -rf docs/{rfc,BUILD}
 
 %build
-# build with non-recommended SSLTYPE (unix) since unix.nopwd would remove
-# support for plain-text auth w/o SSL/TLS
-# (but it should be made some runtime option!
-echo 'y' | %{__make} lnp \
+%if %{with server}
+%{__make} lnp \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
-	SSLTYPE=unix \
 %if "%{pld_release}" != "th"
 	SSLCERTS=/var/lib/openssl/certs \
 	SSLKEYS=/var/lib/openssl/private \
@@ -326,13 +326,11 @@ echo 'y' | %{__make} lnp \
 %endif
 	VERSION="%{version}"
 mv -f c-client/c-client.a libc-client.a
-
 %{__make} clean
-echo 'y' | %{__make} lnps \
+%{__make} lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
-	SSLTYPE=unix \
 %if "%{pld_release}" != "th"
 	SSLCERTS=/var/lib/openssl/certs \
 	SSLKEYS=/var/lib/openssl/private \
@@ -341,9 +339,29 @@ echo 'y' | %{__make} lnps \
 	SSLKEYS=/etc/openssl/private \
 %endif
 	VERSION="%{version}"
+%endif
+
+%if !%{with server}
+%{__make} an SSLTYPE=nopwd
+cd c-client
+%{__make} lnp \
+	CC="%{__cc}" \
+	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
+	LDOPT="%{rpmldflags}" \
+	VERSION="%{version}"
+mv -f c-client.a ../libc-client.a
+%{__make} clean
+%{__make} lnps \
+	CC="%{__cc}" \
+	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
+	LDOPT="%{rpmldflags}" \
+	VERSION="%{version}"
+cd ..
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%if %{with server}
 install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
 	$RPM_BUILD_ROOT%{_mandir}/man{1,8} \
@@ -352,13 +370,9 @@ install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
 %else
 	$RPM_BUILD_ROOT/etc/openssl/certs
 %endif
-
-install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
-install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
-install src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
-install src/dmail/dmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install src/mailutil/mailutil.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install src/tmail/tmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
+%else
+install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}
+%endif
 
 install c-client/*.h $RPM_BUILD_ROOT%{_includedir}
 install c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
@@ -368,6 +382,14 @@ ln -sf libc-client.so.%{version}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
 rm -f	$RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
+
+%if %{with server}
+install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
+install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
+install src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
+install src/dmail/dmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install src/mailutil/mailutil.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install src/tmail/tmail.1 $RPM_BUILD_ROOT%{_mandir}/man1
 
 install ipopd/{ipop2d,ipop3d} $RPM_BUILD_ROOT%{_sbindir}
 install imapd/imapd $RPM_BUILD_ROOT%{_sbindir}
@@ -390,10 +412,10 @@ install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/imapd.pem
 install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/ipop3d.pem
 %endif
+touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
+%endif
 
 /sbin/ldconfig -n $RPM_BUILD_ROOT%{_libdir}
-
-touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -425,6 +447,7 @@ fi
 %post   lib -p /sbin/ldconfig
 %postun lib -p /sbin/ldconfig
 
+%if %{with server}
 %files
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/imapd
@@ -463,6 +486,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.pop3
+%endif
 
 %files lib
 %defattr(644,root,root,755)
@@ -478,7 +502,9 @@ fi
 %defattr(644,root,root,755)
 %{_libdir}/libc-client.a
 
+%if %{with server}
 %files utils
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
+%endif
