@@ -1,4 +1,8 @@
-%bcond_with	server	# build IMAP/POP servers
+#
+# Conditional build:
+%bcond_with	server		# IMAP/POP2/POP3 servers
+%bcond_with	plainpwd	# allow plaintext authentication in non-SSL/TLS sessions (insecure, non RFC-3501 compliant)
+
 Summary:	Support for IMAP network mail protocol
 Summary(es.UTF-8):	Provee soporte para los protocolos de mail IMAP y POP
 Summary(pl.UTF-8):	Obsługa protokołu pocztowego IMAP
@@ -56,6 +60,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %else
 %define		sslcertsdir	/var/lib/openssl/certs
 %define		sslkeysdir	/var/lib/openssl/private
+%endif
+%if %{with plainpwd}
+%define		ssltype		unix
+%else
+%define		ssltype		nopwd
 %endif
 
 %define		skip_post_check_so	libc-client.so.%{version}.0
@@ -315,9 +324,14 @@ Statyczna biblioteka IMAP.
 cd docs/rfc
 ls rfc* > ../INDEX.rfc
 cd ../..
-rm -rf docs/{rfc,BUILD}
+%{__rm} -r docs/{rfc,BUILD}
 
 %build
+# configure ANSI build
+%{?with_plainpwd:echo y |} \
+%{__make} an \
+	SSLTYPE=%{ssltype}
+
 %if %{with server}
 %{__make} -j1 lnp \
 	CC="%{__cc}" \
@@ -325,41 +339,42 @@ rm -rf docs/{rfc,BUILD}
 	LDOPT="%{rpmldflags}" \
 	SSLCERTS=%{sslcertsdir} \
 	SSLKEYS=%{sslkeysdir} \
+	SSLTYPE=%{ssltype} \
 	VERSION="%{version}"
+%else
+%{__make} -C c-client -j1 lnp \
+	CC="%{__cc}" \
+	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
+	LDOPT="%{rpmldflags}" \
+	SSLTYPE=%{ssltype} \
+	VERSION="%{version}"
+%endif
 
 %{__mv} c-client/c-client.a libc-client.a
 
 %{__make} clean
 
+# configure ANSI build again after clean
+%{?with_plainpwd:echo y |} \
+%{__make} an \
+	SSLTYPE=%{ssltype}
+
+%if %{with server}
 %{__make} -j1 lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	SSLCERTS=%{sslcertsdir} \
 	SSLKEYS=%{sslkeysdir} \
+	SSLTYPE=%{ssltype} \
 	VERSION="%{version}"
-%endif
-
-%if %{without server}
-%{__make} an SSLTYPE=nopwd
-
-cd c-client
-%{__make} -j1 lnp \
+%else
+%{__make} -C c-client -j1 lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
+	SSLTYPE=%{ssltype} \
 	VERSION="%{version}"
-
-%{__mv} c-client.a ../libc-client.a
-
-%{__make} clean
-
-%{__make} -j1 lnps \
-	CC="%{__cc}" \
-	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
-	LDOPT="%{rpmldflags}" \
-	VERSION="%{version}"
-cd ..
 %endif
 
 %install
