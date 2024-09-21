@@ -204,6 +204,44 @@ Common files for WU imap and pop daemons.
 %description common -l pl.UTF-8
 Pliki wspólne dla serwerów imap i pop.
 
+%package utils
+Summary:	IMAP tools: mailutil, dmail, tmail
+Summary(pl.UTF-8):	Narzędzia IMAP: mailutil, dmail, tmail
+Group:		Applications/Mail
+Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
+
+%description utils
+IMAP tools: mailutil (mail utility program), dmail (procmail mail
+delivery module), tmail (direct mail delivery module).
+
+%description utils -l pl.UTF-8
+Narzędzia IMAP: mailutil (program narzędziowy do poczty), dmail (moduł
+dostarczający pocztę dla procmaila), tmail (moduł dostarczający pocztę
+bezpośrednio).
+
+%description utils -l pt_BR.UTF-8
+Bibliotecas estáticas para desenvolver programas que utilizem
+POP/IMAP.
+
+%package lib
+Summary:	IMAP client library
+Summary(pl.UTF-8):	Biblioteka IMAP
+Summary(ru.UTF-8):	Библиотека IMAP
+Summary(uk.UTF-8):	Бібліотека IMAP
+Group:		Libraries
+
+%description lib
+IMAP client library.
+
+%description lib -l pl.UTF-8
+Biblioteka IMAP.
+
+%description lib -l ru.UTF-8
+Разделяемая библиотека для POP/IMAP-программ.
+
+%description lib -l uk.UTF-8
+Бібліотека спільного використання для POP/IMAP-програм.
+
 %package devel
 Summary:	Development files for IMAP
 Summary(pl.UTF-8):	Pliki nagłówkowe IMAP
@@ -234,25 +272,6 @@ utilizem POP/IMAP.
 %description devel -l uk.UTF-8
 Хедери для розробки програм з використанням бібліотекі IMAP.
 
-%package lib
-Summary:	IMAP client library
-Summary(pl.UTF-8):	Biblioteka IMAP
-Summary(ru.UTF-8):	Библиотека IMAP
-Summary(uk.UTF-8):	Бібліотека IMAP
-Group:		Libraries
-
-%description lib
-IMAP client library.
-
-%description lib -l pl.UTF-8
-Biblioteka IMAP.
-
-%description lib -l ru.UTF-8
-Разделяемая библиотека для POP/IMAP-программ.
-
-%description lib -l uk.UTF-8
-Бібліотека спільного використання для POP/IMAP-програм.
-
 %package static
 Summary:	IMAP static library
 Summary(pl.UTF-8):	Statyczna biblioteka IMAP
@@ -277,25 +296,6 @@ Statyczna biblioteka IMAP.
 
 %description static -l uk.UTF-8
 Статична бібліотека, необхідна для розробки POP/IMAP-програм.
-
-%package utils
-Summary:	IMAP tools: mailutil, dmail, tmail
-Summary(pl.UTF-8):	Narzędzia IMAP: mailutil, dmail, tmail
-Group:		Applications/Mail
-Requires:	%{name}-lib = %{epoch}:%{version}-%{release}
-
-%description utils
-IMAP tools: mailutil (mail utility program), dmail (procmail mail
-delivery module), tmail (direct mail delivery module).
-
-%description utils -l pl.UTF-8
-Narzędzia IMAP: mailutil (program narzędziowy do poczty), dmail (moduł
-dostarczający pocztę dla procmaila), tmail (moduł dostarczający pocztę
-bezpośrednio).
-
-%description utils -l pt_BR.UTF-8
-Bibliotecas estáticas para desenvolver programas que utilizem
-POP/IMAP.
 
 %prep
 %setup -q
@@ -470,6 +470,15 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/pop
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.pop3
+
+%files utils
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/dmail
+%attr(755,root,root) %{_bindir}/mailutil
+%attr(755,root,root) %{_bindir}/tmail
+%{_mandir}/man1/dmail.1*
+%{_mandir}/man1/mailutil.1*
+%{_mandir}/man1/tmail.1*
 %endif
 
 %files lib
@@ -485,14 +494,3 @@ fi
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libc-client.a
-
-%if %{with server}
-%files utils
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/dmail
-%attr(755,root,root) %{_bindir}/mailutil
-%attr(755,root,root) %{_bindir}/tmail
-%{_mandir}/man1/dmail.1*
-%{_mandir}/man1/mailutil.1*
-%{_mandir}/man1/tmail.1*
-%endif
