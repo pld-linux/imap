@@ -50,7 +50,6 @@ Obsoletes:	imapdaemon
 Conflicts:	courier-imap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_includedir	%{_prefix}/include/imap
 %if "%{pld_release}" == "th"
 %define		sslcertsdir	/etc/openssl/certs
 %define		sslkeysdir	/etc/openssl/private
@@ -365,16 +364,16 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}
+install -d $RPM_BUILD_ROOT{%{_includedir}/imap,%{_libdir}}
 
-install c-client/*.h $RPM_BUILD_ROOT%{_includedir}
-install c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
+install c-client/*.h $RPM_BUILD_ROOT%{_includedir}/imap
+install c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}/imap
 install libc-client.a $RPM_BUILD_ROOT%{_libdir}/libc-client.a
 install c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.%{version}.0
 ln -sf libc-client.so.%{version}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
-%{__rm} $RPM_BUILD_ROOT%{_includedir}/unix.h \
-	$RPM_BUILD_ROOT%{_includedir}/os_*
+%{__rm} $RPM_BUILD_ROOT%{_includedir}/imap/unix.h \
+	$RPM_BUILD_ROOT%{_includedir}/imap/os_*
 
 %if %{with server}
 install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
@@ -489,7 +488,7 @@ fi
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libc-client.so
-%{_includedir}
+%{_includedir}/imap
 
 %files static
 %defattr(644,root,root,755)
