@@ -489,6 +489,10 @@ fi
 %if %{with server}
 %files utils
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*
+%attr(755,root,root) %{_bindir}/dmail
+%attr(755,root,root) %{_bindir}/mailutil
+%attr(755,root,root) %{_bindir}/tmail
+%{_mandir}/man1/dmail.1*
+%{_mandir}/man1/mailutil.1*
+%{_mandir}/man1/tmail.1*
 %endif
