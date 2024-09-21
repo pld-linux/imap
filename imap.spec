@@ -320,7 +320,7 @@ rm -rf docs/{rfc,BUILD}
 
 %build
 %if %{with server}
-%{__make} lnp \
+%{__make} -j1 lnp \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
@@ -332,7 +332,7 @@ rm -rf docs/{rfc,BUILD}
 
 %{__make} clean
 
-%{__make} lnps \
+%{__make} -j1 lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
@@ -345,7 +345,7 @@ rm -rf docs/{rfc,BUILD}
 %{__make} an SSLTYPE=nopwd
 
 cd c-client
-%{__make} lnp \
+%{__make} -j1 lnp \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
@@ -355,7 +355,7 @@ cd c-client
 
 %{__make} clean
 
-%{__make} lnps \
+%{__make} -j1 lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
