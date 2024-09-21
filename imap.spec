@@ -51,6 +51,13 @@ Conflicts:	courier-imap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_includedir	%{_prefix}/include/imap
+%if "%{pld_release}" == "th"
+%define		sslcertsdir	/etc/openssl/certs
+%define		sslkeysdir	/etc/openssl/private
+%else
+%define		sslcertsdir	/var/lib/openssl/certs
+%define		sslkeysdir	/var/lib/openssl/private
+%endif
 
 %define		skip_post_check_so	libc-client.so.%{version}.0
 
@@ -317,40 +324,37 @@ rm -rf docs/{rfc,BUILD}
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
-%if "%{pld_release}" != "th"
-	SSLCERTS=/var/lib/openssl/certs \
-	SSLKEYS=/var/lib/openssl/private \
-%else
-	SSLCERTS=/etc/openssl/certs \
-	SSLKEYS=/etc/openssl/private \
-%endif
+	SSLCERTS=%{sslcertsdir} \
+	SSLKEYS=%{sslkeysdir} \
 	VERSION="%{version}"
-mv -f c-client/c-client.a libc-client.a
+
+%{__mv} c-client/c-client.a libc-client.a
+
 %{__make} clean
+
 %{__make} lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
-%if "%{pld_release}" != "th"
-	SSLCERTS=/var/lib/openssl/certs \
-	SSLKEYS=/var/lib/openssl/private \
-%else
-	SSLCERTS=/etc/openssl/certs \
-	SSLKEYS=/etc/openssl/private \
-%endif
+	SSLCERTS=%{sslcertsdir} \
+	SSLKEYS=%{sslkeysdir} \
 	VERSION="%{version}"
 %endif
 
-%if !%{with server}
+%if %{without server}
 %{__make} an SSLTYPE=nopwd
+
 cd c-client
 %{__make} lnp \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
 	LDOPT="%{rpmldflags}" \
 	VERSION="%{version}"
-mv -f c-client.a ../libc-client.a
+
+%{__mv} c-client.a ../libc-client.a
+
 %{__make} clean
+
 %{__make} lnps \
 	CC="%{__cc}" \
 	GCCOPTLEVEL="%{rpmcflags} -pipe -fPIC" \
@@ -361,18 +365,7 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%if %{with server}
-install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
-	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_includedir},%{_libdir}} \
-	$RPM_BUILD_ROOT%{_mandir}/man{1,8} \
-%if "%{pld_release}" != "th"
-	$RPM_BUILD_ROOT%{_var}/lib/openssl/certs
-%else
-	$RPM_BUILD_ROOT/etc/openssl/certs
-%endif
-%else
 install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}
-%endif
 
 install c-client/*.h $RPM_BUILD_ROOT%{_includedir}
 install c-client/linkage.c $RPM_BUILD_ROOT%{_includedir}
@@ -380,10 +373,14 @@ install libc-client.a $RPM_BUILD_ROOT%{_libdir}/libc-client.a
 install c-client/libc-client.so $RPM_BUILD_ROOT%{_libdir}/libc-client.so.%{version}.0
 ln -sf libc-client.so.%{version}.0 $RPM_BUILD_ROOT%{_libdir}/libc-client.so
 
-rm -f	$RPM_BUILD_ROOT%{_includedir}/unix.h \
+%{__rm} $RPM_BUILD_ROOT%{_includedir}/unix.h \
 	$RPM_BUILD_ROOT%{_includedir}/os_*
 
 %if %{with server}
+install -d $RPM_BUILD_ROOT/etc/{pam.d,security,sysconfig/rc-inetd} \
+	$RPM_BUILD_ROOT{%{_sbindir},%{_bindir},%{_mandir}/man{1,8}} \
+	$RPM_BUILD_ROOT{%{sslcertsdir},%{sslkeysdir}}
+
 install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop2d.8
 install src/ipopd/ipopd.8 $RPM_BUILD_ROOT%{_mandir}/man8/ipop3d.8
 install src/imapd/imapd.8 $RPM_BUILD_ROOT%{_mandir}/man8/imapd.8
@@ -405,13 +402,8 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3d
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/imaps
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/ipop3s
 install %{SOURCE7} $RPM_BUILD_ROOT/etc/pam.d/pop
-%if "%{pld_release}" != "th"
-install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/imapd.pem
-install %{SOURCE8} $RPM_BUILD_ROOT%{_var}/lib/openssl/certs/ipop3d.pem
-%else
-install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/imapd.pem
-install %{SOURCE8} $RPM_BUILD_ROOT/etc/openssl/certs/ipop3d.pem
-%endif
+install %{SOURCE8} $RPM_BUILD_ROOT%{sslcertsdir}/imapd.pem
+install %{SOURCE8} $RPM_BUILD_ROOT%{sslcertsdir}/ipop3d.pem
 touch $RPM_BUILD_ROOT/etc/security/blacklist.{pop3,imap}
 %endif
 
@@ -454,11 +446,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/imaps
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/imap
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.imap
-%if "%{pld_release}" != "th"
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/imapd.pem
-%else
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/openssl/certs/imapd.pem
-%endif
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{sslcertsdir}/imapd.pem
 %attr(755,root,root) %{_sbindir}/imapd
 %{_mandir}/man8/imapd.8*
 
@@ -472,11 +460,7 @@ fi
 %defattr(644,root,root,755)
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3d
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/ipop3s
-%if "%{pld_release}" != "th"
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_var}/lib/openssl/certs/ipop3d.pem
-%else
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/openssl/certs/ipop3d.pem
-%endif
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{sslcertsdir}/ipop3d.pem
 %attr(755,root,root) %{_sbindir}/ipop3d
 %{_mandir}/man8/ipop3d.8*
 
