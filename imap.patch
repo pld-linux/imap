@@ -40,27 +40,4 @@
  
  sl4:	# Secure Linux using libc4
  	@echo You are building for libc4 versions of Secure Linux
-diff -ur imap-2004/src/osdep/unix/os_lnx.h imap-patched/src/osdep/unix/os_lnx.h
---- imap-2004/src/osdep/unix/os_lnx.h	Tue Jul 15 22:53:32 2003
-+++ imap-patched/src/osdep/unix/os_lnx.h	Sun May 30 06:31:26 2004
-@@ -37,7 +37,7 @@
- #include <fcntl.h>
- #include <syslog.h>
- #include <sys/file.h>
--
-+#include <ustat.h>
- 
- /* Linux gets this wrong */
- 
-diff -ur imap-2004/src/osdep/unix/os_slx.h imap-patched/src/osdep/unix/os_slx.h
---- imap-2004/src/osdep/unix/os_slx.h	Tue Jul 15 22:53:32 2003
-+++ imap-patched/src/osdep/unix/os_slx.h	Sun May 30 06:31:26 2004
-@@ -37,7 +37,7 @@
- #include <fcntl.h>
- #include <syslog.h>
- #include <sys/file.h>
--
-+#include <ustat.h>
- 
- /* Linux gets this wrong */
- 
+

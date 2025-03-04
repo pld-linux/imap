@@ -1,0 +1,25 @@
+From: Chris Hofstaedtler <zeha@debian.org>
+Date: Tue, 31 Dec 2024 09:13:10 +0100
+X-Dgit-Generated: 8:2007f~dfsg-7.1 4c56abb2b57c9316db774f68fcc38174c9f17139
+Subject: Stop ignoring build errors
+
+
+---
+
+diff --git a/Makefile b/Makefile
+index 78f5ba8..9543c10 100644
+--- a/Makefile
++++ b/Makefile
+@@ -717,9 +717,9 @@ bundled:
+ 	$(CD) imapd;$(MAKE)
+ 	$(CD) mailutil;$(MAKE)
+ 	@$(SH) -c '(test -f /usr/include/sysexits.h ) || make sysexitwarn'
+-	$(CD) mlock;$(MAKE) || true
+-	$(CD) dmail;$(MAKE) || true
+-	$(CD) tmail;$(MAKE) || true
++	$(CD) mlock;$(MAKE)
++	$(CD) dmail;$(MAKE)
++	$(CD) tmail;$(MAKE)
+ 
+ 
+ sysexitwarn:

@@ -12,7 +12,7 @@ Summary(uk.UTF-8):	Забезпечує підтримку мережевого 
 Summary(zh_CN.UTF-8):	IMAP和POP服务器
 Name:		imap
 Version:	2007f
-Release:	9
+Release:	10
 Epoch:		1
 License:	Apache v2.0
 Group:		Networking/Daemons
@@ -36,11 +36,18 @@ Patch4:		%{name}-mailpath.patch
 Patch5:		%{name}-man.patch
 Patch6:		%{name}-overflow.patch
 Patch7:		%{name}-version-pld.patch
-Patch8:		%{name}-headers_fix.patch
-Patch9:		%{name}-annotations.patch
-Patch10:	%{name}-werror.patch
-Patch11:	no-ustat.h.patch
-Patch12:	openssl.patch
+Patch8:		fix-ftbfs-with-gcc-14.patch
+Patch9:		1005_poll.patch
+Patch10:	1002_flock_fix_syslog_args.patch
+Patch11:	2004_no_binaries_below_etc.patch
+Patch12:	2014_openssl1.1.1_sni.patch
+Patch13:	stop-ignoring-build-errors.patch
+Patch14:	1003_fix_zero_len_when_mail_fetch_body_is_empty.patch
+Patch15:	1004_support_rfc5464_METADATA.patch
+Patch16:	1006_openssl1.1_autoverify.patch
+Patch17:	2010_disallow_escaping_home.patch
+Patch18:	2011_disable_version_check.patch
+Patch19:	2013_disable_rsh.patch
 URL:		http://www.washington.edu/imap/
 BuildRequires:	/sbin/ldconfig
 BuildRequires:	openssl-devel >= 0.9.7d
@@ -307,19 +314,26 @@ Statyczna biblioteka IMAP.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
+%patch -P6 -p1
+%patch -P7 -p1
+%patch -P8 -p1
+%patch -P9 -p1
+%patch -P10 -p1
+%patch -P11 -p1
+%patch -P12 -p1
+%patch -P13 -p1
+%patch -P14 -p1
+%patch -P15 -p1
+%patch -P16 -p1
+%patch -P17 -p1
+%patch -P18 -p1
+%patch -P19 -p1
 
 cd docs/rfc
 ls rfc* > ../INDEX.rfc

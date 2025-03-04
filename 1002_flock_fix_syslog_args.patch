@@ -1,12 +1,11 @@
-diff -ur imap-2007f.orig/src/osdep/unix/flocklnx.c imap-2007f.fix/src/osdep/unix/flocklnx.c
---- imap-2007f.orig/src/osdep/unix/flocklnx.c	2011-07-23 00:20:11.000000000 +0000
-+++ imap-2007f.fix/src/osdep/unix/flocklnx.c	2013-11-14 11:48:37.216449543 +0000
+--- a/src/osdep/unix/flocklnx.c
++++ b/src/osdep/unix/flocklnx.c
 @@ -57,7 +57,7 @@
      case ENOLCK:		/* lock table is full */
        sprintf (tmp,"File locking failure: %s",strerror (errno));
        mm_log (tmp,WARN);	/* give the user a warning of what happened */
 -      if (!logged++) syslog (LOG_ERR,tmp);
-+      if (!logged++) syslog ("%s",LOG_ERR,tmp);
++	  if (!logged++) syslog (LOG_ERR,"%s",tmp);
  				/* return failure if non-blocking lock */
        if (op & LOCK_NB) return -1;
        sleep (5);		/* slow down in case it loops */
